@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		322F708F2A7C2BD4002DBB9D /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F708E2A7C2BD4002DBB9D /* HealthManager.swift */; };
 		3231DF432A75970D0051DCC7 /* FitnessAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF422A75970D0051DCC7 /* FitnessAppApp.swift */; };
 		3231DF452A75970D0051DCC7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF442A75970D0051DCC7 /* ContentView.swift */; };
 		3231DF472A75970F0051DCC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3231DF462A75970F0051DCC7 /* Assets.xcassets */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		322F708D2A7C2BC9002DBB9D /* FitnessApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitnessApp.entitlements; sourceTree = "<group>"; };
+		322F708E2A7C2BD4002DBB9D /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
 		3231DF3F2A75970D0051DCC7 /* FitnessApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3231DF422A75970D0051DCC7 /* FitnessAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessAppApp.swift; sourceTree = "<group>"; };
 		3231DF442A75970D0051DCC7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		322F70902A7C2BF0002DBB9D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				322F708E2A7C2BD4002DBB9D /* HealthManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		3231DF362A75970D0051DCC7 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +80,8 @@
 		3231DF412A75970D0051DCC7 /* FitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				322F70902A7C2BF0002DBB9D /* Managers */,
+				322F708D2A7C2BC9002DBB9D /* FitnessApp.entitlements */,
 				3231DF582A768F010051DCC7 /* Home */,
 				3231DF422A75970D0051DCC7 /* FitnessAppApp.swift */,
 				3231DF442A75970D0051DCC7 /* ContentView.swift */,
@@ -203,6 +216,7 @@
 				3231DF572A75B1E70051DCC7 /* ProgressCircleView.swift in Sources */,
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
 				326B022E2A7865D20034E363 /* Workout.swift in Sources */,
+				322F708F2A7C2BD4002DBB9D /* HealthManager.swift in Sources */,
 				3231DF552A759E5C0051DCC7 /* HistoricDataView.swift in Sources */,
 				3231DF452A75970D0051DCC7 /* ContentView.swift in Sources */,
 				3231DF5A2A768F370051DCC7 /* ActivityCard.swift in Sources */,
@@ -332,12 +346,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FitnessApp/FitnessApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FitnessApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 8U63ZP8KK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -361,12 +377,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FitnessApp/FitnessApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FitnessApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 8U63ZP8KK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
