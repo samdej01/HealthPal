@@ -16,6 +16,14 @@ class HomeViewModel: ObservableObject {
     @Published var stand: Int = 0
     
     @Published var activities = [Activity]()
+    @Published var workouts = [
+        Workout(id: 0, title: "Running", image: "figure.run", tintColor: .cyan, duration: "51 mins", date: "Aug 1", calories: "512 kcal"),
+        Workout(id: 1, title: "Strength Training", image: "figure.run", tintColor: .red, duration: "51 mins", date: "Aug 1", calories: "512 kcal"),
+        Workout(id: 2, title: "Walk", image: "figure.walk", tintColor: .purple, duration: "5 mins", date: "Aug 11", calories: "512 kcal"),
+        Workout(id: 3, title: "Running", image: "figure.run", tintColor: .cyan, duration: "1 mins", date: "Aug 19", calories: "512 kcal"),
+        
+    ]
+    
     
     var mockActivites = [
         Activity(title: "Today steps", subtitle: "Goal 12,000", image: "figure.walk", tintColor: .green, amount: "9,812"),
@@ -42,6 +50,7 @@ class HomeViewModel: ObservableObject {
                 fetchTodayStandHours()
                 fetchTodaysSteps()
                 fetchCurrentWeekActivities()
+                fetchRecentWorkouts()
             } catch {
                 print(error.localizedDescription)
             }
@@ -110,6 +119,20 @@ class HomeViewModel: ObservableObject {
             case .success(let activities):
                 DispatchQueue.main.async {
                     self.activities.append(contentsOf: activities)
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: Recent Workouts
+    func fetchRecentWorkouts() {
+        healthManager.fetchWorkoutsForMonth(month: Date()) { result in
+            switch result {
+            case .success(let workouts):
+                DispatchQueue.main.async {
+                    self.workouts = Array(workouts.prefix(4))
                 }
             case .failure(let failure):
                 print(failure.localizedDescription)
