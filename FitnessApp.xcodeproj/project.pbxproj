@@ -22,6 +22,11 @@
 		326B02272A7864D60034E363 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B02262A7864D60034E363 /* HomeViewModel.swift */; };
 		326B022C2A7865AC0034E363 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022B2A7865AC0034E363 /* Activity.swift */; };
 		326B022E2A7865D20034E363 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022D2A7865D20034E363 /* Workout.swift */; };
+		32E3C6212A83F6BB00835BB3 /* ChartDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6202A83F6BB00835BB3 /* ChartDataView.swift */; };
+		32E3C6232A83F7FB00835BB3 /* ChartsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6222A83F7FB00835BB3 /* ChartsViewModel.swift */; };
+		32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */; };
+		32E3C6272A83F81E00835BB3 /* DailyStepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6262A83F81E00835BB3 /* DailyStepModel.swift */; };
+		32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6282A83F89B00835BB3 /* ChartOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,11 @@
 		326B02262A7864D60034E363 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		326B022B2A7865AC0034E363 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		326B022D2A7865D20034E363 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		32E3C6202A83F6BB00835BB3 /* ChartDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataView.swift; sourceTree = "<group>"; };
+		32E3C6222A83F7FB00835BB3 /* ChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewModel.swift; sourceTree = "<group>"; };
+		32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyStepModel.swift; sourceTree = "<group>"; };
+		32E3C6262A83F81E00835BB3 /* DailyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStepModel.swift; sourceTree = "<group>"; };
+		32E3C6282A83F89B00835BB3 /* ChartOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartOptions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				3231DF542A759E5C0051DCC7 /* ChartsView.swift */,
+				32E3C6202A83F6BB00835BB3 /* ChartDataView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -92,6 +103,7 @@
 		322F70962A82DD72002DBB9D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				32E3C6222A83F7FB00835BB3 /* ChartsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -99,6 +111,9 @@
 		322F70972A82DD7F002DBB9D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */,
+				32E3C6262A83F81E00835BB3 /* DailyStepModel.swift */,
+				32E3C6282A83F89B00835BB3 /* ChartOptions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -253,17 +268,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				326B022C2A7865AC0034E363 /* Activity.swift in Sources */,
+				32E3C6272A83F81E00835BB3 /* DailyStepModel.swift in Sources */,
 				3231DF512A759D880051DCC7 /* FitnessTabView.swift in Sources */,
 				326B02272A7864D60034E363 /* HomeViewModel.swift in Sources */,
 				3231DF5C2A769E790051DCC7 /* WorkoutCard.swift in Sources */,
 				3231DF572A75B1E70051DCC7 /* ProgressCircleView.swift in Sources */,
+				32E3C6212A83F6BB00835BB3 /* ChartDataView.swift in Sources */,
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
 				322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */,
 				326B022E2A7865D20034E363 /* Workout.swift in Sources */,
+				32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */,
 				322F708F2A7C2BD4002DBB9D /* HealthManager.swift in Sources */,
 				3231DF552A759E5C0051DCC7 /* ChartsView.swift in Sources */,
+				32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */,
 				3231DF452A75970D0051DCC7 /* ContentView.swift in Sources */,
 				3231DF5A2A768F370051DCC7 /* ActivityCard.swift in Sources */,
+				32E3C6232A83F7FB00835BB3 /* ChartsViewModel.swift in Sources */,
 				3231DF432A75970D0051DCC7 /* FitnessAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
