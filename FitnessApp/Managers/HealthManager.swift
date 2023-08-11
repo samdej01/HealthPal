@@ -22,6 +22,25 @@ extension Date {
         return calendar.date(from: components) ?? Date()
     }
     
+    static var oneWeekAgo: Date {
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .day, value: -6, to: Date()) ?? Date()
+        return calendar.startOfDay(for: date)
+    }
+    
+    static var oneMonthAgo: Date {
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .month, value: -1, to: Date()) ?? Date()
+        return calendar.startOfDay(for: date)
+    }
+    
+    static var threeMonthsAgo: Date {
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .month, value: -3, to: Date()) ?? Date()
+        return calendar.startOfDay(for: date)
+    }
+    
+    
     func fetchMonthStartAndEndDate() -> (Date, Date) {
         let calendar = Calendar.current
         let startDateComponent = calendar.dateComponents([.year, .month], from: calendar.startOfDay(for: self))
@@ -218,6 +237,28 @@ class HealthManager {
 
     // MARK: ChartsView Data
 extension HealthManager {
+    
+    func fetchDailySteps(startDate: Date, completion: @escaping (Result<[DailyStepModel], Error>) -> Void) {
+        let steps = HKQuantityType(.stepCount)
+        let interval = DateComponents(day: 1)
+        
+        let query = HKStatisticsCollectionQuery(quantityType: steps, quantitySamplePredicate: nil, anchorDate: startDate, intervalComponents: interval)
+        
+        query.initialResultsHandler = { _, results, error in
+            guard let result = results, error == nil else {
+                completion(.failure(URLError(.badURL)))
+                return
+            }
+            
+            var dailySteps = [DailyStepModel]()
+            
+            result.enumerateStatistics(from: startDate, to: Date()) { statistics, stop in
+                dailySteps.append(DailyStepModel(date: statistics.startDate, count: Int(statistics.sumQuantity()?.doubleValue(for: .count()) ?? 0)))
+            }
+            completion(.success(dailySteps))
+        }
+        healthStore.execute(query)
+    }
     
     struct YearChartDataResult {
         let ytd: [MonthlyStepModel]

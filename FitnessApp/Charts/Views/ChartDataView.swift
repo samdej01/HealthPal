@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ChartDataView: View {
-    @State var average: Int
-    @State var total: Int
+    @Binding var average: Int
+    @Binding var total: Int
     
     var body: some View {
         HStack {
@@ -21,8 +21,10 @@ struct ChartDataView: View {
                 
                 Text("\(average)")
                     .font(.title3)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
             }
-            .frame(width: 90)
+            .frame(width: 100)
             .foregroundColor(.black)
             .padding()
             .background(.gray.opacity(0.1))
@@ -37,8 +39,10 @@ struct ChartDataView: View {
                 
                 Text("\(total)")
                     .font(.title3)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
             }
-            .frame(width: 90)
+            .frame(width: 100)
             .foregroundColor(.black)
             .padding()
             .background(.gray.opacity(0.1))
@@ -52,6 +56,6 @@ struct ChartDataView: View {
 
 struct ChartDataView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartDataView(average: 1235, total: 8461)
+        ChartDataView(average: .constant(1235), total: .constant(8461))
     }
 }

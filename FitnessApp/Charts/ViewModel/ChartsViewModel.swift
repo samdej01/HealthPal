@@ -30,14 +30,15 @@ class ChartsViewModel: ObservableObject {
         MonthlyStepModel(date: Calendar.current.date(byAdding: .month, value: -7, to: Date()) ?? Date(), count: 97175),
             ]
     
-    @Published var oneWeekAverage = 1243
-    @Published var oneWeekTotal = 8223
+    @Published var oneWeekChartData = [DailyStepModel]()
+    @Published var oneWeekAverage = 0
+    @Published var oneWeekTotal = 0
     
-    @Published var mockOneMonthData = [DailyStepModel]()
+    @Published var oneMonthChartData = [DailyStepModel]()
     @Published var oneMonthAverage = 0
     @Published var oneMonthTotal = 0
     
-    @Published var mockThreeMonthData = [DailyStepModel]()
+    @Published var threeMonthsChartData = [DailyStepModel]()
     @Published var threeMonthAverage = 0
     @Published var threeMonthTotal = 0
     
@@ -53,13 +54,17 @@ class ChartsViewModel: ObservableObject {
     
     init() {
         
-        let mockOneMonth = mockDataForDays(days: 30)
-        let mockThreeMonths = mockDataForDays(days: 90)
-        DispatchQueue.main.async {
-            self.mockOneMonthData = mockOneMonth
-            self.mockThreeMonthData = mockThreeMonths
-        }
+        // Mock Data
+//        let mockOneMonth = mockDataForDays(days: 30)
+//        let mockThreeMonths = mockDataForDays(days: 90)
+//        DispatchQueue.main.async {
+//            self.mockOneMonthData = mockOneMonth
+//            self.mockThreeMonthData = mockThreeMonths
+//        }
         
+        fetchOneWeekStepData()
+        fetchOneMonthStepData()
+        fetchThreeMonthsStepData()
         fetchYTDAndOneYearChartData()
     }
     
@@ -72,6 +77,61 @@ class ChartsViewModel: ObservableObject {
             mockData.append(dailyStepData)
         }
         return mockData
+    }
+    
+    func calculateAverageAndTotalFromData(steps: [DailyStepModel]) -> (Int, Int) {
+        let total = steps.reduce(0, { $0 + $1.count })
+        let average = total / steps.count
+        
+        return (total, average)
+    }
+    
+    func fetchOneWeekStepData() {
+        healthManager.fetchDailySteps(startDate: .oneWeekAgo) { result in
+            switch result {
+            case .success(let steps):
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.oneWeekChartData = steps
+                    
+                    (self.oneWeekTotal, self.oneWeekAverage) = self.calculateAverageAndTotalFromData(steps: steps)
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchOneMonthStepData() {
+        healthManager.fetchDailySteps(startDate: .oneMonthAgo) { result in
+            switch result {
+            case .success(let steps):
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.oneMonthChartData = steps
+                    
+                    (self.oneMonthTotal, self.oneMonthAverage) = self.calculateAverageAndTotalFromData(steps: steps)
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchThreeMonthsStepData() {
+        healthManager.fetchDailySteps(startDate: .threeMonthsAgo) { result in
+            switch result {
+            case .success(let steps):
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.threeMonthsChartData = steps
+                    
+                    (self.threeMonthTotal, self.threeMonthAverage) = self.calculateAverageAndTotalFromData(steps: steps)
+                }
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
     }
     
     func fetchYTDAndOneYearChartData() {
