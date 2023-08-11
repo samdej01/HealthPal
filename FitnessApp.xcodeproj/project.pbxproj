@@ -27,6 +27,9 @@
 		32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */; };
 		32E3C6272A83F81E00835BB3 /* DailyStepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6262A83F81E00835BB3 /* DailyStepModel.swift */; };
 		32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6282A83F89B00835BB3 /* ChartOptions.swift */; };
+		32E3C62C2A86CCF100835BB3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32E3C62B2A86CCF100835BB3 /* StoreKit.framework */; };
+		32E3C62F2A86D14300835BB3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 32E3C62E2A86D14300835BB3 /* RevenueCat */; };
+		32E3C6312A86D15300835BB3 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6302A86D15300835BB3 /* PaywallView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,8 @@
 		32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyStepModel.swift; sourceTree = "<group>"; };
 		32E3C6262A83F81E00835BB3 /* DailyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStepModel.swift; sourceTree = "<group>"; };
 		32E3C6282A83F89B00835BB3 /* ChartOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartOptions.swift; sourceTree = "<group>"; };
+		32E3C62B2A86CCF100835BB3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		32E3C6302A86D15300835BB3 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32E3C62F2A86D14300835BB3 /* RevenueCat in Frameworks */,
+				32E3C62C2A86CCF100835BB3 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +130,7 @@
 			children = (
 				3231DF412A75970D0051DCC7 /* FitnessApp */,
 				3231DF402A75970D0051DCC7 /* Products */,
+				32E3C62A2A86CCF100835BB3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,6 +155,7 @@
 				3231DF462A75970F0051DCC7 /* Assets.xcassets */,
 				3231DF482A75970F0051DCC7 /* Preview Content */,
 				3231DF502A759D880051DCC7 /* FitnessTabView.swift */,
+				32E3C6302A86D15300835BB3 /* PaywallView.swift */,
 			);
 			path = FitnessApp;
 			sourceTree = "<group>";
@@ -197,6 +206,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		32E3C62A2A86CCF100835BB3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32E3C62B2A86CCF100835BB3 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,6 +230,9 @@
 			dependencies = (
 			);
 			name = FitnessApp;
+			packageProductDependencies = (
+				32E3C62E2A86D14300835BB3 /* RevenueCat */,
+			);
 			productName = FitnessApp;
 			productReference = 3231DF3F2A75970D0051DCC7 /* FitnessApp.app */;
 			productType = "com.apple.product-type.application";
@@ -241,6 +261,9 @@
 				Base,
 			);
 			mainGroup = 3231DF362A75970D0051DCC7;
+			packageReferences = (
+				32E3C62D2A86D14300835BB3 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+			);
 			productRefGroup = 3231DF402A75970D0051DCC7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,6 +300,7 @@
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
 				322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */,
 				326B022E2A7865D20034E363 /* Workout.swift in Sources */,
+				32E3C6312A86D15300835BB3 /* PaywallView.swift in Sources */,
 				32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */,
 				322F708F2A7C2BD4002DBB9D /* HealthManager.swift in Sources */,
 				3231DF552A759E5C0051DCC7 /* ChartsView.swift in Sources */,
@@ -489,6 +513,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		32E3C62D2A86D14300835BB3 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		32E3C62E2A86D14300835BB3 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32E3C62D2A86D14300835BB3 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3231DF372A75970D0051DCC7 /* Project object */;
 }
