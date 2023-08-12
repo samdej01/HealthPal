@@ -30,6 +30,8 @@
 		32E3C62C2A86CCF100835BB3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32E3C62B2A86CCF100835BB3 /* StoreKit.framework */; };
 		32E3C62F2A86D14300835BB3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 32E3C62E2A86D14300835BB3 /* RevenueCat */; };
 		32E3C6312A86D15300835BB3 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6302A86D15300835BB3 /* PaywallView.swift */; };
+		32E3C6332A87B63000835BB3 /* PaywallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */; };
+		32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		32E3C6282A83F89B00835BB3 /* ChartOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartOptions.swift; sourceTree = "<group>"; };
 		32E3C62B2A86CCF100835BB3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		32E3C6302A86D15300835BB3 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallViewModel.swift; sourceTree = "<group>"; };
+		32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RevenueCat+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				322F70922A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift */,
+				32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 				3231DF482A75970F0051DCC7 /* Preview Content */,
 				3231DF502A759D880051DCC7 /* FitnessTabView.swift */,
 				32E3C6302A86D15300835BB3 /* PaywallView.swift */,
+				32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */,
 			);
 			path = FitnessApp;
 			sourceTree = "<group>";
@@ -301,10 +307,12 @@
 				322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */,
 				326B022E2A7865D20034E363 /* Workout.swift in Sources */,
 				32E3C6312A86D15300835BB3 /* PaywallView.swift in Sources */,
+				32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */,
 				32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */,
 				322F708F2A7C2BD4002DBB9D /* HealthManager.swift in Sources */,
 				3231DF552A759E5C0051DCC7 /* ChartsView.swift in Sources */,
 				32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */,
+				32E3C6332A87B63000835BB3 /* PaywallViewModel.swift in Sources */,
 				3231DF452A75970D0051DCC7 /* ContentView.swift in Sources */,
 				3231DF5A2A768F370051DCC7 /* ActivityCard.swift in Sources */,
 				32E3C6232A83F7FB00835BB3 /* ChartsViewModel.swift in Sources */,
