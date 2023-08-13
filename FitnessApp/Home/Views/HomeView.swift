@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
+    @Binding var isPremium: Bool
+    @State private var showPaywall = false
     
     var body: some View {
         NavigationStack {
@@ -79,7 +81,9 @@ struct HomeView: View {
                         Spacer()
                         
                         Button {
-                            print("show more")
+                            if !isPremium {
+                                showPaywall = true
+                            }
                         } label: {
                             Text("Show more")
                                 .padding(.all, 10)
@@ -105,15 +109,30 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        NavigationLink {
-                            EmptyView()
-                        } label: {
-                            Text("Show more")
-                                .padding(.all, 10)
-                                .foregroundColor(.white)
-                                .background(.blue)
-                                .cornerRadius(20)
+                        if !isPremium {
+                            Button {
+                                if !isPremium {
+                                    showPaywall = true
+                                }
+                            } label: {
+                                Text("Show more")
+                                    .padding(.all, 10)
+                                    .foregroundColor(.white)
+                                    .background(.blue)
+                                    .cornerRadius(20)
+                            }
+                        } else {
+                            NavigationLink {
+                                EmptyView()
+                            } label: {
+                                Text("Show more")
+                                    .padding(.all, 10)
+                                    .foregroundColor(.white)
+                                    .background(.blue)
+                                    .cornerRadius(20)
+                            }
                         }
+                        
                     }
                     .padding(.horizontal)
                     .padding(.top)
@@ -127,11 +146,14 @@ struct HomeView: View {
                 }
             }
         }
+        .sheet(isPresented: $showPaywall) {
+            PaywallView()
+        }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(isPremium: .constant(false))
     }
 }
