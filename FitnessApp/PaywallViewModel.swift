@@ -22,4 +22,18 @@ class PaywallViewModel: ObservableObject {
             }
         }
     }
+    
+    func purchase(package: Package) async throws {
+        let result = try await Purchases.shared.purchase(package: package)
+        if result.customerInfo.entitlements["premium"]?.isActive != true {
+            throw URLError(.badURL)
+        }
+    }
+    
+    func restorePurchases() async throws {
+        let customerInfo = try await Purchases.shared.restorePurchases()
+        if customerInfo.entitlements["premium"]?.isActive != true {
+            throw URLError(.badURL)
+        }
+    }
 }
