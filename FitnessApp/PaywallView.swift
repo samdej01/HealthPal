@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RevenueCat
 
 struct PaywallView: View {
     @Environment(\.dismiss) var dismiss
@@ -54,13 +55,11 @@ struct PaywallView: View {
                 if let offering = viewModel.currentOffering {
                     ForEach(offering.availablePackages) { package in
                         Button {
-                            Task {
-                                do {
-                                    try await viewModel.purchase(package: package)
-                                    dismiss()
-                                } catch {
-                                    print(error.localizedDescription)
-                                }
+                            Purchases.shared.purchase(package: package) { (transaction, customerInfo, error, userCancelled) in
+                                if customerInfo?.entitlements["premium"]?.isActive == true {
+                                // Unlock that great "premium" content
+                                  dismiss()
+                              }
                             }
                         } label: {
                             VStack(spacing: 8) {
@@ -86,20 +85,18 @@ struct PaywallView: View {
             
             
             Button {
-                Task {
-                    do {
-                        try await viewModel.restorePurchases()
-                        dismiss()
-                    } catch {
-                        print(error.localizedDescription)
-                    }
+                Purchases.shared.restorePurchases { customerInfo, error in
+                    if customerInfo?.entitlements["premium"]?.isActive == true {
+                    // Unlock that great "pro" content
+                      dismiss()
+                  }
                 }
             } label: {
                 Text("Restore Purchases")
                     .foregroundColor(.green)
                     .underline()
             }
-            
+
             Spacer()
             
             HStack(spacing: 16) {
@@ -109,7 +106,6 @@ struct PaywallView: View {
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
-        .padding(.top)
     }
 }
 

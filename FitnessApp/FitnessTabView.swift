@@ -6,11 +6,9 @@
 //
 
 import SwiftUI
-import RevenueCat
 
 struct FitnessTabView: View {
     @State var selectedTab = "Home"
-    @State var isPremium = false
     
     init() {
         let appearance = UITabBarAppearance()
@@ -22,7 +20,7 @@ struct FitnessTabView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView(isPremium: $isPremium)
+            HomeView()
                 .tag("Home")
                 .tabItem {
                     Image(systemName: "house")
@@ -37,11 +35,6 @@ struct FitnessTabView: View {
                     
                     Text("Charts")
                 }
-        }
-        .onAppear {
-            Purchases.shared.getCustomerInfo { customerInfo, error in
-                isPremium = customerInfo?.entitlements["premium"]?.isActive == true
-            }
         }
     }
 }
