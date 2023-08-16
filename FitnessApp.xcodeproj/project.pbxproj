@@ -32,6 +32,8 @@
 		32E3C6312A86D15300835BB3 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6302A86D15300835BB3 /* PaywallView.swift */; };
 		32E3C6332A87B63000835BB3 /* PaywallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */; };
 		32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */; };
+		32E3C64C2A8CFC2100835BB3 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */; };
+		32E3C64E2A8D01C000835BB3 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C64D2A8D01C000835BB3 /* TermsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		32E3C6302A86D15300835BB3 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallViewModel.swift; sourceTree = "<group>"; };
 		32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RevenueCat+Ext.swift"; sourceTree = "<group>"; };
+		32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		32E3C64D2A8D01C000835BB3 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,7 @@
 		3231DF412A75970D0051DCC7 /* FitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				32E3C6472A8CFC0300835BB3 /* Leaderboards */,
 				322F70942A82DD65002DBB9D /* Charts */,
 				322F70912A7E79AD002DBB9D /* Utils */,
 				322F70902A7C2BF0002DBB9D /* Managers */,
@@ -218,6 +223,39 @@
 				32E3C62B2A86CCF100835BB3 /* StoreKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		32E3C6472A8CFC0300835BB3 /* Leaderboards */ = {
+			isa = PBXGroup;
+			children = (
+				32E3C64A2A8CFC1500835BB3 /* ViewModel */,
+				32E3C6492A8CFC0F00835BB3 /* Model */,
+				32E3C6482A8CFC0B00835BB3 /* Views */,
+			);
+			path = Leaderboards;
+			sourceTree = "<group>";
+		};
+		32E3C6482A8CFC0B00835BB3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */,
+				32E3C64D2A8D01C000835BB3 /* TermsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		32E3C6492A8CFC0F00835BB3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		32E3C64A2A8CFC1500835BB3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +339,7 @@
 				3231DF512A759D880051DCC7 /* FitnessTabView.swift in Sources */,
 				326B02272A7864D60034E363 /* HomeViewModel.swift in Sources */,
 				3231DF5C2A769E790051DCC7 /* WorkoutCard.swift in Sources */,
+				32E3C64E2A8D01C000835BB3 /* TermsView.swift in Sources */,
 				3231DF572A75B1E70051DCC7 /* ProgressCircleView.swift in Sources */,
 				32E3C6212A83F6BB00835BB3 /* ChartDataView.swift in Sources */,
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
@@ -314,6 +353,7 @@
 				32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */,
 				32E3C6332A87B63000835BB3 /* PaywallViewModel.swift in Sources */,
 				3231DF452A75970D0051DCC7 /* ContentView.swift in Sources */,
+				32E3C64C2A8CFC2100835BB3 /* LeaderboardView.swift in Sources */,
 				3231DF5A2A768F370051DCC7 /* ActivityCard.swift in Sources */,
 				32E3C6232A83F7FB00835BB3 /* ChartsViewModel.swift in Sources */,
 				3231DF432A75970D0051DCC7 /* FitnessAppApp.swift in Sources */,
