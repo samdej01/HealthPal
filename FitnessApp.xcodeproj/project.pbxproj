@@ -34,6 +34,10 @@
 		32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */; };
 		32E3C64C2A8CFC2100835BB3 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */; };
 		32E3C64E2A8D01C000835BB3 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C64D2A8D01C000835BB3 /* TermsView.swift */; };
+		32E3C6502A8D5C7C00835BB3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32E3C64F2A8D5C7C00835BB3 /* GoogleService-Info.plist */; };
+		32E3C6532A8D5CFD00835BB3 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 32E3C6522A8D5CFD00835BB3 /* FirebaseFirestore */; };
+		32E3C6552A8D5CFD00835BB3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 32E3C6542A8D5CFD00835BB3 /* FirebaseFirestoreSwift */; };
+		32E3C6582A8D5D2500835BB3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6572A8D5D2500835BB3 /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +69,8 @@
 		32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RevenueCat+Ext.swift"; sourceTree = "<group>"; };
 		32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		32E3C64D2A8D01C000835BB3 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
+		32E3C64F2A8D5C7C00835BB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		32E3C6572A8D5D2500835BB3 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,8 @@
 			files = (
 				32E3C62F2A86D14300835BB3 /* RevenueCat in Frameworks */,
 				32E3C62C2A86CCF100835BB3 /* StoreKit.framework in Frameworks */,
+				32E3C6532A8D5CFD00835BB3 /* FirebaseFirestore in Frameworks */,
+				32E3C6552A8D5CFD00835BB3 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				322F708E2A7C2BD4002DBB9D /* HealthManager.swift */,
+				32E3C6572A8D5D2500835BB3 /* DatabaseManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -154,6 +163,7 @@
 		3231DF412A75970D0051DCC7 /* FitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				32E3C64F2A8D5C7C00835BB3 /* GoogleService-Info.plist */,
 				32E3C6472A8CFC0300835BB3 /* Leaderboards */,
 				322F70942A82DD65002DBB9D /* Charts */,
 				322F70912A7E79AD002DBB9D /* Utils */,
@@ -276,6 +286,8 @@
 			name = FitnessApp;
 			packageProductDependencies = (
 				32E3C62E2A86D14300835BB3 /* RevenueCat */,
+				32E3C6522A8D5CFD00835BB3 /* FirebaseFirestore */,
+				32E3C6542A8D5CFD00835BB3 /* FirebaseFirestoreSwift */,
 			);
 			productName = FitnessApp;
 			productReference = 3231DF3F2A75970D0051DCC7 /* FitnessApp.app */;
@@ -307,6 +319,7 @@
 			mainGroup = 3231DF362A75970D0051DCC7;
 			packageReferences = (
 				32E3C62D2A86D14300835BB3 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				32E3C6512A8D5CFD00835BB3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 3231DF402A75970D0051DCC7 /* Products */;
 			projectDirPath = "";
@@ -323,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3231DF4A2A75970F0051DCC7 /* Preview Assets.xcassets in Resources */,
+				32E3C6502A8D5C7C00835BB3 /* GoogleService-Info.plist in Resources */,
 				3231DF472A75970F0051DCC7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +356,7 @@
 				32E3C64E2A8D01C000835BB3 /* TermsView.swift in Sources */,
 				3231DF572A75B1E70051DCC7 /* ProgressCircleView.swift in Sources */,
 				32E3C6212A83F6BB00835BB3 /* ChartDataView.swift in Sources */,
+				32E3C6582A8D5D2500835BB3 /* DatabaseManager.swift in Sources */,
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
 				322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */,
 				326B022E2A7865D20034E363 /* Workout.swift in Sources */,
@@ -571,6 +586,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		32E3C6512A8D5CFD00835BB3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -578,6 +601,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 32E3C62D2A86D14300835BB3 /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
+		};
+		32E3C6522A8D5CFD00835BB3 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32E3C6512A8D5CFD00835BB3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		32E3C6542A8D5CFD00835BB3 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32E3C6512A8D5CFD00835BB3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
