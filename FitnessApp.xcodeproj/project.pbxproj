@@ -38,6 +38,8 @@
 		32E3C6532A8D5CFD00835BB3 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 32E3C6522A8D5CFD00835BB3 /* FirebaseFirestore */; };
 		32E3C6552A8D5CFD00835BB3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 32E3C6542A8D5CFD00835BB3 /* FirebaseFirestoreSwift */; };
 		32E3C6582A8D5D2500835BB3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6572A8D5D2500835BB3 /* DatabaseManager.swift */; };
+		32E3C65A2A8E394600835BB3 /* LeaderboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6592A8E394600835BB3 /* LeaderboardViewModel.swift */; };
+		32E3C65C2A8E395F00835BB3 /* LeaderboardUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C65B2A8E395F00835BB3 /* LeaderboardUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		32E3C64D2A8D01C000835BB3 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		32E3C64F2A8D5C7C00835BB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		32E3C6572A8D5D2500835BB3 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		32E3C6592A8E394600835BB3 /* LeaderboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewModel.swift; sourceTree = "<group>"; };
+		32E3C65B2A8E395F00835BB3 /* LeaderboardUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +261,7 @@
 		32E3C6492A8CFC0F00835BB3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				32E3C65B2A8E395F00835BB3 /* LeaderboardUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 		32E3C64A2A8CFC1500835BB3 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				32E3C6592A8E394600835BB3 /* LeaderboardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -350,6 +356,8 @@
 			files = (
 				326B022C2A7865AC0034E363 /* Activity.swift in Sources */,
 				32E3C6272A83F81E00835BB3 /* DailyStepModel.swift in Sources */,
+				32E3C65C2A8E395F00835BB3 /* LeaderboardUser.swift in Sources */,
+				32E3C65A2A8E394600835BB3 /* LeaderboardViewModel.swift in Sources */,
 				3231DF512A759D880051DCC7 /* FitnessTabView.swift in Sources */,
 				326B02272A7864D60034E363 /* HomeViewModel.swift in Sources */,
 				3231DF5C2A769E790051DCC7 /* WorkoutCard.swift in Sources */,

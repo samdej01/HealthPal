@@ -15,8 +15,8 @@ class DatabaseManager {
     
     private init() { }
     
-    let database = Firestore.firestore()
-    let weeklyLeaderboard = "\(Date().mondayDateFormat())-leaderboard"
+    private let database = Firestore.firestore()
+    private let weeklyLeaderboard = "\(Date().mondayDateFormat())-leaderboard"
     
     // Fetch Leaderboards
     func fetchLeaderboards() async throws -> [LeaderboardUser] {
@@ -25,9 +25,8 @@ class DatabaseManager {
     }
     
     // Post (Update) Leaderboards for current user
-    func postStepCountUpdateFor(username: String, count: Int) async throws {
-        let leader = LeaderboardUser(username: username, count: count)
+    func postStepCountUpdateForUser(leader: LeaderboardUser) async throws {
         let data = try Firestore.Encoder().encode(leader)
-        try await database.collection(weeklyLeaderboard).document(username).setData(data, merge: false)
+        try await database.collection(weeklyLeaderboard).document(leader.username).setData(data, merge: false)
     }
 }
