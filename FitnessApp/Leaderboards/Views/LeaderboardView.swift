@@ -14,63 +14,69 @@ struct LeaderboardView: View {
     @Binding var showTerms: Bool
     
     var body: some View {
-        VStack {
-            Text("Leaderboard")
-                .font(.largeTitle)
-                .bold()
-            
-            HStack {
-                Text("Name")
+        ZStack {
+            VStack {
+                Text("Leaderboard")
+                    .font(.largeTitle)
                     .bold()
                 
-                Spacer()
+                HStack {
+                    Text("Name")
+                        .bold()
+                    
+                    Spacer()
+                    
+                    Text("Steps")
+                        .bold()
+                }
+                .padding()
                 
-                Text("Steps")
-                    .bold()
-            }
-            .padding()
-            
-            LazyVStack(spacing: 24) {
-                ForEach(Array(viewModel.leaderResult.top10.enumerated()), id: \.element.id) { (idx, person) in
-                    HStack {
-                        Text("\(idx + 1).")
-                        
-                        Text(person.username)
-                        
-                        if username == person.username {
-                            Image(systemName: "crown.fill")
-                                .foregroundColor(.yellow)
+                LazyVStack(spacing: 24) {
+                    ForEach(Array(viewModel.leaderResult.top10.enumerated()), id: \.element.id) { (idx, person) in
+                        HStack {
+                            Text("\(idx + 1).")
+                            
+                            Text(person.username)
+                            
+                            if username == person.username {
+                                Image(systemName: "crown.fill")
+                                    .foregroundColor(.yellow)
+                            }
+                            
+                            Spacer()
+                            
+                            Text("\(person.count)")
                         }
+                        .padding(.horizontal)
+                    }
+                }
+                
+                if let user = viewModel.leaderResult.user {
+                    Image(systemName: "ellipsis")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 48, height: 48)
+                        .foregroundColor(.gray.opacity(0.5))
+                    
+                    HStack {
+                        Text(user.username)
                         
                         Spacer()
                         
-                        Text("\(person.count)")
+                        Text("\(user.count)")
                     }
                     .padding(.horizontal)
                 }
             }
+            .frame(maxHeight: .infinity, alignment: .top)
             
-            if let user = viewModel.leaderResult.user {
-                Image(systemName: "ellipsis")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 48, height: 48)
-                    .foregroundColor(.gray.opacity(0.5))
+            if showTerms {
+                Color.white
                 
-                HStack {
-                    Text(user.username)
-                    
-                    Spacer()
-                    
-                    Text("\(user.count)")
-                }
-                .padding(.horizontal)
+                TermsView(showTerms: $showTerms)
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
-        .fullScreenCover(isPresented: $showTerms) {
-            TermsView()
-        }
         .onChange(of: showTerms) { _ in
             if !showTerms && username != nil {
                 Task {
