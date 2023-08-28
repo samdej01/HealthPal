@@ -22,6 +22,8 @@
 		326B02272A7864D60034E363 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B02262A7864D60034E363 /* HomeViewModel.swift */; };
 		326B022C2A7865AC0034E363 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022B2A7865AC0034E363 /* Activity.swift */; };
 		326B022E2A7865D20034E363 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022D2A7865D20034E363 /* Workout.swift */; };
+		32D06DB12A9D165600D69189 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB02A9D165600D69189 /* ProfileView.swift */; };
+		32D06DB62A9D1B1C00D69189 /* FitnessProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB52A9D1B1C00D69189 /* FitnessProfileButton.swift */; };
 		32E3C6212A83F6BB00835BB3 /* ChartDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6202A83F6BB00835BB3 /* ChartDataView.swift */; };
 		32E3C6232A83F7FB00835BB3 /* ChartsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6222A83F7FB00835BB3 /* ChartsViewModel.swift */; };
 		32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */; };
@@ -62,6 +64,8 @@
 		326B02262A7864D60034E363 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		326B022B2A7865AC0034E363 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		326B022D2A7865D20034E363 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		32D06DB02A9D165600D69189 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		32D06DB52A9D1B1C00D69189 /* FitnessProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileButton.swift; sourceTree = "<group>"; };
 		32E3C6202A83F6BB00835BB3 /* ChartDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataView.swift; sourceTree = "<group>"; };
 		32E3C6222A83F7FB00835BB3 /* ChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewModel.swift; sourceTree = "<group>"; };
 		32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyStepModel.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 		3231DF412A75970D0051DCC7 /* FitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				32D06DAF2A9D164400D69189 /* Profile */,
 				32E3C64F2A8D5C7C00835BB3 /* GoogleService-Info.plist */,
 				32E3C6472A8CFC0300835BB3 /* Leaderboards */,
 				322F70942A82DD65002DBB9D /* Charts */,
@@ -233,6 +238,39 @@
 			isa = PBXGroup;
 			children = (
 				326B02262A7864D60034E363 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		32D06DAF2A9D164400D69189 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				32D06DB42A9D166300D69189 /* ViewModel */,
+				32D06DB32A9D165F00D69189 /* Model */,
+				32D06DB22A9D165800D69189 /* Views */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		32D06DB22A9D165800D69189 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				32D06DB02A9D165600D69189 /* ProfileView.swift */,
+				32D06DB52A9D1B1C00D69189 /* FitnessProfileButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		32D06DB32A9D165F00D69189 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		32D06DB42A9D166300D69189 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -371,6 +409,8 @@
 				32FF673B2A96805C0001E8E9 /* Date+Ext.swift in Sources */,
 				3231DF572A75B1E70051DCC7 /* ProgressCircleView.swift in Sources */,
 				32E3C6212A83F6BB00835BB3 /* ChartDataView.swift in Sources */,
+				32D06DB12A9D165600D69189 /* ProfileView.swift in Sources */,
+				32D06DB62A9D1B1C00D69189 /* FitnessProfileButton.swift in Sources */,
 				32E3C6582A8D5D2500835BB3 /* DatabaseManager.swift in Sources */,
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
 				322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */,
