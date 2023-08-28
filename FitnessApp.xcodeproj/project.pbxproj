@@ -25,6 +25,7 @@
 		32D06DB12A9D165600D69189 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB02A9D165600D69189 /* ProfileView.swift */; };
 		32D06DB62A9D1B1C00D69189 /* FitnessProfileItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB52A9D1B1C00D69189 /* FitnessProfileItemButton.swift */; };
 		32D06DB82A9D245300D69189 /* FitnessProfileEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB72A9D245300D69189 /* FitnessProfileEditButton.swift */; };
+		32D06DBA2A9D3AC000D69189 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB92A9D3AC000D69189 /* ProfileViewModel.swift */; };
 		32E3C6212A83F6BB00835BB3 /* ChartDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6202A83F6BB00835BB3 /* ChartDataView.swift */; };
 		32E3C6232A83F7FB00835BB3 /* ChartsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6222A83F7FB00835BB3 /* ChartsViewModel.swift */; };
 		32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */; };
@@ -68,6 +69,7 @@
 		32D06DB02A9D165600D69189 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		32D06DB52A9D1B1C00D69189 /* FitnessProfileItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileItemButton.swift; sourceTree = "<group>"; };
 		32D06DB72A9D245300D69189 /* FitnessProfileEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileEditButton.swift; sourceTree = "<group>"; };
+		32D06DB92A9D3AC000D69189 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		32E3C6202A83F6BB00835BB3 /* ChartDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataView.swift; sourceTree = "<group>"; };
 		32E3C6222A83F7FB00835BB3 /* ChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewModel.swift; sourceTree = "<group>"; };
 		32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyStepModel.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 		32D06DB42A9D166300D69189 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				32D06DB92A9D3AC000D69189 /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				32D06DB12A9D165600D69189 /* ProfileView.swift in Sources */,
 				32D06DB62A9D1B1C00D69189 /* FitnessProfileItemButton.swift in Sources */,
 				32E3C6582A8D5D2500835BB3 /* DatabaseManager.swift in Sources */,
+				32D06DBA2A9D3AC000D69189 /* ProfileViewModel.swift in Sources */,
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
 				322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */,
 				326B022E2A7865D20034E363 /* Workout.swift in Sources */,
