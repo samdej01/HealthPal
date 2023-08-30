@@ -5,11 +5,11 @@
 //  Created by Jason Dubon on 8/28/23.
 //
 
-import Foundation
+import SwiftUI
 
 class ProfileViewModel: ObservableObject {
     
-    @Published var isEditingName = true
+    @Published var isEditingName = false
     @Published var currentName = ""
     @Published var profileName: String? = UserDefaults.standard.string(forKey: "profileName")
     
@@ -52,4 +52,24 @@ class ProfileViewModel: ObservableObject {
         self.dismissEdit()
     }
     
+    func presentEmailApp() {
+        let emailSubject = "Fitness App - Contact Us"
+        let emailRecipient = "jasonsdubon@gmail.com"
+        
+        let encodedSubject = emailSubject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let encodedRecipient = emailRecipient.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
+        let urlString = "mailto:\(encodedRecipient)?subject=\(encodedSubject)"
+        
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            return
+        }
+        
+    }
 }

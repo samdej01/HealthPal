@@ -70,6 +70,7 @@
 		32D06DB52A9D1B1C00D69189 /* FitnessProfileItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileItemButton.swift; sourceTree = "<group>"; };
 		32D06DB72A9D245300D69189 /* FitnessProfileEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileEditButton.swift; sourceTree = "<group>"; };
 		32D06DB92A9D3AC000D69189 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		32D06DBB2A9FD8C800D69189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		32E3C6202A83F6BB00835BB3 /* ChartDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataView.swift; sourceTree = "<group>"; };
 		32E3C6222A83F7FB00835BB3 /* ChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewModel.swift; sourceTree = "<group>"; };
 		32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyStepModel.swift; sourceTree = "<group>"; };
@@ -181,6 +182,7 @@
 		3231DF412A75970D0051DCC7 /* FitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				32D06DBB2A9FD8C800D69189 /* Info.plist */,
 				32D06DAF2A9D164400D69189 /* Profile */,
 				32E3C64F2A8D5C7C00835BB3 /* GoogleService-Info.plist */,
 				32E3C6472A8CFC0300835BB3 /* Leaderboards */,
@@ -568,6 +570,7 @@
 				DEVELOPMENT_TEAM = 8U63ZP8KK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitnessApp/Info.plist;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -599,6 +602,7 @@
 				DEVELOPMENT_TEAM = 8U63ZP8KK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitnessApp/Info.plist;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

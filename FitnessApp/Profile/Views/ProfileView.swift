@@ -124,17 +124,30 @@ struct ProfileView: View {
             
             VStack {
                 FitnessProfileItemButton(title: "Contact Us", image: "envelope") {
-                    print("contact")
+                    viewModel.presentEmailApp()
                 }
                 
-                FitnessProfileItemButton(title: "Privacy Policy", image: "doc") {
-                    print("privacy")
+                Link(destination: URL(string: "https://github.com/MexJason/SwiftUI-Course/blob/main/policy.md")!) {
+                    HStack {
+                        Image(systemName: "doc")
+                        
+                        Text("Privacy Policy")
+                    }
+                    .foregroundColor(.primary)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
-                FitnessProfileItemButton(title: "Terms of Service", image: "doc") {
-                    print("terms")
+                Link(destination: URL(string: "https://github.com/MexJason/SwiftUI-Course/blob/main/terms.md")!) {
+                    HStack {
+                        Image(systemName: "doc")
+                        
+                        Text("Terms of Service")
+                    }
+                    .foregroundColor(.primary)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                
             }
             .background(
                 RoundedRectangle(cornerRadius: 10)
