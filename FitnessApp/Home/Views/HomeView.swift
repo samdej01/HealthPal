@@ -145,6 +145,11 @@ struct HomeView: View {
                 }
             }
         }
+        .alert("Oops", isPresented: $viewModel.presentError, actions: {
+            Text("Ok")
+        }, message: {
+            Text(viewModel.error)
+        })
         .sheet(isPresented: $showPaywall) {
             PaywallView(isPremium: $isPremium)
         }

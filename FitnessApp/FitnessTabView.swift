@@ -18,8 +18,8 @@ struct FitnessTabView: View {
     init() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.stackedLayoutAppearance.selected.iconColor = .green
-        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.green]
+        appearance.stackedLayoutAppearance.selected.iconColor = .systemGreen
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGreen]
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }
     

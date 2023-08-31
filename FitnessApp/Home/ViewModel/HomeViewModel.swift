@@ -16,14 +16,7 @@ class HomeViewModel: ObservableObject {
     @Published var stand: Int = 0
     
     @Published var activities = [Activity]()
-    @Published var workouts = [
-        Workout(id: 0, title: "Running", image: "figure.run", tintColor: .cyan, duration: "51 mins", date: "Aug 1", calories: "512 kcal"),
-        Workout(id: 1, title: "Strength Training", image: "figure.run", tintColor: .red, duration: "51 mins", date: "Aug 1", calories: "512 kcal"),
-        Workout(id: 2, title: "Walk", image: "figure.walk", tintColor: .purple, duration: "5 mins", date: "Aug 11", calories: "512 kcal"),
-        Workout(id: 3, title: "Running", image: "figure.run", tintColor: .cyan, duration: "1 mins", date: "Aug 19", calories: "512 kcal"),
-        
-    ]
-    
+    @Published var workouts = [Workout]()
     
     var mockActivites = [
         Activity(title: "Today steps", subtitle: "Goal 12,000", image: "figure.walk", tintColor: .green, amount: "9,812"),
@@ -40,6 +33,18 @@ class HomeViewModel: ObservableObject {
         
     ]
     
+    enum HomeViewModelError: String, Error {
+        case failedToFetchTodayCalories = "Today's Calories"
+        case failedToFetchTodayExercise = "Today's Exercise Time"
+        case failedToFetchTodayStandHours = "Today's Stand Hours"
+        case failedToFetchTodayStepCount = "Today's Step Count"
+        case failedToFetchCurrentWeekActivities = "This Weeks Workouts"
+        case failedToFetchRecentWorkouts = "Recent Workouts"
+    }
+    
+    @Published var presentError = false
+    @Published var error = "Unable to access your health data, please try again."
+    var errors = [HomeViewModelError]()
     
     init() {
         Task {
@@ -51,15 +56,50 @@ class HomeViewModel: ObservableObject {
                 fetchTodaysSteps()
                 fetchCurrentWeekActivities()
                 fetchRecentWorkouts()
+                handleErrors()
             } catch {
-                print(error.localizedDescription)
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.error = "Unable to access your health data. Please make sure you give us access in order to enjoy the benefits of our application."
+                    self.presentError = true
+                }
             }
         }
         
     }
     
+    func handleErrors() {
+        if errors.count == 1, let newError = errors.first {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch newError {
+                case .failedToFetchTodayCalories:
+                    self.error = "Unable to fetch today's calories please make sure your device is setup correctly and try again. Calorie tracking requires an Apple Watch."
+                case .failedToFetchTodayExercise:
+                    self.error = "Unable to fetch today's exercise time please make sure your device is setup correctly and try again. Exercise time tracking requires an Apple Watch."
+                case .failedToFetchTodayStandHours:
+                    self.error = "Unable to fetch today's stand hours please make sure your device is setup correctly and try again. Stand hours tracking requires an Apple Watch."
+                case .failedToFetchTodayStepCount:
+                    self.error = "Unable to fetch today's total step count please make sure your device is setup correctly and try again."
+                case .failedToFetchCurrentWeekActivities:
+                    self.error = "Unable to fetch your workouts for the current week please make sure your device is setup correctly and try again."
+                case .failedToFetchRecentWorkouts:
+                    self.error = "Unable to fetch your workouts for your recent workouts please make sure your device is setup correctly and try again."
+                }
+                self.presentError = true
+            }
+        } else if errors.count > 1 {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.error = "Unable to fetch the following health data: \n\(self.errors.map({ $0.rawValue }).joined(separator: "\n")) \nPlease make sure your device & data are setup correctly and try again. Some health tracking requires an Apple Watch."
+                self.presentError = true
+            }
+        }
+    }
+    
     func fetchTodayCalories() {
-        healthManager.fetchTodayCaloriesBurned { result in
+        healthManager.fetchTodayCaloriesBurned { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let calories):
                 DispatchQueue.main.async {
@@ -67,75 +107,80 @@ class HomeViewModel: ObservableObject {
                     let activity = Activity(title: "Calories Burned", subtitle: "today", image: "flame", tintColor: .red, amount: calories.formattedNumberString())
                     self.activities.append(activity)
                 }
-            case .failure(let failure):
-                print(failure.localizedDescription)
+            case .failure(_):
+                self.errors.append(HomeViewModelError.failedToFetchTodayCalories)
             }
         }
     }
     
     func fetchTodayExerciseTime() {
-        healthManager.fetchTodayExerciseTime { result in
+        healthManager.fetchTodayExerciseTime { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let exercise):
                 DispatchQueue.main.async {
                     self.exercise = Int(exercise)
                 }
-            case .failure(let failure):
-                print(failure.localizedDescription)
+            case .failure(_):
+                self.errors.append(HomeViewModelError.failedToFetchTodayExercise)
             }
         }
     }
     
     func fetchTodayStandHours() {
-        healthManager.fetchTodayStandHours { result in
+        healthManager.fetchTodayStandHours { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let hours):
                 DispatchQueue.main.async {
                     self.stand = hours
                 }
-            case .failure(let failure):
-                print(failure.localizedDescription)
+            case .failure(_):
+                self.errors.append(HomeViewModelError.failedToFetchTodayStandHours)
             }
         }
     }
     
     // MARK: Fitness Activity
     func fetchTodaysSteps() {
-        healthManager.fetchTodaySteps { result in
+        healthManager.fetchTodaySteps { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let activity):
                 DispatchQueue.main.async {
                     self.activities.append(activity)
                 }
-            case .failure(let failure):
-                print(failure.localizedDescription)
+            case .failure(_):
+                self.errors.append(HomeViewModelError.failedToFetchTodayStepCount)
             }
         }
     }
     
     func fetchCurrentWeekActivities() {
-        healthManager.fetchCurrentWeekWorkoutStats { result in
+        healthManager.fetchCurrentWeekWorkoutStats { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let activities):
                 DispatchQueue.main.async {
                     self.activities.append(contentsOf: activities)
                 }
-            case .failure(let failure):
-                print(failure.localizedDescription)
+            case .failure(_):
+                self.errors.append(HomeViewModelError.failedToFetchCurrentWeekActivities)
             }
         }
     }
     
     // MARK: Recent Workouts
     func fetchRecentWorkouts() {
-        healthManager.fetchWorkoutsForMonth(month: Date()) { result in
+        healthManager.fetchWorkoutsForMonth(month: Date()) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let workouts):
                 DispatchQueue.main.async {
                     self.workouts = Array(workouts.prefix(4))
                 }
-            case .failure(let failure):
-                print(failure.localizedDescription)
+            case .failure(_):
+                self.errors.append(HomeViewModelError.failedToFetchRecentWorkouts)
             }
         }
     }
