@@ -214,10 +214,11 @@ extension HealthManager {
             let (startOfMonth, endOfMonth) = month.fetchMonthStartAndEndDate()
             let predicate = HKQuery.predicateForSamples(withStart: startOfMonth, end: endOfMonth)
             let query = HKStatisticsQuery(quantityType: steps, quantitySamplePredicate: predicate) { _, results, error in
-                guard let steps = results?.sumQuantity()?.doubleValue(for: .count()), error == nil else {
-                    completion(.failure(URLError(.badURL)))
-                    return
+                if let error = error, error.localizedDescription != "No data available for the specified predicate." {
+                    completion(.failure(error))
                 }
+                
+                let steps = results?.sumQuantity()?.doubleValue(for: .count()) ?? 0
                 
                 if i == 0 {
                     oneYearMonths.append(MonthlyStepModel(date: month, count: Int(steps)))

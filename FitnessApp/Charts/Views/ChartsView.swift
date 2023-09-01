@@ -92,6 +92,11 @@ struct ChartsView: View {
                 }
             }
         }
+        .alert("Oops", isPresented: $viewModel.presentError, actions: {
+            Text("Ok")
+        }, message: {
+            Text("We ran into issues fetching some of your step data please make sure you have allowed access and try again.")
+        })
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
 }
