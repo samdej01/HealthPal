@@ -145,6 +145,11 @@ struct HomeView: View {
                 }
             }
         }
+        .alert("Oops", isPresented: $viewModel.presentError, actions: {
+            Text("Ok")
+        }, message: {
+            Text("There was an issue fetching some of your data. Some health tracking requires an Apple Watch.")
+        })
         .sheet(isPresented: $showPaywall) {
             PaywallView(isPremium: $isPremium)
         }
