@@ -19,7 +19,9 @@ class HealthManager {
             do {
                 try await requestHealthKitAccess()
             } catch {
-                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    presentAlert(title: "Oops", message: "We were unable to access health data. Please allow access to enjoy the app.")
+                }
             }
         }
     }
@@ -40,7 +42,7 @@ class HealthManager {
         let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
         let query = HKStatisticsQuery(quantityType: calories, quantitySamplePredicate: predicate) { _, results, error in
             guard let quantity = results?.sumQuantity(), error == nil else {
-                completion(.failure(URLError(.badURL)))
+                completion(.failure(error!))
                 return
             }
             
@@ -56,7 +58,7 @@ class HealthManager {
         let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
         let query = HKStatisticsQuery(quantityType: exercise, quantitySamplePredicate: predicate) { _, results, error in
             guard let quantity = results?.sumQuantity(), error == nil else {
-                completion(.failure(URLError(.badURL)))
+                completion(.failure(error!))
                 return
             }
             
@@ -72,7 +74,7 @@ class HealthManager {
         let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
         let query = HKSampleQuery(sampleType: stand, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, results, error in
             guard let samples = results as? [HKCategorySample], error == nil else {
-                completion(.failure(URLError(.badURL)))
+                completion(.failure(error!))
                 return
             }
             
@@ -89,7 +91,7 @@ class HealthManager {
         let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
         let query = HKStatisticsQuery(quantityType: steps, quantitySamplePredicate: predicate) { _, results, error in
             guard let quantity = results?.sumQuantity(), error == nil else {
-                completion(.failure(URLError(.badURL)))
+                completion(.failure(error!))
                 return
             }
             
@@ -106,7 +108,7 @@ class HealthManager {
         let predicate = HKQuery.predicateForSamples(withStart: .startOfWeek, end: Date())
         let query = HKSampleQuery(sampleType: workouts, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { [weak self] _, results, error in
             guard let workouts = results as? [HKWorkout], let self = self, error == nil else {
-                completion(.failure(URLError(.badURL)))
+                completion(.failure(error!))
                 return
             }
             
@@ -161,7 +163,7 @@ class HealthManager {
         
         let query = HKSampleQuery(sampleType: workouts, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) { _, results, error in
             guard let workouts = results as? [HKWorkout], error == nil else {
-                completion(.failure(URLError(.badURL)))
+                completion(.failure(error!))
                 return
             }
             
@@ -184,7 +186,7 @@ extension HealthManager {
         
         query.initialResultsHandler = { _, results, error in
             guard let result = results, error == nil else {
-                completion(.failure(URLError(.badURL)))
+                completion(.failure(error!))
                 return
             }
             
@@ -247,7 +249,7 @@ extension HealthManager {
         let predicate = HKQuery.predicateForSamples(withStart: .startOfWeek, end: Date())
         let query = HKStatisticsQuery(quantityType: steps, quantitySamplePredicate: predicate) { _, results, error in
             guard let quantity = results?.sumQuantity(), error == nil else {
-                completion(.failure(URLError(.badURL)))
+                completion(.failure(error!))
                 return
             }
             

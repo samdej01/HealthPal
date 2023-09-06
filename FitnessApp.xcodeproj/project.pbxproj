@@ -10,7 +10,6 @@
 		322F708F2A7C2BD4002DBB9D /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F708E2A7C2BD4002DBB9D /* HealthManager.swift */; };
 		322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322F70922A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift */; };
 		3231DF432A75970D0051DCC7 /* FitnessAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF422A75970D0051DCC7 /* FitnessAppApp.swift */; };
-		3231DF452A75970D0051DCC7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF442A75970D0051DCC7 /* ContentView.swift */; };
 		3231DF472A75970F0051DCC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3231DF462A75970F0051DCC7 /* Assets.xcassets */; };
 		3231DF4A2A75970F0051DCC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3231DF492A75970F0051DCC7 /* Preview Assets.xcassets */; };
 		3231DF512A759D880051DCC7 /* FitnessTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF502A759D880051DCC7 /* FitnessTabView.swift */; };
@@ -54,7 +53,6 @@
 		322F70922A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKWorkoutActivityType+Ext.swift"; sourceTree = "<group>"; };
 		3231DF3F2A75970D0051DCC7 /* FitnessApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3231DF422A75970D0051DCC7 /* FitnessAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessAppApp.swift; sourceTree = "<group>"; };
-		3231DF442A75970D0051DCC7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3231DF462A75970F0051DCC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3231DF492A75970F0051DCC7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3231DF502A759D880051DCC7 /* FitnessTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTabView.swift; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 				322F708D2A7C2BC9002DBB9D /* FitnessApp.entitlements */,
 				3231DF582A768F010051DCC7 /* Home */,
 				3231DF422A75970D0051DCC7 /* FitnessAppApp.swift */,
-				3231DF442A75970D0051DCC7 /* ContentView.swift */,
 				3231DF462A75970F0051DCC7 /* Assets.xcassets */,
 				3231DF482A75970F0051DCC7 /* Preview Content */,
 				3231DF502A759D880051DCC7 /* FitnessTabView.swift */,
@@ -433,7 +430,6 @@
 				32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */,
 				32E3C6332A87B63000835BB3 /* PaywallViewModel.swift in Sources */,
 				32D06DB82A9D245300D69189 /* FitnessProfileEditButton.swift in Sources */,
-				3231DF452A75970D0051DCC7 /* ContentView.swift in Sources */,
 				32E3C64C2A8CFC2100835BB3 /* LeaderboardView.swift in Sources */,
 				3231DF5A2A768F370051DCC7 /* ActivityCard.swift in Sources */,
 				32E3C6232A83F7FB00835BB3 /* ChartsViewModel.swift in Sources */,
