@@ -12,6 +12,6 @@ struct Workout: Hashable, Identifiable {
     let image: String
     let tintColor: Color
     let duration: String
-    let date: String
+    let date: Date
     let calories: String
 }

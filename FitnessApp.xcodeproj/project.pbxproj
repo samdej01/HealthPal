@@ -44,6 +44,7 @@
 		32E3C65A2A8E394600835BB3 /* LeaderboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6592A8E394600835BB3 /* LeaderboardViewModel.swift */; };
 		32E3C65C2A8E395F00835BB3 /* LeaderboardUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C65B2A8E395F00835BB3 /* LeaderboardUser.swift */; };
 		32FF5F0D2AA90103002062C1 /* MonthWorkoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF5F0C2AA90103002062C1 /* MonthWorkoutsView.swift */; };
+		32FF5F112AA90D7F002062C1 /* MonthWorkoutsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF5F102AA90D7F002062C1 /* MonthWorkoutsViewModel.swift */; };
 		32FF67392A9680410001E8E9 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF67382A9680410001E8E9 /* Double+Ext.swift */; };
 		32FF673B2A96805C0001E8E9 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF673A2A96805C0001E8E9 /* Date+Ext.swift */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		32E3C6592A8E394600835BB3 /* LeaderboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewModel.swift; sourceTree = "<group>"; };
 		32E3C65B2A8E395F00835BB3 /* LeaderboardUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardUser.swift; sourceTree = "<group>"; };
 		32FF5F0C2AA90103002062C1 /* MonthWorkoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthWorkoutsView.swift; sourceTree = "<group>"; };
+		32FF5F102AA90D7F002062C1 /* MonthWorkoutsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthWorkoutsViewModel.swift; sourceTree = "<group>"; };
 		32FF67382A9680410001E8E9 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		32FF673A2A96805C0001E8E9 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				326B02262A7864D60034E363 /* HomeViewModel.swift */,
+				32FF5F102AA90D7F002062C1 /* MonthWorkoutsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				32E3C6272A83F81E00835BB3 /* DailyStepModel.swift in Sources */,
 				32E3C65C2A8E395F00835BB3 /* LeaderboardUser.swift in Sources */,
 				32E3C65A2A8E394600835BB3 /* LeaderboardViewModel.swift in Sources */,
+				32FF5F112AA90D7F002062C1 /* MonthWorkoutsViewModel.swift in Sources */,
 				3231DF512A759D880051DCC7 /* FitnessTabView.swift in Sources */,
 				326B02272A7864D60034E363 /* HomeViewModel.swift in Sources */,
 				3231DF5C2A769E790051DCC7 /* WorkoutCard.swift in Sources */,

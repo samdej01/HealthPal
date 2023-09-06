@@ -35,7 +35,7 @@ struct WorkoutCard: View {
                 }
                 
                 HStack {
-                    Text(workout.date)
+                    Text(workout.date.formatWorkoutDate())
                     
                     Spacer()
                     
@@ -49,6 +49,6 @@ struct WorkoutCard: View {
 
 struct WorkoutCard_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutCard(workout: Workout(title: "Running", image: "figure.run", tintColor: .cyan, duration: "51 mins", date: "Aug 1", calories: "512 kcal"))
+        WorkoutCard(workout: Workout(title: "Running", image: "figure.run", tintColor: .cyan, duration: "51 mins", date: Date(), calories: "512 kcal"))
     }
 }
