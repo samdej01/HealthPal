@@ -16,9 +16,24 @@ struct LeaderboardView: View {
     var body: some View {
         ZStack {
             VStack {
-                Text("Leaderboard")
-                    .font(.largeTitle)
-                    .bold()
+                ZStack(alignment: .trailing) {
+                    Text("Leaderboard")
+                        .font(.largeTitle)
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                    
+                    Button {
+                        viewModel.setupLeaderboardData()
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                            .resizable()
+                            .scaledToFit()
+                            .bold()
+                            .foregroundColor(Color(uiColor: .label))
+                            .frame(width: 28, height: 28)
+                            .padding(.trailing)
+                    }
+                }
                 
                 HStack {
                     Text("Name")
@@ -77,15 +92,14 @@ struct LeaderboardView: View {
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)
+        .alert("Oops", isPresented: $viewModel.showAlert, actions: {
+            Text("Ok")
+        }, message: {
+            Text("There was an issue loading the leaderboard data. Please try again.")
+        })
         .onChange(of: showTerms) { _ in
             if !showTerms && username != nil {
-                Task {
-                    do {
-                        try await viewModel.setupLeaderboardData()
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                }
+                viewModel.setupLeaderboardData()
             }
         }
     }
