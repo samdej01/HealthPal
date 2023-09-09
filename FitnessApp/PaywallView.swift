@@ -23,35 +23,38 @@ struct PaywallView: View {
             Spacer()
             
             // Features
-            VStack(spacing: 20) {
+            VStack(spacing: 36) {
                 HStack {
                     Image(systemName: "figure.run")
                     
                     Text("Exercise boosts energy levels and promotes vitality.")
                         .lineLimit(1)
                         .font(.system(size: 14))
+                        .minimumScaleFactor(0.6)
                 }
                 
                 HStack {
-                    Image(systemName: "figure.run")
+                    Image(systemName: "chart.xyaxis.line")
                     
-                    Text("Exercise boosts energy levels and promotes vitality.")
+                    Text("Track your monthly workouts and activity.")
                         .lineLimit(1)
                         .font(.system(size: 14))
+                        .minimumScaleFactor(0.6)
                 }
                 
                 HStack {
-                    Image(systemName: "figure.run")
+                    Image(systemName: "person.3.fill")
                     
-                    Text("Exercise boosts energy levels and promotes vitality.")
+                    Text("Join the commmunity of people changing their lives.")
                         .lineLimit(1)
                         .font(.system(size: 14))
+                        .minimumScaleFactor(0.6)
                 }
             }
             
             Spacer()
             
-            HStack {
+            VStack(spacing: 12) {
                 if let offering = viewModel.currentOffering {
                     ForEach(offering.availablePackages) { package in
                         Button {
@@ -67,24 +70,24 @@ struct PaywallView: View {
                         } label: {
                             VStack(spacing: 8) {
                                 Text(package.storeProduct.subscriptionPeriod?.durationTitle ?? "Subscription")
+                                    .font(.title3)
+                                    .bold()
                                 
                                 Text(package.storeProduct.localizedPriceString)
                             }
-                            .foregroundColor(.primary)
+                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                         }
-                        .padding()
-                        .frame(height: 100)
-                        
+                        .padding(.vertical)
                         .background(
                             RoundedRectangle(cornerRadius: 15)
-                                .stroke(lineWidth: 2)
                                 .foregroundColor(.green)
+                                .shadow(radius: 3)
                         )
                     }
                 }
             }
-            .padding(.horizontal, 40)
+            .padding(.horizontal)
             
             
             Button {
@@ -102,14 +105,19 @@ struct PaywallView: View {
                     .foregroundColor(.green)
                     .underline()
             }
+            .padding()
 
             Spacer()
             
             HStack(spacing: 16) {
-                Link("Terms of Use (ELUA)", destination: URL(string: "https://github.com/MexJason")!)
+                Link("Terms of Service", destination: URL(string: "https://github.com/MexJason")!)
+                
+                Circle()
+                    .frame(maxWidth: 8)
                 
                 Link("Privacy Policy", destination: URL(string: "https://github.com/MexJason")!)
             }
+            .foregroundColor(.green)
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .padding(.top)
