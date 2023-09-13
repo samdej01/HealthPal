@@ -10,8 +10,6 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
     @Binding var isPremium: Bool
-    @State var showPaywall = false
-    @State var showAllActivities = false
     
     var body: some View {
         NavigationStack {
@@ -81,25 +79,29 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        Button {
-                            if isPremium {
-                                showAllActivities.toggle()
-                            } else {
-                                showPaywall = true
+                        ZStack {
+                            Color.blue
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .frame(width: 115)
+                            
+                            Button {
+                                if isPremium {
+                                    viewModel.showAllActivities.toggle()
+                                } else {
+                                    viewModel.showPaywall = true
+                                }
+                            } label: {
+                                Text("Show \(viewModel.showAllActivities == true ? "less" : "more")")
+                                    .padding(.all, 10)
+                                    .foregroundColor(.white)
                             }
-                        } label: {
-                            Text("Show more")
-                                .padding(.all, 10)
-                                .foregroundColor(.white)
-                                .background(.blue)
-                                .cornerRadius(20)
                         }
                     }
                     .padding(.horizontal)
                     
                     if !viewModel.activities.isEmpty {
                         LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2)) {
-                            ForEach(viewModel.activities.prefix(showAllActivities == true ? 8 : 4), id: \.title) { activity in
+                            ForEach(viewModel.activities.prefix(viewModel.showAllActivities == true ? 8 : 4), id: \.title) { activity in
                                 ActivityCard(activity: activity)
                             }
                         }
@@ -112,26 +114,29 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        if isPremium {
-                            NavigationLink {
-                                MonthWorkoutsView()
-                            } label: {
-                                Text("Show more")
-                                    .padding(.all, 10)
-                                    .foregroundColor(.white)
-                                    .background(.blue)
-                                    .cornerRadius(20)
+                        ZStack {
+                            Color.blue
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .frame(width: 115)
+                            
+                            if isPremium {
+                                NavigationLink {
+                                    MonthWorkoutsView()
+                                } label: {
+                                    Text("Show more")
+                                        .padding(.all, 10)
+                                        .foregroundColor(.white)
+                                }
+                            } else {
+                                Button {
+                                    viewModel.showPaywall = true
+                                } label: {
+                                    Text("Show more")
+                                        .padding(.all, 10)
+                                        .foregroundColor(.white)
+                                }
                             }
-                        } else {
-                            Button {
-                                showPaywall = true
-                            } label: {
-                                Text("Show more")
-                                    .padding(.all, 10)
-                                    .foregroundColor(.white)
-                                    .background(.blue)
-                                    .cornerRadius(20)
-                            }
+
                         }
                     }
                     .padding(.horizontal)
@@ -151,7 +156,7 @@ struct HomeView: View {
         }, message: {
             Text("There was an issue fetching some of your data. Some health tracking requires an Apple Watch.")
         })
-        .sheet(isPresented: $showPaywall) {
+        .sheet(isPresented: $viewModel.showPaywall) {
             PaywallView(isPremium: $isPremium)
         }
     }
@@ -159,6 +164,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(isPremium: .constant(true))
+        HomeView(isPremium: .constant(false))
     }
 }

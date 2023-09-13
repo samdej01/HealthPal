@@ -11,6 +11,9 @@ class HomeViewModel: ObservableObject {
     
     let healthManager = HealthManager.shared
     
+    @Published var showPaywall = false
+    @Published var showAllActivities = false
+    
     @Published var calories: Int = 0
     @Published var exercise: Int = 0
     @Published var stand: Int = 0
