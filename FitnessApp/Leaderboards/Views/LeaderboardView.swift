@@ -93,7 +93,11 @@ struct LeaderboardView: View {
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .alert("Oops", isPresented: $viewModel.showAlert, actions: {
-            Text("Ok")
+            Button(role: .cancel) {
+                viewModel.showAlert = false
+            } label: {
+                Text("Ok")
+            }
         }, message: {
             Text("There was an issue loading the leaderboard data. Please try again.")
         })

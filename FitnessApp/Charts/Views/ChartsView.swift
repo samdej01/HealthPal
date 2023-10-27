@@ -92,8 +92,12 @@ struct ChartsView: View {
                 }
             }
         }
-        .alert("Oops", isPresented: $viewModel.presentError, actions: {
-            Text("Ok")
+        .alert("Oops", isPresented: $viewModel.showAlert, actions: {
+            Button(role: .cancel) {
+                viewModel.showAlert = false
+            } label: {
+                Text("Ok")
+            }
         }, message: {
             Text("We ran into issues fetching some of your step data please make sure you have allowed access and try again.")
         })

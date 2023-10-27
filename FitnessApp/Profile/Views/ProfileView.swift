@@ -158,7 +158,11 @@ struct ProfileView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .alert("Oops", isPresented: $viewModel.showAlert) {
-            Text("Ok")
+            Button(role: .cancel) {
+                viewModel.showAlert = false
+            } label: {
+                Text("Ok")
+            }
         } message: {
             Text("We were unable to open your mail application. Please make sure you have one installed.")
         }

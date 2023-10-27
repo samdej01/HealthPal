@@ -21,7 +21,7 @@ class HomeViewModel: ObservableObject {
     @Published var activities = [Activity]()
     @Published var workouts = [Workout]()
     
-    @Published var presentError = false
+    @Published var showAlert = false
     
     init() {
         Task {
@@ -39,7 +39,7 @@ class HomeViewModel: ObservableObject {
             } catch {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.presentError =  true
+                    self.showAlert =  true
                 }
             }
         }

@@ -31,7 +31,7 @@ class ChartsViewModel: ObservableObject {
     
     let healthManager = HealthManager.shared
     
-    @Published var presentError = false
+    @Published var showAlert = false
     
     init() {
         Task {
@@ -45,7 +45,7 @@ class ChartsViewModel: ObservableObject {
             } catch {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    self.presentError = true
+                    self.showAlert = true
                 }
             }
         }
