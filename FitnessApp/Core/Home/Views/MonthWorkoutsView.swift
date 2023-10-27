@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MonthWorkoutsView: View {
-    @StateObject var viewModel = MonthWorkoutsViewModel()
+    @State var viewModel = MonthWorkoutsViewModel()
     
     var body: some View {
         VStack {

@@ -70,7 +70,7 @@
 		32D06DB52A9D1B1C00D69189 /* FitnessProfileItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileItemButton.swift; sourceTree = "<group>"; };
 		32D06DB72A9D245300D69189 /* FitnessProfileEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileEditButton.swift; sourceTree = "<group>"; };
 		32D06DB92A9D3AC000D69189 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		32D06DBB2A9FD8C800D69189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		32D06DBB2A9FD8C800D69189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32E3C6202A83F6BB00835BB3 /* ChartDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDataView.swift; sourceTree = "<group>"; };
 		32E3C6222A83F7FB00835BB3 /* ChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewModel.swift; sourceTree = "<group>"; };
 		32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyStepModel.swift; sourceTree = "<group>"; };
@@ -107,6 +107,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		322E865E2AEBE51200B388D8 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				3231DF582A768F010051DCC7 /* Home */,
+				322E86602AEBE53A00B388D8 /* Paywall */,
+				322F70942A82DD65002DBB9D /* Charts */,
+				32E3C6472A8CFC0300835BB3 /* Leaderboards */,
+				32D06DAF2A9D164400D69189 /* Profile */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		322E86602AEBE53A00B388D8 /* Paywall */ = {
+			isa = PBXGroup;
+			children = (
+				322E86622AEBE55400B388D8 /* ViewModel */,
+				322E86612AEBE54F00B388D8 /* Views */,
+			);
+			path = Paywall;
+			sourceTree = "<group>";
+		};
+		322E86612AEBE54F00B388D8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				32E3C6302A86D15300835BB3 /* PaywallView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		322E86622AEBE55400B388D8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		322F70902A7C2BF0002DBB9D /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +156,7 @@
 		322F70912A7E79AD002DBB9D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3231DF462A75970F0051DCC7 /* Assets.xcassets */,
 				322F70922A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift */,
 				32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */,
 				32FF67382A9680410001E8E9 /* Double+Ext.swift */,
@@ -184,21 +222,15 @@
 		3231DF412A75970D0051DCC7 /* FitnessApp */ = {
 			isa = PBXGroup;
 			children = (
-				32D06DBB2A9FD8C800D69189 /* Info.plist */,
-				32D06DAF2A9D164400D69189 /* Profile */,
+				322E865E2AEBE51200B388D8 /* Core */,
 				32E3C64F2A8D5C7C00835BB3 /* GoogleService-Info.plist */,
-				32E3C6472A8CFC0300835BB3 /* Leaderboards */,
-				322F70942A82DD65002DBB9D /* Charts */,
+				32D06DBB2A9FD8C800D69189 /* Info.plist */,
 				322F70912A7E79AD002DBB9D /* Utils */,
 				322F70902A7C2BF0002DBB9D /* Managers */,
 				322F708D2A7C2BC9002DBB9D /* FitnessApp.entitlements */,
-				3231DF582A768F010051DCC7 /* Home */,
 				3231DF422A75970D0051DCC7 /* FitnessAppApp.swift */,
-				3231DF462A75970F0051DCC7 /* Assets.xcassets */,
-				3231DF482A75970F0051DCC7 /* Preview Content */,
 				3231DF502A759D880051DCC7 /* FitnessTabView.swift */,
-				32E3C6302A86D15300835BB3 /* PaywallView.swift */,
-				32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */,
+				3231DF482A75970F0051DCC7 /* Preview Content */,
 			);
 			path = FitnessApp;
 			sourceTree = "<group>";
@@ -582,6 +614,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -615,6 +648,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -7,21 +7,22 @@
 
 import Foundation
 
-class HomeViewModel: ObservableObject {
+@Observable
+class HomeViewModel {
     
     let healthManager = HealthManager.shared
     
-    @Published var showPaywall = false
-    @Published var showAllActivities = false
+    var showPaywall = false
+    var showAllActivities = false
     
-    @Published var calories: Int = 0
-    @Published var exercise: Int = 0
-    @Published var stand: Int = 0
+    var calories: Int = 0
+    var exercise: Int = 0
+    var stand: Int = 0
     
-    @Published var activities = [Activity]()
-    @Published var workouts = [Workout]()
+    var activities = [Activity]()
+    var workouts = [Workout]()
     
-    @Published var showAlert = false
+    var showAlert = false
     
     init() {
         Task {

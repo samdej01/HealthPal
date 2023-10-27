@@ -7,17 +7,18 @@
 
 import SwiftUI
 
-class ProfileViewModel: ObservableObject {
+@Observable
+class ProfileViewModel {
     
-    @Published var isEditingName = false
-    @Published var currentName = ""
-    @Published var profileName: String? = UserDefaults.standard.string(forKey: "profileName")
+    var isEditingName = false
+    var currentName = ""
+    var profileName: String? = UserDefaults.standard.string(forKey: "profileName")
     
-    @Published var isEditingImage = false
-    @Published var profileImage: String? = UserDefaults.standard.string(forKey: "profileImage")
-    @Published var selectedImage: String? = UserDefaults.standard.string(forKey: "profileImage")
+    var isEditingImage = false
+    var profileImage: String? = UserDefaults.standard.string(forKey: "profileImage")
+    var selectedImage: String? = UserDefaults.standard.string(forKey: "profileImage")
     
-    @Published var showAlert = false
+    var showAlert = false
     
     var images = [
         "avatar 1", "avatar 2", "avatar 3", "avatar 4", "avatar 5", "avatar 6", "avatar 7", "avatar 8", "avatar 9", "avatar 10"
@@ -39,9 +40,11 @@ class ProfileViewModel: ObservableObject {
     }
     
     func setNewName() {
-        profileName = currentName
-        UserDefaults.standard.setValue(currentName, forKey: "profileName")
-        self.dismissEdit()
+        if !currentName.isEmpty {
+            profileName = currentName
+            UserDefaults.standard.setValue(currentName, forKey: "profileName")
+            self.dismissEdit()
+        }
     }
     
     func didSelectNewImage(name: String) {

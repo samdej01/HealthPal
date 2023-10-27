@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @StateObject var viewModel = ProfileViewModel()
+    @State var viewModel = ProfileViewModel()
     
     var body: some View {
         VStack {
@@ -55,9 +55,7 @@ struct ProfileView: View {
                     .foregroundColor(.red)
                     
                     FitnessProfileEditButton(title: "Done", backgroundColor: .primary) {
-                        if !viewModel.currentName.isEmpty {
-                            viewModel.setNewName()
-                        }
+                        viewModel.setNewName()
                     }
                     .foregroundColor(Color(uiColor: .systemBackground))
                 }

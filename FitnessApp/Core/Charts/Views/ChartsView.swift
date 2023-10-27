@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct ChartsView: View {
-    @StateObject var viewModel = ChartsViewModel()
+    @State var viewModel = ChartsViewModel()
     @State var selectedChart: ChartOptions = .oneWeek
     
     var body: some View {

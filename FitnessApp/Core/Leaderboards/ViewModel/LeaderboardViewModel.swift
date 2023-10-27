@@ -7,10 +7,11 @@
 
 import Foundation
 
-class LeaderboardViewModel: ObservableObject {
+@Observable
+class LeaderboardViewModel {
     
-    @Published var leaderResult = LeaderboardResult(user: nil, top10: [])
-    @Published var showAlert = false
+    var leaderResult = LeaderboardResult(user: nil, top10: [])
+    var showAlert = false
     
     var mockData = [
         LeaderboardUser(username: "jason", count: 4124),
@@ -26,6 +27,9 @@ class LeaderboardViewModel: ObservableObject {
         LeaderboardUser(username: "catalin", count: 11124),
         LeaderboardUser(username: "logan", count: 124),
     ]
+    
+    let databaseManager = DatabaseManager.shared
+    let healthManager = HealthManager.shared
     
     init() {
         setupLeaderboardData()
@@ -55,7 +59,7 @@ class LeaderboardViewModel: ObservableObject {
     }
     
     private func fetchLeaderboards() async throws -> LeaderboardResult {
-        let leaders = try await DatabaseManager.shared.fetchLeaderboards()
+        let leaders = try await databaseManager.fetchLeaderboards()
         let top10 = Array(leaders.sorted(by: { $0.count > $1.count }).prefix(10))
         let username = UserDefaults.standard.string(forKey: "username")
     
@@ -76,12 +80,12 @@ class LeaderboardViewModel: ObservableObject {
         }
         
         let steps = try await fetchCurrentWeekStepCount()
-        try await DatabaseManager.shared.postStepCountUpdateForUser(leader: LeaderboardUser(username: username, count: Int(steps)))
+        try await databaseManager.postStepCountUpdateForUser(leader: LeaderboardUser(username: username, count: Int(steps)))
     }
     
     private func fetchCurrentWeekStepCount() async throws -> Double {
         try await withCheckedThrowingContinuation({ continuation in
-            HealthManager.shared.fetchCurrentWeekStepCount { result in
+            healthManager.fetchCurrentWeekStepCount { result in
                 continuation.resume(with: result)
             }
         })

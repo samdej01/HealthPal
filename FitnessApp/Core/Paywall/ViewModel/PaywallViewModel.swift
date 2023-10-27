@@ -8,9 +8,10 @@
 import Foundation
 import RevenueCat
 
-class PaywallViewModel: ObservableObject {
+@Observable
+class PaywallViewModel {
     
-    @Published var currentOffering: Offering?
+    var currentOffering: Offering?
     
     init() {
         Purchases.shared.getOfferings { (offerings, error) in

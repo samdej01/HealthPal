@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var viewModel = HomeViewModel()
+    @State var viewModel = HomeViewModel()
     @Binding var isPremium: Bool
     
     var body: some View {

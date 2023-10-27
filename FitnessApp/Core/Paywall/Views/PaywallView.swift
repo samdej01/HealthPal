@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PaywallView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var viewModel = PaywallViewModel()
+    @State var viewModel = PaywallViewModel()
     @Binding var isPremium: Bool
     
     var body: some View {
