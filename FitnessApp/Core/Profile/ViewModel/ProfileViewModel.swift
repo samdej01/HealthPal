@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable
-class ProfileViewModel {
+final class ProfileViewModel {
     
     var isEditingName = false
     var currentName = ""

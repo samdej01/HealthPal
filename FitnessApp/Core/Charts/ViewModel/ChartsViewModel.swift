@@ -8,7 +8,9 @@
 import Foundation
 
 @Observable
-class ChartsViewModel {
+final class ChartsViewModel {
+    
+    var selectedChart: ChartOptions = .oneWeek
     
     var oneWeekChartData = [DailyStepModel]()
     var oneWeekAverage = 0
@@ -128,6 +130,7 @@ class ChartsViewModel {
     }
     
     func fetchYTDAndOneYearChartData() async throws {
+        try await healthManager.requestHealthKitAccess()
         try await withCheckedThrowingContinuation({ continuation in
             healthManager.fetchYTDAndOneYearChartData { [weak self] result in
                 guard let self = self else { return }

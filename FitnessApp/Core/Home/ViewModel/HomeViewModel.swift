@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class HomeViewModel {
+final class HomeViewModel {
     
     let healthManager = HealthManager.shared
     

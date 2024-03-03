@@ -8,110 +8,107 @@
 import SwiftUI
 
 struct LeaderboardView: View {
-    @AppStorage("username") var username: String?
+    @Environment(FitnessTabState.self) var tabState
     @State var viewModel = LeaderboardViewModel()
     
-    @Binding var showTerms: Bool
-    
     var body: some View {
-        ZStack {
-            VStack {
-                ZStack(alignment: .trailing) {
-                    Text("Leaderboard")
-                        .font(.largeTitle)
-                        .bold()
-                        .frame(maxWidth: .infinity)
+        NavigationStack {
+            ZStack {
+                VStack {
+                    HStack {
+                        Text("Name")
+                            .bold()
+                        
+                        Spacer()
+                        
+                        Text("Steps")
+                            .bold()
+                    }
+                    .padding()
                     
-                    Button {
-                        viewModel.setupLeaderboardData()
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
+                    LazyVStack(spacing: 24) {
+                        ForEach(Array(viewModel.leaderResult.top10.enumerated()), id: \.element.id) { (idx, person) in
+                            HStack {
+                                Text("\(idx + 1).")
+                                
+                                Text(person.username)
+                                
+                                if viewModel.username == person.username {
+                                    Image(systemName: "crown.fill")
+                                        .foregroundColor(.yellow)
+                                }
+                                
+                                Spacer()
+                                
+                                Text("\(person.count)")
+                            }
+                            .padding(.horizontal)
+                        }
+                    }
+                    
+                    if let user = viewModel.leaderResult.user {
+                        Image(systemName: "ellipsis")
                             .resizable()
                             .scaledToFit()
-                            .bold()
-                            .foregroundColor(Color(uiColor: .label))
-                            .frame(width: 28, height: 28)
-                            .padding(.trailing)
-                    }
-                }
-                
-                HStack {
-                    Text("Name")
-                        .bold()
-                    
-                    Spacer()
-                    
-                    Text("Steps")
-                        .bold()
-                }
-                .padding()
-                
-                LazyVStack(spacing: 24) {
-                    ForEach(Array(viewModel.leaderResult.top10.enumerated()), id: \.element.id) { (idx, person) in
+                            .frame(width: 48, height: 48)
+                            .foregroundColor(.gray.opacity(0.5))
+                        
                         HStack {
-                            Text("\(idx + 1).")
-                            
-                            Text(person.username)
-                            
-                            if username == person.username {
-                                Image(systemName: "crown.fill")
-                                    .foregroundColor(.yellow)
-                            }
+                            Text(user.username)
                             
                             Spacer()
                             
-                            Text("\(person.count)")
+                            Text("\(user.count)")
                         }
                         .padding(.horizontal)
                     }
                 }
+                .frame(maxHeight: .infinity, alignment: .top)
                 
-                if let user = viewModel.leaderResult.user {
-                    Image(systemName: "ellipsis")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 48, height: 48)
-                        .foregroundColor(.gray.opacity(0.5))
+                if tabState.showTerms {
+                    Color.white
                     
-                    HStack {
-                        Text(user.username)
-                        
-                        Spacer()
-                        
-                        Text("\(user.count)")
+                    TermsView()
+                        .environment(viewModel)
+                        .environment(tabState)
+                }
+            }
+            .navigationTitle("Leaderboard")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    if viewModel.didCompleteAccepting {
+                        Button {
+                            viewModel.setupLeaderboardData()
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                                .foregroundColor(Color(uiColor: .label))
+                        }
                     }
-                    .padding(.horizontal)
                 }
             }
             .frame(maxHeight: .infinity, alignment: .top)
-            
-            if showTerms {
-                Color.white
-                
-                TermsView(showTerms: $showTerms)
+            .alert("Oops", isPresented: $viewModel.showAlert, actions: {
+                Button(role: .cancel) {
+                    viewModel.showAlert = false
+                } label: {
+                    Text("Ok")
+                }
+            }, message: {
+                Text("There was an issue loading the leaderboard data. Please try again.")
+            })
+            .onChange(of: tabState.showTerms) { _,_ in
+                if !tabState.showTerms && viewModel.username != nil {
+                    viewModel.setupLeaderboardData()
+                }
             }
         }
-        .frame(maxHeight: .infinity, alignment: .top)
-        .alert("Oops", isPresented: $viewModel.showAlert, actions: {
-            Button(role: .cancel) {
-                viewModel.showAlert = false
-            } label: {
-                Text("Ok")
-            }
-        }, message: {
-            Text("There was an issue loading the leaderboard data. Please try again.")
-        })
-        .onChange(of: showTerms) { _ in
-            if !showTerms && username != nil {
-                viewModel.setupLeaderboardData()
-            }
-        }
+        
     }
         
 }
 
 struct LeaderboardView_Previews: PreviewProvider {
     static var previews: some View {
-        LeaderboardView(showTerms: .constant(false))
+        LeaderboardView()
     }
 }

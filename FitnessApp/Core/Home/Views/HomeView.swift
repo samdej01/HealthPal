@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import RevenueCatUI
 
 struct HomeView: View {
+    @Environment(FitnessTabState.self) var tabState
     @State var viewModel = HomeViewModel()
-    @Binding var isPremium: Bool
     
     var body: some View {
         NavigationStack {
@@ -80,12 +81,12 @@ struct HomeView: View {
                         Spacer()
                         
                         ZStack {
-                            Color.blue
+                            Color.green
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                                 .frame(width: 115)
                             
                             Button {
-                                if isPremium {
+                                if tabState.isPremium {
                                     viewModel.showAllActivities.toggle()
                                 } else {
                                     viewModel.showPaywall = true
@@ -115,11 +116,11 @@ struct HomeView: View {
                         Spacer()
                         
                         ZStack {
-                            Color.blue
+                            Color.green
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                                 .frame(width: 115)
                             
-                            if isPremium {
+                            if tabState.isPremium {
                                 NavigationLink {
                                     MonthWorkoutsView()
                                 } label: {
@@ -161,13 +162,13 @@ struct HomeView: View {
             Text("There was an issue fetching some of your data. Some health tracking requires an Apple Watch.")
         })
         .sheet(isPresented: $viewModel.showPaywall) {
-            PaywallView(isPremium: $isPremium)
+            PaywallView()
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(isPremium: .constant(false))
+        HomeView()
     }
 }

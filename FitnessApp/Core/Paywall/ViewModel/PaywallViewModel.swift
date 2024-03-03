@@ -9,7 +9,7 @@ import Foundation
 import RevenueCat
 
 @Observable
-class PaywallViewModel {
+final class PaywallViewModel {
     
     var currentOffering: Offering?
     

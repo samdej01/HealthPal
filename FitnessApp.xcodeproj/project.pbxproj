@@ -21,6 +21,9 @@
 		326B02272A7864D60034E363 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B02262A7864D60034E363 /* HomeViewModel.swift */; };
 		326B022C2A7865AC0034E363 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022B2A7865AC0034E363 /* Activity.swift */; };
 		326B022E2A7865D20034E363 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022D2A7865D20034E363 /* Workout.swift */; };
+		3273CB6B2B938B4000F39A00 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3273CB6A2B938B4000F39A00 /* RevenueCatUI */; };
+		3273CB712B93920F00F39A00 /* TabState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3273CB702B93920F00F39A00 /* TabState.swift */; };
+		3273CB732B94CF9F00F39A00 /* GlobalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3273CB722B94CF9F00F39A00 /* GlobalAlert.swift */; };
 		32D06DB12A9D165600D69189 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB02A9D165600D69189 /* ProfileView.swift */; };
 		32D06DB62A9D1B1C00D69189 /* FitnessProfileItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB52A9D1B1C00D69189 /* FitnessProfileItemButton.swift */; };
 		32D06DB82A9D245300D69189 /* FitnessProfileEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB72A9D245300D69189 /* FitnessProfileEditButton.swift */; };
@@ -32,7 +35,7 @@
 		32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6282A83F89B00835BB3 /* ChartOptions.swift */; };
 		32E3C62C2A86CCF100835BB3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32E3C62B2A86CCF100835BB3 /* StoreKit.framework */; };
 		32E3C62F2A86D14300835BB3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 32E3C62E2A86D14300835BB3 /* RevenueCat */; };
-		32E3C6312A86D15300835BB3 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6302A86D15300835BB3 /* PaywallView.swift */; };
+		32E3C6312A86D15300835BB3 /* FitnessPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6302A86D15300835BB3 /* FitnessPaywallView.swift */; };
 		32E3C6332A87B63000835BB3 /* PaywallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */; };
 		32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */; };
 		32E3C64C2A8CFC2100835BB3 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */; };
@@ -66,6 +69,9 @@
 		326B02262A7864D60034E363 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		326B022B2A7865AC0034E363 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		326B022D2A7865D20034E363 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		3273CB702B93920F00F39A00 /* TabState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabState.swift; sourceTree = "<group>"; };
+		3273CB722B94CF9F00F39A00 /* GlobalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAlert.swift; sourceTree = "<group>"; };
+		3273CB742B94CFF100F39A00 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		32D06DB02A9D165600D69189 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		32D06DB52A9D1B1C00D69189 /* FitnessProfileItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileItemButton.swift; sourceTree = "<group>"; };
 		32D06DB72A9D245300D69189 /* FitnessProfileEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileEditButton.swift; sourceTree = "<group>"; };
@@ -77,7 +83,7 @@
 		32E3C6262A83F81E00835BB3 /* DailyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStepModel.swift; sourceTree = "<group>"; };
 		32E3C6282A83F89B00835BB3 /* ChartOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartOptions.swift; sourceTree = "<group>"; };
 		32E3C62B2A86CCF100835BB3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		32E3C6302A86D15300835BB3 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		32E3C6302A86D15300835BB3 /* FitnessPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessPaywallView.swift; sourceTree = "<group>"; };
 		32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallViewModel.swift; sourceTree = "<group>"; };
 		32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RevenueCat+Ext.swift"; sourceTree = "<group>"; };
 		32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
@@ -100,6 +106,7 @@
 				32E3C62F2A86D14300835BB3 /* RevenueCat in Frameworks */,
 				32E3C62C2A86CCF100835BB3 /* StoreKit.framework in Frameworks */,
 				32E3C6532A8D5CFD00835BB3 /* FirebaseFirestore in Frameworks */,
+				3273CB6B2B938B4000F39A00 /* RevenueCatUI in Frameworks */,
 				32E3C6552A8D5CFD00835BB3 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +117,7 @@
 		322E865E2AEBE51200B388D8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				3273CB6D2B9391F100F39A00 /* Tab */,
 				3231DF582A768F010051DCC7 /* Home */,
 				322E86602AEBE53A00B388D8 /* Paywall */,
 				322F70942A82DD65002DBB9D /* Charts */,
@@ -131,7 +139,7 @@
 		322E86612AEBE54F00B388D8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				32E3C6302A86D15300835BB3 /* PaywallView.swift */,
+				32E3C6302A86D15300835BB3 /* FitnessPaywallView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,6 +169,7 @@
 				32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */,
 				32FF67382A9680410001E8E9 /* Double+Ext.swift */,
 				32FF673A2A96805C0001E8E9 /* Date+Ext.swift */,
+				3273CB722B94CF9F00F39A00 /* GlobalAlert.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -222,6 +231,7 @@
 		3231DF412A75970D0051DCC7 /* FitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				3273CB742B94CFF100F39A00 /* README.md */,
 				322E865E2AEBE51200B388D8 /* Core */,
 				32E3C64F2A8D5C7C00835BB3 /* GoogleService-Info.plist */,
 				32D06DBB2A9FD8C800D69189 /* Info.plist */,
@@ -229,7 +239,6 @@
 				322F70902A7C2BF0002DBB9D /* Managers */,
 				322F708D2A7C2BC9002DBB9D /* FitnessApp.entitlements */,
 				3231DF422A75970D0051DCC7 /* FitnessAppApp.swift */,
-				3231DF502A759D880051DCC7 /* FitnessTabView.swift */,
 				3231DF482A75970F0051DCC7 /* Preview Content */,
 			);
 			path = FitnessApp;
@@ -281,6 +290,15 @@
 				32FF5F102AA90D7F002062C1 /* MonthWorkoutsViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3273CB6D2B9391F100F39A00 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				3231DF502A759D880051DCC7 /* FitnessTabView.swift */,
+				3273CB702B93920F00F39A00 /* TabState.swift */,
+			);
+			path = Tab;
 			sourceTree = "<group>";
 		};
 		32D06DAF2A9D164400D69189 /* Profile */ = {
@@ -381,6 +399,7 @@
 				32E3C62E2A86D14300835BB3 /* RevenueCat */,
 				32E3C6522A8D5CFD00835BB3 /* FirebaseFirestore */,
 				32E3C6542A8D5CFD00835BB3 /* FirebaseFirestoreSwift */,
+				3273CB6A2B938B4000F39A00 /* RevenueCatUI */,
 			);
 			productName = FitnessApp;
 			productReference = 3231DF3F2A75970D0051DCC7 /* FitnessApp.app */;
@@ -442,6 +461,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				326B022C2A7865AC0034E363 /* Activity.swift in Sources */,
+				3273CB712B93920F00F39A00 /* TabState.swift in Sources */,
 				32FF5F0D2AA90103002062C1 /* MonthWorkoutsView.swift in Sources */,
 				32E3C6272A83F81E00835BB3 /* DailyStepModel.swift in Sources */,
 				32E3C65C2A8E395F00835BB3 /* LeaderboardUser.swift in Sources */,
@@ -454,6 +474,7 @@
 				32FF673B2A96805C0001E8E9 /* Date+Ext.swift in Sources */,
 				3231DF572A75B1E70051DCC7 /* ProgressCircleView.swift in Sources */,
 				32E3C6212A83F6BB00835BB3 /* ChartDataView.swift in Sources */,
+				3273CB732B94CF9F00F39A00 /* GlobalAlert.swift in Sources */,
 				32D06DB12A9D165600D69189 /* ProfileView.swift in Sources */,
 				32D06DB62A9D1B1C00D69189 /* FitnessProfileItemButton.swift in Sources */,
 				32E3C6582A8D5D2500835BB3 /* DatabaseManager.swift in Sources */,
@@ -461,7 +482,7 @@
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
 				322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */,
 				326B022E2A7865D20034E363 /* Workout.swift in Sources */,
-				32E3C6312A86D15300835BB3 /* PaywallView.swift in Sources */,
+				32E3C6312A86D15300835BB3 /* FitnessPaywallView.swift in Sources */,
 				32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */,
 				32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */,
 				32FF67392A9680410001E8E9 /* Double+Ext.swift in Sources */,
@@ -607,6 +628,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FitnessApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Be Fit";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access!";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Please allow access, we will not be changing any of your data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -641,6 +663,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FitnessApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Be Fit";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access!";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Please allow access, we will not be changing any of your data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -705,6 +728,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3273CB6A2B938B4000F39A00 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32E3C62D2A86D14300835BB3 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCatUI;
+		};
 		32E3C62E2A86D14300835BB3 /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 32E3C62D2A86D14300835BB3 /* XCRemoteSwiftPackageReference "purchases-ios" */;

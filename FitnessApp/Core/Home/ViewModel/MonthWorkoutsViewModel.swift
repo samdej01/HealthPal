@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class MonthWorkoutsViewModel {
+final class MonthWorkoutsViewModel {
     
     var selectedMonth = 0
     var selectedDate = Date()

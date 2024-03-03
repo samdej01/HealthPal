@@ -206,6 +206,7 @@ extension HealthManager {
     }
     
     func fetchYTDAndOneYearChartData(completion: @escaping (Result<YearChartDataResult, Error>) -> Void) {
+        
         let steps = HKQuantityType(.stepCount)
         let calendar = Calendar.current
         

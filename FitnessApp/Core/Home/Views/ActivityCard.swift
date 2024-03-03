@@ -33,7 +33,7 @@ struct ActivityCard: View {
                 }
                 
                 Text(activity.amount)
-                    .font(.title)
+                    .font(.title2)
                     .bold()
                     .padding()
             }

@@ -10,98 +10,94 @@ import Charts
 
 struct ChartsView: View {
     @State var viewModel = ChartsViewModel()
-    @State var selectedChart: ChartOptions = .oneWeek
     
     var body: some View {
-        VStack {
-            Text("Charts")
-                .font(.largeTitle)
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-            
-            ZStack {
-                switch selectedChart {
-                case .oneWeek:
-                    VStack {
-                        ChartDataView(average: $viewModel.oneWeekAverage, total: $viewModel.oneWeekTotal)
-                        
-                        Chart {
-                            ForEach(viewModel.oneWeekChartData) { data in
-                                BarMark(x: .value(data.date.formatted(), data.date, unit: .day), y: .value("Steps", data.count))
+        NavigationStack {
+            VStack {
+                ZStack {
+                    switch viewModel.selectedChart {
+                    case .oneWeek:
+                        VStack {
+                            ChartDataView(average: $viewModel.oneWeekAverage, total: $viewModel.oneWeekTotal)
+                            
+                            Chart {
+                                ForEach(viewModel.oneWeekChartData) { data in
+                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .day), y: .value("Steps", data.count))
+                                }
+                            }
+                        }
+                    case .oneMonth:
+                        VStack {
+                            ChartDataView(average: $viewModel.oneMonthAverage, total: $viewModel.oneMonthTotal)
+                            
+                            Chart {
+                                ForEach(viewModel.oneMonthChartData) { data in
+                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .day), y: .value("Steps", data.count))
+                                }
+                            }
+                        }
+                    case .threeMonth:
+                        VStack {
+                            ChartDataView(average: $viewModel.threeMonthAverage, total: $viewModel.threeMonthTotal)
+                            
+                            Chart {
+                                ForEach(viewModel.threeMonthsChartData) { data in
+                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .day), y: .value("Steps", data.count))
+                                }
+                            }
+                        }
+                    case .yearToDate:
+                        VStack {
+                            ChartDataView(average: $viewModel.ytdAverage, total: $viewModel.ytdTotal)
+                            
+                            Chart {
+                                ForEach(viewModel.ytdChartData) { data in
+                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .month), y: .value("Steps", data.count))
+                                }
+                            }
+                        }
+                    case .oneYear:
+                        VStack {
+                            ChartDataView(average: $viewModel.oneYearAverage, total: $viewModel.oneYearTotal)
+                            
+                            Chart {
+                                ForEach(viewModel.oneYearChartData) { data in
+                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .month), y: .value("Steps", data.count))
+                                }
                             }
                         }
                     }
-                case .oneMonth:
-                    VStack {
-                        ChartDataView(average: $viewModel.oneMonthAverage, total: $viewModel.oneMonthTotal)
-                        
-                        Chart {
-                            ForEach(viewModel.oneMonthChartData) { data in
-                                BarMark(x: .value(data.date.formatted(), data.date, unit: .day), y: .value("Steps", data.count))
+                }
+                .foregroundColor(.green)
+                .frame(maxHeight: 450)
+                .padding(.horizontal)
+                
+                HStack {
+                    ForEach(ChartOptions.allCases, id:\.rawValue) { option in
+                        Button(option.rawValue) {
+                            withAnimation {
+                                viewModel.selectedChart = option
                             }
                         }
-                    }
-                case .threeMonth:
-                    VStack {
-                        ChartDataView(average: $viewModel.threeMonthAverage, total: $viewModel.threeMonthTotal)
-                        
-                        Chart {
-                            ForEach(viewModel.threeMonthsChartData) { data in
-                                BarMark(x: .value(data.date.formatted(), data.date, unit: .day), y: .value("Steps", data.count))
-                            }
-                        }
-                    }
-                case .yearToDate:
-                    VStack {
-                        ChartDataView(average: $viewModel.ytdAverage, total: $viewModel.ytdTotal)
-                        
-                        Chart {
-                            ForEach(viewModel.ytdChartData) { data in
-                                BarMark(x: .value(data.date.formatted(), data.date, unit: .month), y: .value("Steps", data.count))
-                            }
-                        }
-                    }
-                case .oneYear:
-                    VStack {
-                        ChartDataView(average: $viewModel.oneYearAverage, total: $viewModel.oneYearTotal)
-                        
-                        Chart {
-                            ForEach(viewModel.oneYearChartData) { data in
-                                BarMark(x: .value(data.date.formatted(), data.date, unit: .month), y: .value("Steps", data.count))
-                            }
-                        }
+                        .padding()
+                        .foregroundColor(viewModel.selectedChart == option ? .white : .green)
+                        .background(viewModel.selectedChart == option ? .green : .clear)
+                        .cornerRadius(10)
                     }
                 }
             }
-            .foregroundColor(.green)
-            .frame(maxHeight: 450)
-            .padding(.horizontal)
-            
-            HStack {
-                ForEach(ChartOptions.allCases, id:\.rawValue) { option in
-                    Button(option.rawValue) {
-                        withAnimation {
-                            selectedChart = option
-                        }
-                    }
-                    .padding()
-                    .foregroundColor(selectedChart == option ? .white : .green)
-                    .background(selectedChart == option ? .green : .clear)
-                    .cornerRadius(10)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .navigationTitle("Charts")
+            .alert("Oops", isPresented: $viewModel.showAlert) {
+                Button(role: .cancel) {
+                    viewModel.showAlert = false
+                } label: {
+                    Text("Ok")
                 }
+            } message: {
+                Text("We ran into issues fetching some of your step data please make sure you have allowed access and try again.")
             }
         }
-        .alert("Oops", isPresented: $viewModel.showAlert, actions: {
-            Button(role: .cancel) {
-                viewModel.showAlert = false
-            } label: {
-                Text("Ok")
-            }
-        }, message: {
-            Text("We ran into issues fetching some of your step data please make sure you have allowed access and try again.")
-        })
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
 }
 

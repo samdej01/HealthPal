@@ -8,8 +8,13 @@
 import Foundation
 
 @Observable
-class LeaderboardViewModel {
+final class LeaderboardViewModel {
     
+    var termsViewUsername = ""
+    var acceptedTerms = false
+    var didCompleteAccepting = false
+    
+    var username = UserDefaults.standard.string(forKey: "username")
     var leaderResult = LeaderboardResult(user: nil, top10: [])
     var showAlert = false
     
@@ -32,8 +37,18 @@ class LeaderboardViewModel {
     let healthManager = HealthManager.shared
     
     init() {
-        setupLeaderboardData()
+        if username != nil {
+            setupLeaderboardData()
+        }
     }
+    
+    func acceptedTermsAndSignedUp() {
+        if acceptedTerms && termsViewUsername.count > 2 {
+            UserDefaults.standard.set(termsViewUsername, forKey: "username")
+            didCompleteAccepting = true
+        }
+    }
+    
     
     func setupLeaderboardData() {
         Task {
@@ -74,6 +89,7 @@ class LeaderboardViewModel {
     enum LeaderboardViewModelError: Error {
         case unableToFetchUsername
     }
+    
     private func postStepCountUpdateForUser() async throws {
         guard let username = UserDefaults.standard.string(forKey: "username") else {
             throw LeaderboardViewModelError.unableToFetchUsername

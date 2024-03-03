@@ -18,32 +18,32 @@ struct ChartDataView: View {
             VStack(spacing: 16) {
                 Text("Average")
                     .font(.title2)
+                    .minimumScaleFactor(0.6)
                 
                 Text("\(average)")
                     .font(.title3)
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
             }
-            .frame(width: 100)
-            .foregroundColor(.black)
+            .frame(maxWidth: .infinity)
+            .foregroundColor(.primary)
             .padding()
             .background(.gray.opacity(0.1))
             .cornerRadius(10)
-            
-            Spacer()
             
             VStack(spacing: 16) {
                 
                 Text("Total")
                     .font(.title2)
+                    .minimumScaleFactor(0.6)
                 
                 Text("\(total)")
                     .font(.title3)
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
             }
-            .frame(width: 100)
-            .foregroundColor(.black)
+            .frame(maxWidth: .infinity)
+            .foregroundColor(.primary)
             .padding()
             .background(.gray.opacity(0.1))
             .cornerRadius(10)
