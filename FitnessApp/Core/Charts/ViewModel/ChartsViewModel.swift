@@ -34,11 +34,12 @@ final class ChartsViewModel {
     
     var showAlert = false
     
-    let healthManager = HealthManager.shared
+    var healthManager = HealthManager.shared
     
-    init() {
+    init(healthManager: HealthManagerType = HealthManager.shared) {
         Task {
             do {
+                // Batch fetches all the health & chart data
                 async let oneWeek: () = try await fetchOneWeekStepData()
                 async let oneMonth: () = try await fetchOneMonthStepData()
                 async let threeMonths: () = try await fetchThreeMonthsStepData()
@@ -54,11 +55,12 @@ final class ChartsViewModel {
         }
     }
     
-    func mockDataForDays(days: Int) -> [DailyStepModel] {
+    func mockChartDataFor(days: Int) -> [DailyStepModel] {
         var mockData = [DailyStepModel]()
         for day in 0..<days {
             let currentDate = Calendar.current.date(byAdding: .day, value: -day, to: Date()) ?? Date()
-            let randomStepCount = Int.random(in: 500...15000) // Generating a random step count between 5000 and 15000
+            // Generating a random step count between 5000 and 15000
+            let randomStepCount = Int.random(in: 500...15000)
             let dailyStepData = DailyStepModel(date: currentDate, count: randomStepCount)
             mockData.append(dailyStepData)
         }
@@ -129,6 +131,7 @@ final class ChartsViewModel {
         }) as Void
     }
     
+    /// Fetches both one year and year to date data in one pass
     func fetchYTDAndOneYearChartData() async throws {
         try await healthManager.requestHealthKitAccess()
         try await withCheckedThrowingContinuation({ continuation in
@@ -143,7 +146,7 @@ final class ChartsViewModel {
                         self.ytdTotal = self.ytdChartData.reduce(0, { $0 + $1.count })
                         self.oneYearTotal = self.oneYearChartData.reduce(0, { $0 + $1.count })
                         
-                        self.ytdAverage = self.ytdTotal / Calendar.current.component(.month, from: Date())
+                        self.ytdAverage = self.ytdTotal / Calendar.current.component(.month, from: Date.now)
                         self.oneYearAverage = self.oneYearTotal / 12
                         
                         continuation.resume()

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WorkoutCard: View {
-    @State var workout: Workout
+    var workout: Workout
     
     var body: some View {
         HStack {

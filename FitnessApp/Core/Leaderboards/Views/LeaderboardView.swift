@@ -73,10 +73,10 @@ struct LeaderboardView: View {
                         .environment(tabState)
                 }
             }
-            .navigationTitle("Leaderboard")
+            .navigationTitle(FitnessTabs.leaderboard.rawValue)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    if viewModel.didCompleteAccepting {
+                    if viewModel.didCompleteAccepting || viewModel.username != nil {
                         Button {
                             viewModel.setupLeaderboardData()
                         } label: {

@@ -16,10 +16,6 @@ struct HomeView: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
-                    Text("Welcome")
-                        .font(.largeTitle)
-                        .padding()
-                    
                     HStack {
                         Spacer()
                         
@@ -60,12 +56,12 @@ struct HomeView: View {
                         Spacer()
                         
                         ZStack {
-                            ProgressCircleView(progress: $viewModel.calories, goal: 600, color: .red)
+                            ProgressCircleView(progress: $viewModel.calories, goal: viewModel.caloriesGoal, color: .red)
                             
-                            ProgressCircleView(progress: $viewModel.exercise, goal: 60, color: .green)
+                            ProgressCircleView(progress: $viewModel.exercise, goal: viewModel.activeGoal, color: .green)
                                 .padding(.all, 20)
                             
-                            ProgressCircleView(progress: $viewModel.stand, goal: 12, color: .blue)
+                            ProgressCircleView(progress: $viewModel.stand, goal: viewModel.standGoal, color: .blue)
                                 .padding(.all, 40)
                         }
                         .padding(.horizontal)
@@ -150,6 +146,7 @@ struct HomeView: View {
                     }
                     .padding(.bottom)
                 }
+                .navigationTitle(FitnessTabs.home.rawValue)
             }
         }
         .alert("Oops", isPresented: $viewModel.showAlert, actions: {
@@ -163,6 +160,9 @@ struct HomeView: View {
         })
         .sheet(isPresented: $viewModel.showPaywall) {
             PaywallView()
+        }
+        .onAppear {
+            viewModel.fetchGoalData()
         }
     }
 }

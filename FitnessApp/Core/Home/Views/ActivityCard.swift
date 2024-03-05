@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActivityCard: View {
-    @State var activity: Activity
+    var activity: Activity
     
     var body: some View {
         ZStack {

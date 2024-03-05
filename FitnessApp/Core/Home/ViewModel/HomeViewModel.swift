@@ -10,7 +10,7 @@ import Foundation
 @Observable
 final class HomeViewModel {
     
-    let healthManager = HealthManager.shared
+    var healthManager = HealthManager.shared
     
     var showPaywall = false
     var showAllActivities = false
@@ -19,16 +19,22 @@ final class HomeViewModel {
     var exercise: Int = 0
     var stand: Int = 0
     
+    var stepGoal: Int = UserDefaults.standard.value(forKey: "stepGoal") as? Int ?? 7500
+    var caloriesGoal: Int = UserDefaults.standard.value(forKey: "caloriesGoal") as? Int ?? 900
+    var activeGoal: Int = UserDefaults.standard.value(forKey: "activeGoal") as? Int ?? 60
+    var standGoal: Int = UserDefaults.standard.value(forKey: "standGoal") as? Int ?? 12
+    
     var activities = [Activity]()
     var workouts = [Workout]()
     
     var showAlert = false
-    
-    init() {
+
+    init(healthManager: HealthManagerType = HealthManager.shared) {
         Task {
             do {
                 try await healthManager.requestHealthKitAccess()
                 
+                // Fetch all health data in parallel at init of View Model
                 async let fetchCalories: () = try await fetchTodayCalories()
                 async let fetchExercise: () = try await fetchTodayExerciseTime()
                 async let fetchStand: () = try await fetchTodayStandHours()
@@ -44,9 +50,16 @@ final class HomeViewModel {
                 }
             }
         }
-        
     }
     
+    func fetchGoalData() {
+        stepGoal = UserDefaults.standard.value(forKey: "stepGoal") as? Int ?? 7500
+        caloriesGoal = UserDefaults.standard.value(forKey: "caloriesGoal") as? Int ?? 900
+        activeGoal = UserDefaults.standard.value(forKey: "activeGoal") as? Int ?? 60
+        standGoal = UserDefaults.standard.value(forKey: "standGoal") as? Int ?? 12
+    }
+    
+    /// Fetches today calories and leaves the activity card blank if it fails
     func fetchTodayCalories() async throws {
         try await withCheckedThrowingContinuation({ continuation in
             healthManager.fetchTodayCaloriesBurned { [weak self] result in
@@ -105,6 +118,8 @@ final class HomeViewModel {
     }
     
     // MARK: Fitness Activity
+    
+    /// Fetches today's steps and displays an empty card if it fails
     func fetchTodaySteps() async throws {
         try await withCheckedThrowingContinuation({ continuation in
             healthManager.fetchTodaySteps { [weak self] result in
@@ -150,6 +165,7 @@ final class HomeViewModel {
                 switch result {
                 case .success(let workouts):
                     DispatchQueue.main.async {
+                        // Only displays the most recent 4 (four) workouts, the rest are behind a paywall
                         self.workouts = Array(workouts.prefix(4))
                         continuation.resume()
                     }

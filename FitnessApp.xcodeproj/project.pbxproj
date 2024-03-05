@@ -24,6 +24,7 @@
 		3273CB6B2B938B4000F39A00 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3273CB6A2B938B4000F39A00 /* RevenueCatUI */; };
 		3273CB712B93920F00F39A00 /* TabState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3273CB702B93920F00F39A00 /* TabState.swift */; };
 		3273CB732B94CF9F00F39A00 /* GlobalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3273CB722B94CF9F00F39A00 /* GlobalAlert.swift */; };
+		3273CB762B96536500F39A00 /* EditGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3273CB752B96536500F39A00 /* EditGoalsView.swift */; };
 		32D06DB12A9D165600D69189 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB02A9D165600D69189 /* ProfileView.swift */; };
 		32D06DB62A9D1B1C00D69189 /* FitnessProfileItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB52A9D1B1C00D69189 /* FitnessProfileItemButton.swift */; };
 		32D06DB82A9D245300D69189 /* FitnessProfileEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D06DB72A9D245300D69189 /* FitnessProfileEditButton.swift */; };
@@ -35,8 +36,6 @@
 		32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6282A83F89B00835BB3 /* ChartOptions.swift */; };
 		32E3C62C2A86CCF100835BB3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32E3C62B2A86CCF100835BB3 /* StoreKit.framework */; };
 		32E3C62F2A86D14300835BB3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 32E3C62E2A86D14300835BB3 /* RevenueCat */; };
-		32E3C6312A86D15300835BB3 /* FitnessPaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6302A86D15300835BB3 /* FitnessPaywallView.swift */; };
-		32E3C6332A87B63000835BB3 /* PaywallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */; };
 		32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */; };
 		32E3C64C2A8CFC2100835BB3 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */; };
 		32E3C64E2A8D01C000835BB3 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C64D2A8D01C000835BB3 /* TermsView.swift */; };
@@ -72,6 +71,7 @@
 		3273CB702B93920F00F39A00 /* TabState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabState.swift; sourceTree = "<group>"; };
 		3273CB722B94CF9F00F39A00 /* GlobalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAlert.swift; sourceTree = "<group>"; };
 		3273CB742B94CFF100F39A00 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3273CB752B96536500F39A00 /* EditGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGoalsView.swift; sourceTree = "<group>"; };
 		32D06DB02A9D165600D69189 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		32D06DB52A9D1B1C00D69189 /* FitnessProfileItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileItemButton.swift; sourceTree = "<group>"; };
 		32D06DB72A9D245300D69189 /* FitnessProfileEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessProfileEditButton.swift; sourceTree = "<group>"; };
@@ -83,8 +83,6 @@
 		32E3C6262A83F81E00835BB3 /* DailyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStepModel.swift; sourceTree = "<group>"; };
 		32E3C6282A83F89B00835BB3 /* ChartOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartOptions.swift; sourceTree = "<group>"; };
 		32E3C62B2A86CCF100835BB3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		32E3C6302A86D15300835BB3 /* FitnessPaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessPaywallView.swift; sourceTree = "<group>"; };
-		32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallViewModel.swift; sourceTree = "<group>"; };
 		32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RevenueCat+Ext.swift"; sourceTree = "<group>"; };
 		32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		32E3C64D2A8D01C000835BB3 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
@@ -119,37 +117,11 @@
 			children = (
 				3273CB6D2B9391F100F39A00 /* Tab */,
 				3231DF582A768F010051DCC7 /* Home */,
-				322E86602AEBE53A00B388D8 /* Paywall */,
 				322F70942A82DD65002DBB9D /* Charts */,
 				32E3C6472A8CFC0300835BB3 /* Leaderboards */,
 				32D06DAF2A9D164400D69189 /* Profile */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		322E86602AEBE53A00B388D8 /* Paywall */ = {
-			isa = PBXGroup;
-			children = (
-				322E86622AEBE55400B388D8 /* ViewModel */,
-				322E86612AEBE54F00B388D8 /* Views */,
-			);
-			path = Paywall;
-			sourceTree = "<group>";
-		};
-		322E86612AEBE54F00B388D8 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				32E3C6302A86D15300835BB3 /* FitnessPaywallView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		322E86622AEBE55400B388D8 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				32E3C6322A87B63000835BB3 /* PaywallViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		322F70902A7C2BF0002DBB9D /* Managers */ = {
@@ -317,6 +289,7 @@
 				32D06DB02A9D165600D69189 /* ProfileView.swift */,
 				32D06DB52A9D1B1C00D69189 /* FitnessProfileItemButton.swift */,
 				32D06DB72A9D245300D69189 /* FitnessProfileEditButton.swift */,
+				3273CB752B96536500F39A00 /* EditGoalsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -482,17 +455,16 @@
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
 				322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */,
 				326B022E2A7865D20034E363 /* Workout.swift in Sources */,
-				32E3C6312A86D15300835BB3 /* FitnessPaywallView.swift in Sources */,
 				32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */,
 				32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */,
 				32FF67392A9680410001E8E9 /* Double+Ext.swift in Sources */,
 				322F708F2A7C2BD4002DBB9D /* HealthManager.swift in Sources */,
 				3231DF552A759E5C0051DCC7 /* ChartsView.swift in Sources */,
 				32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */,
-				32E3C6332A87B63000835BB3 /* PaywallViewModel.swift in Sources */,
 				32D06DB82A9D245300D69189 /* FitnessProfileEditButton.swift in Sources */,
 				32E3C64C2A8CFC2100835BB3 /* LeaderboardView.swift in Sources */,
 				3231DF5A2A768F370051DCC7 /* ActivityCard.swift in Sources */,
+				3273CB762B96536500F39A00 /* EditGoalsView.swift in Sources */,
 				32E3C6232A83F7FB00835BB3 /* ChartsViewModel.swift in Sources */,
 				3231DF432A75970D0051DCC7 /* FitnessAppApp.swift in Sources */,
 			);

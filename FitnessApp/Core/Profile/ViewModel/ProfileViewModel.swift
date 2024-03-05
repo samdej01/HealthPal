@@ -24,6 +24,12 @@ final class ProfileViewModel {
         "avatar 1", "avatar 2", "avatar 3", "avatar 4", "avatar 5", "avatar 6", "avatar 7", "avatar 8", "avatar 9", "avatar 10"
     ]
     
+    var presentGoal = false
+    var caloriesGoal: Int = UserDefaults.standard.value(forKey: "caloriesGoal") as? Int ?? 900
+    var stepGoal: Int = UserDefaults.standard.value(forKey: "stepGoal") as? Int ?? 7500
+    var activeGoal: Int = UserDefaults.standard.value(forKey: "activeGoal") as? Int ?? 60
+    var standGoal: Int = UserDefaults.standard.value(forKey: "standGoal") as? Int ?? 12
+    
     func presentEditName() {
         isEditingName = true
         isEditingImage = false
@@ -78,6 +84,13 @@ final class ProfileViewModel {
                 self.showAlert = true
             }
         }
-        
+    }
+    
+    func saveUserGoals() {
+        UserDefaults.standard.set(stepGoal, forKey: "stepGoal")
+        UserDefaults.standard.set(caloriesGoal, forKey: "caloriesGoal")
+        UserDefaults.standard.set(activeGoal, forKey: "activeGoal")
+        UserDefaults.standard.set(standGoal, forKey: "standGoal")
+        presentGoal = false
     }
 }

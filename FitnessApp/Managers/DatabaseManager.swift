@@ -9,7 +9,12 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class DatabaseManager {
+protocol DatabaseManagerType {
+    func fetchLeaderboards() async throws -> [LeaderboardUser]
+    func postStepCountUpdateForUser(leader: LeaderboardUser) async throws
+}
+
+final class DatabaseManager: DatabaseManagerType {
     
     static let shared = DatabaseManager()
     

@@ -8,11 +8,30 @@
 import Foundation
 import HealthKit
 
-class HealthManager {
+protocol HealthManagerType {
+    func requestHealthKitAccess() async throws
+    func fetchTodayCaloriesBurned(completion: @escaping(Result<Double, Error>) -> Void)
+    func fetchTodayExerciseTime(completion: @escaping(Result<Double, Error>) -> Void)
+    func fetchTodayStandHours(completion: @escaping(Result<Int, Error>) -> Void)
+    func fetchTodaySteps(completion: @escaping(Result<Activity, Error>) -> Void)
+    func fetchCurrentWeekWorkoutStats(completion: @escaping (Result<[Activity], Error>) -> Void)
+
+    func fetchWorkoutsForMonth(month: Date, completion: @escaping (Result<[Workout], Error>) -> Void)
+    func fetchDailySteps(startDate: Date, completion: @escaping (Result<[DailyStepModel], Error>) -> Void)
+    func fetchYTDAndOneYearChartData(completion: @escaping (Result<YearChartDataResult, Error>) -> Void)
+    func fetchCurrentWeekStepCount(completion: @escaping (Result<Double, Error>) -> Void)
+}
+
+struct YearChartDataResult {
+    let ytd: [MonthlyStepModel]
+    let oneYear: [MonthlyStepModel]
+}
+
+final class HealthManager: HealthManagerType {
     
     static let shared = HealthManager()
     
-    let healthStore = HKHealthStore()
+    private let healthStore = HKHealthStore()
     
     private init () {
         Task {
@@ -96,7 +115,8 @@ class HealthManager {
             }
             
             let steps = quantity.doubleValue(for: .count())
-            let activity = Activity(title: "Today Steps", subtitle: "Goal: 800", image: "figure.walk", tintColor: .green, amount: steps.formattedNumberString())
+            let stepsGoal = UserDefaults.standard.value(forKey: "stepsGoal") ?? 7500
+            let activity = Activity(title: "Today Steps", subtitle: "Goal: \(stepsGoal)", image: "figure.walk", tintColor: .green, amount: steps.formattedNumberString())
             completion(.success(activity))
         }
         
@@ -112,6 +132,7 @@ class HealthManager {
                 return
             }
             
+            // Only tracking acitivties we are interested in
             var runningCount: Int = 0
             var strengthCount: Int = 0
             var soccerCount: Int = 0
@@ -167,6 +188,7 @@ class HealthManager {
                 return
             }
             
+            // Generates workout cards that will be displayed on home screen
             let workoutsArray = workouts.map( { Workout(title: $0.workoutActivityType.name, image: $0.workoutActivityType.image, tintColor: $0.workoutActivityType.color, duration: "\(Int($0.duration)/60) mins", date: $0.startDate, calories: ($0.totalEnergyBurned?.doubleValue(for: .kilocalorie()).formattedNumberString() ?? "-") + " kcal") })
             completion(.success(workoutsArray))
         }
@@ -184,6 +206,7 @@ extension HealthManager {
         
         let query = HKStatisticsCollectionQuery(quantityType: steps, quantitySamplePredicate: nil, anchorDate: startDate, intervalComponents: interval)
         
+        // Method to query health data for each date of a given period
         query.initialResultsHandler = { _, results, error in
             guard let result = results, error == nil else {
                 completion(.failure(error!))
@@ -200,11 +223,6 @@ extension HealthManager {
         healthStore.execute(query)
     }
     
-    struct YearChartDataResult {
-        let ytd: [MonthlyStepModel]
-        let oneYear: [MonthlyStepModel]
-    }
-    
     func fetchYTDAndOneYearChartData(completion: @escaping (Result<YearChartDataResult, Error>) -> Void) {
         
         let steps = HKQuantityType(.stepCount)
@@ -212,6 +230,8 @@ extension HealthManager {
         
         var oneYearMonths = [MonthlyStepModel]()
         var ytdMonths = [MonthlyStepModel]()
+        // Note: Query is imbedded in a for loop to fetch data for previous 12 months
+        // Approach could be improved as running into an error for a given month will return failure/error for the entire call
         for i in 0...11 {
             let month = calendar.date(byAdding: .month, value: -i, to: Date()) ?? Date()
             let (startOfMonth, endOfMonth) = month.fetchMonthStartAndEndDate()
@@ -233,6 +253,7 @@ extension HealthManager {
                     }
                 }
                 
+                // On last interation of the loop (last month), call completion success
                 if i == 11 {
                     completion(.success(YearChartDataResult(ytd: ytdMonths, oneYear: oneYearMonths)))
                 }
@@ -248,6 +269,7 @@ extension HealthManager {
     func fetchCurrentWeekStepCount(completion: @escaping (Result<Double, Error>) -> Void) {
         let steps = HKQuantityType(.stepCount)
         let predicate = HKQuery.predicateForSamples(withStart: .startOfWeek, end: Date())
+
         let query = HKStatisticsQuery(quantityType: steps, quantitySamplePredicate: predicate) { _, results, error in
             guard let quantity = results?.sumQuantity(), error == nil else {
                 completion(.failure(error!))

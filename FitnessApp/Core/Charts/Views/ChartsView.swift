@@ -87,7 +87,8 @@ struct ChartsView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .navigationTitle("Charts")
+            .navigationTitle(FitnessTabs.charts.rawValue)
+            .padding(.top)
             .alert("Oops", isPresented: $viewModel.showAlert) {
                 Button(role: .cancel) {
                     viewModel.showAlert = false

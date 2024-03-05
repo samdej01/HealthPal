@@ -8,17 +8,32 @@
 import Foundation
 
 extension Date {
-    
+
     static var startOfDay: Date {
         let calendar = Calendar.current
         return calendar.startOfDay(for: Date())
     }
-    
+
+    // Treats Monday as start of week
     static var startOfWeek: Date {
         let calendar = Calendar.current
-        var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())
+        let today = Date()
+        let weekday = calendar.component(.weekday, from: today)
+
+        // Monday
+        var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)
         components.weekday = 2
-        return calendar.date(from: components) ?? Date()
+
+        // Calculate the start of the week date
+        var startOfWeek = calendar.date(from: components) ?? Date()
+
+        // Check if today is Sunday (weekday == 1) and adjust the startOfWeek to the previous Monday
+        if weekday == 1 {
+            let adjustedDate = calendar.date(byAdding: .day, value: -7, to: startOfWeek)
+            startOfWeek = adjustedDate ?? startOfWeek
+        }
+
+        return startOfWeek
     }
     
     static var oneWeekAgo: Date {
@@ -39,7 +54,7 @@ extension Date {
         return calendar.startOfDay(for: date)
     }
     
-    
+    // Returns start date and end date of given month
     func fetchMonthStartAndEndDate() -> (Date, Date) {
         let calendar = Calendar.current
         let startDateComponent = calendar.dateComponents([.year, .month], from: calendar.startOfDay(for: self))
@@ -68,4 +83,17 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func timeOfDayGreeting() -> String {
+            let calendar = Calendar.current
+            let hour = calendar.component(.hour, from: self)
+            
+            switch hour {
+            case 2..<12:
+                return "Good Morning,"
+            case 12..<18:
+                return "Good Afternoon,"
+            default:
+                return "Good Evening,"
+            }
+        }
 }

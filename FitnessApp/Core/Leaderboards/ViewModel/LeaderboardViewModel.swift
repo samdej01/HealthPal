@@ -33,10 +33,10 @@ final class LeaderboardViewModel {
         LeaderboardUser(username: "logan", count: 124),
     ]
     
-    let databaseManager = DatabaseManager.shared
-    let healthManager = HealthManager.shared
+    var databaseManager = DatabaseManager.shared
+    var healthManager = HealthManager.shared
     
-    init() {
+    init(healthManager: HealthManagerType = HealthManager.shared, databaseManager: DatabaseManagerType = DatabaseManager.shared) {
         if username != nil {
             setupLeaderboardData()
         }
@@ -48,7 +48,6 @@ final class LeaderboardViewModel {
             didCompleteAccepting = true
         }
     }
-    
     
     func setupLeaderboardData() {
         Task {
@@ -95,8 +94,9 @@ final class LeaderboardViewModel {
             throw LeaderboardViewModelError.unableToFetchUsername
         }
         
-        let steps = try await fetchCurrentWeekStepCount()
-        try await databaseManager.postStepCountUpdateForUser(leader: LeaderboardUser(username: username, count: Int(steps)))
+        // When current week steps throws and error (steps is nil) make step count 0
+        let steps = try? await fetchCurrentWeekStepCount()
+        try await databaseManager.postStepCountUpdateForUser(leader: LeaderboardUser(username: username, count: Int(steps ?? 0)))
     }
     
     private func fetchCurrentWeekStepCount() async throws -> Double {

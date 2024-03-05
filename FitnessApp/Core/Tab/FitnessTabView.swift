@@ -14,36 +14,36 @@ struct FitnessTabView: View {
         TabView(selection: $tabState.selectedTab) {
             HomeView()
                 .environment(tabState)
-                .tag("Home")
+                .tag(FitnessTabs.home)
                 .tabItem {
                     Image(systemName: "house")
                     
-                    Text("Home")
+                    Text(FitnessTabs.home.rawValue)
                 }
             
             ChartsView()
-                .tag("Charts")
+                .tag(FitnessTabs.charts)
                 .tabItem {
                     Image(systemName: "chart.line.uptrend.xyaxis")
                     
-                    Text("Charts")
+                    Text(FitnessTabs.charts.rawValue)
                 }
             
             LeaderboardView()
                 .environment(tabState)
-                .tag("Leaderboard")
+                .tag(FitnessTabs.leaderboard)
                 .tabItem {
                     Image(systemName: "list.bullet")
                     
-                    Text("Leaderboard")
+                    Text(FitnessTabs.leaderboard.rawValue)
                 }
             
             ProfileView()
-                .tag("Profile")
+                .tag(FitnessTabs.profile.rawValue)
                 .tabItem {
                     Image(systemName: "person")
                     
-                    Text("Profile")
+                    Text(FitnessTabs.profile.rawValue)
                 }
         }
         .tint(.green)
