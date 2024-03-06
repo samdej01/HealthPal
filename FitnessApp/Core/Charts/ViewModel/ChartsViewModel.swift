@@ -34,9 +34,10 @@ final class ChartsViewModel {
     
     var showAlert = false
     
-    var healthManager = HealthManager.shared
+    var healthManager: HealthManagerType
     
     init(healthManager: HealthManagerType = HealthManager.shared) {
+        self.healthManager = healthManager
         Task {
             do {
                 // Batch fetches all the health & chart data

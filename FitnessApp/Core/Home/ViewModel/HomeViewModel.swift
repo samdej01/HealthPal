@@ -10,8 +10,6 @@ import Foundation
 @Observable
 final class HomeViewModel {
     
-    var healthManager = HealthManager.shared
-    
     var showPaywall = false
     var showAllActivities = false
     
@@ -29,20 +27,14 @@ final class HomeViewModel {
     
     var showAlert = false
 
+    var healthManager: HealthManagerType
+    
     init(healthManager: HealthManagerType = HealthManager.shared) {
+        self.healthManager = healthManager
         Task {
             do {
                 try await healthManager.requestHealthKitAccess()
-                
-                // Fetch all health data in parallel at init of View Model
-                async let fetchCalories: () = try await fetchTodayCalories()
-                async let fetchExercise: () = try await fetchTodayExerciseTime()
-                async let fetchStand: () = try await fetchTodayStandHours()
-                async let fetchSteps: () = try await fetchTodaySteps()
-                async let fetchActivities: () = try await fetchCurrentWeekActivities()
-                async let fetchWorkouts: () = try await fetchRecentWorkouts()
-                
-                let (_, _, _, _, _, _) = (try await fetchCalories, try await fetchExercise, try await fetchStand, try await fetchSteps, try await fetchActivities, try await fetchWorkouts)
+                try await fetchHealthData()
             } catch {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
@@ -50,6 +42,18 @@ final class HomeViewModel {
                 }
             }
         }
+    }
+    
+    func fetchHealthData() async throws {
+        // Fetch all health data in parallel at init of View Model
+        async let fetchCalories: () = try await fetchTodayCalories()
+        async let fetchExercise: () = try await fetchTodayExerciseTime()
+        async let fetchStand: () = try await fetchTodayStandHours()
+        async let fetchSteps: () = try await fetchTodaySteps()
+        async let fetchActivities: () = try await fetchCurrentWeekActivities()
+        async let fetchWorkouts: () = try await fetchRecentWorkouts()
+        
+        let (_, _, _, _, _, _) = (try await fetchCalories, try await fetchExercise, try await fetchStand, try await fetchSteps, try await fetchActivities, try await fetchWorkouts)
     }
     
     func fetchGoalData() {
@@ -127,7 +131,7 @@ final class HomeViewModel {
                 switch result {
                 case .success(let activity):
                     DispatchQueue.main.async {
-                        self.activities.append(activity)
+                        self.activities.insert(activity, at: 0)
                         continuation.resume()
                     }
                 case .failure(let failure):

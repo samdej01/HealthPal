@@ -48,7 +48,6 @@ struct ChartDataView: View {
             .background(.gray.opacity(0.1))
             .cornerRadius(10)
             
-            
             Spacer()
         }
     }

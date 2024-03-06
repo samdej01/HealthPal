@@ -8,8 +8,16 @@
 import Foundation
 import RevenueCat
 
+enum FitnessTabs: String {
+    case home = "Home"
+    case charts = "Charts"
+    case leaderboard = "Leaderboard"
+    case profile = "Profile"
+}
+
 @Observable
 final class FitnessTabState {
+    
     var selectedTab = "Home"
     var isPremium = false
     var showTerms = true

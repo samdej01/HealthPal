@@ -170,9 +170,8 @@ struct ProfileView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .sheet(isPresented: $viewModel.presentGoal) {
                     EditGoalsView()
-                        .presentationDetents([.fraction(0.3)])
+                        .presentationDetents([.fraction(0.45)])
                         .environment(viewModel)
-                        
                 }
                 .alert("Oops", isPresented: $viewModel.showAlert) {
                     Button(role: .cancel) {

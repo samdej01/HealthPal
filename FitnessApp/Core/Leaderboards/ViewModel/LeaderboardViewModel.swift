@@ -33,10 +33,13 @@ final class LeaderboardViewModel {
         LeaderboardUser(username: "logan", count: 124),
     ]
     
-    var databaseManager = DatabaseManager.shared
-    var healthManager = HealthManager.shared
+    var healthManager: HealthManagerType
+    var databaseManager: DatabaseManagerType
     
-    init(healthManager: HealthManagerType = HealthManager.shared, databaseManager: DatabaseManagerType = DatabaseManager.shared) {
+    init(healthManager: HealthManagerType = HealthManager.shared, databaseManager: 
+        DatabaseManagerType = DatabaseManager.shared) {
+        self.healthManager = healthManager
+        self.databaseManager = databaseManager
         if username != nil {
             setupLeaderboardData()
         }

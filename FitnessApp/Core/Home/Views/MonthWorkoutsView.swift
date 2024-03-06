@@ -57,7 +57,7 @@ struct MonthWorkoutsView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.vertical)
-        .onChange(of: viewModel.selectedMonth) { _ in
+        .onChange(of: viewModel.selectedMonth) { _, _ in
             viewModel.updateSelectedDate()
         }
         .alert("Oops", isPresented: $viewModel.showAlert) {
