@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-final class MonthWorkoutsViewModel {
+final class MonthWorkoutsViewModel: ObservableObject {
     
     var selectedMonth = 0
     var selectedDate = Date()
@@ -26,9 +26,8 @@ final class MonthWorkoutsViewModel {
             do {
                 try await fetchWorkoutsForMonth()
             } catch {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.showAlert = true
+                await MainActor.run {
+                    showAlert = true
                 }
             }
         }

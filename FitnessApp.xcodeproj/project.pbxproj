@@ -18,6 +18,7 @@
 		3231DF572A75B1E70051DCC7 /* ProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF562A75B1E70051DCC7 /* ProgressCircleView.swift */; };
 		3231DF5A2A768F370051DCC7 /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF592A768F370051DCC7 /* ActivityCard.swift */; };
 		3231DF5C2A769E790051DCC7 /* WorkoutCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF5B2A769E790051DCC7 /* WorkoutCard.swift */; };
+		3260933F2C46E39800EF3FF4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3260933E2C46E39800EF3FF4 /* StoreKit.framework */; };
 		326B02272A7864D60034E363 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B02262A7864D60034E363 /* HomeViewModel.swift */; };
 		326B022C2A7865AC0034E363 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022B2A7865AC0034E363 /* Activity.swift */; };
 		326B022E2A7865D20034E363 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022D2A7865D20034E363 /* Workout.swift */; };
@@ -41,7 +42,6 @@
 		32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */; };
 		32E3C6272A83F81E00835BB3 /* DailyStepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6262A83F81E00835BB3 /* DailyStepModel.swift */; };
 		32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6282A83F89B00835BB3 /* ChartOptions.swift */; };
-		32E3C62C2A86CCF100835BB3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32E3C62B2A86CCF100835BB3 /* StoreKit.framework */; };
 		32E3C62F2A86D14300835BB3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 32E3C62E2A86D14300835BB3 /* RevenueCat */; };
 		32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */; };
 		32E3C64C2A8CFC2100835BB3 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */; };
@@ -82,6 +82,7 @@
 		3231DF562A75B1E70051DCC7 /* ProgressCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleView.swift; sourceTree = "<group>"; };
 		3231DF592A768F370051DCC7 /* ActivityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		3231DF5B2A769E790051DCC7 /* WorkoutCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCard.swift; sourceTree = "<group>"; };
+		3260933E2C46E39800EF3FF4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		326B02262A7864D60034E363 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		326B022B2A7865AC0034E363 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		326B022D2A7865D20034E363 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
@@ -107,7 +108,6 @@
 		32E3C6242A83F81500835BB3 /* MonthlyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyStepModel.swift; sourceTree = "<group>"; };
 		32E3C6262A83F81E00835BB3 /* DailyStepModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStepModel.swift; sourceTree = "<group>"; };
 		32E3C6282A83F89B00835BB3 /* ChartOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartOptions.swift; sourceTree = "<group>"; };
-		32E3C62B2A86CCF100835BB3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		32E3C6342A87B68300835BB3 /* RevenueCat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RevenueCat+Ext.swift"; sourceTree = "<group>"; };
 		32E3C64B2A8CFC2100835BB3 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		32E3C64D2A8D01C000835BB3 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				32E3C62F2A86D14300835BB3 /* RevenueCat in Frameworks */,
-				32E3C62C2A86CCF100835BB3 /* StoreKit.framework in Frameworks */,
 				32E3C6532A8D5CFD00835BB3 /* FirebaseFirestore in Frameworks */,
+				3260933F2C46E39800EF3FF4 /* StoreKit.framework in Frameworks */,
 				3273CB6B2B938B4000F39A00 /* RevenueCatUI in Frameworks */,
 				32E3C6552A8D5CFD00835BB3 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -392,7 +392,7 @@
 		32E3C62A2A86CCF100835BB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				32E3C62B2A86CCF100835BB3 /* StoreKit.framework */,
+				3260933E2C46E39800EF3FF4 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -664,6 +664,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
 			};
 			name = Debug;
 		};
@@ -718,6 +719,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -731,7 +733,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FitnessApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 8U63ZP8KK6;
+				DEVELOPMENT_TEAM = C4VLH96GN4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FitnessApp/Info.plist;
@@ -749,9 +751,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jasondubon.FitnessApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.siembra.fit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -766,7 +769,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FitnessApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 8U63ZP8KK6;
+				DEVELOPMENT_TEAM = C4VLH96GN4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FitnessApp/Info.plist;
@@ -784,9 +787,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jasondubon.FitnessApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.siembra.fit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-final class LeaderboardViewModel {
+final class LeaderboardViewModel: ObservableObject {
     
     var termsViewUsername = ""
     var acceptedTerms = false
@@ -40,8 +40,16 @@ final class LeaderboardViewModel {
         DatabaseManagerType = DatabaseManager.shared) {
         self.healthManager = healthManager
         self.databaseManager = databaseManager
-        if username != nil {
-            setupLeaderboardData()
+        Task {
+            if username != nil {
+                do {
+                    try await setupLeaderboardData()
+                } catch {
+                    await MainActor.run {
+                        showAlert = true
+                    }
+                }
+            }
         }
     }
     
@@ -52,22 +60,11 @@ final class LeaderboardViewModel {
         }
     }
     
-    func setupLeaderboardData() {
-        Task {
-            do {
-                try await postStepCountUpdateForUser()
-                let result = try await fetchLeaderboards()
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.leaderResult = result
-                }
-            } catch {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.showAlert = true
-                }
-            }
-        }
+    @MainActor
+    func setupLeaderboardData() async throws {
+        try await postStepCountUpdateForUser()
+        let result = try await fetchLeaderboards()
+        leaderResult = result
     }
     
     struct LeaderboardResult {

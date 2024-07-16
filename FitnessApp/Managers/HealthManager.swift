@@ -11,12 +11,22 @@ import HealthKit
 protocol HealthManagerType {
     func requestHealthKitAccess() async throws
     func fetchTodayCaloriesBurned(completion: @escaping(Result<Double, Error>) -> Void)
+    func fetchTodayCalories() async throws -> Double
     func fetchTodayExerciseTime(completion: @escaping(Result<Double, Error>) -> Void)
+    func fetchTodayExerciseTime() async throws -> Double
     func fetchTodayStandHours(completion: @escaping(Result<Int, Error>) -> Void)
+    func fetchTodayStandHours() async throws -> Int
     func fetchTodaySteps(completion: @escaping(Result<Activity, Error>) -> Void)
+    func fetchTodaySteps() async throws -> Activity
     func fetchCurrentWeekWorkoutStats(completion: @escaping (Result<[Activity], Error>) -> Void)
+    func fetchCurrentWeekActivities() async throws -> [Activity]
     func fetchWorkoutsForMonth(month: Date, completion: @escaping (Result<[Workout], Error>) -> Void)
+    func fetchRecentWorkouts() async throws -> [Workout]
     func fetchDailySteps(startDate: Date, completion: @escaping (Result<[DailyStepModel], Error>) -> Void)
+    func fetchOneWeekStepData() async throws -> [DailyStepModel]
+    func fetchOneMonthStepData() async throws -> [DailyStepModel]
+    func fetchThreeMonthsStepData() async throws -> [DailyStepModel]
+    func fetchYTDAndOneYearChartData() async throws -> YearChartDataResult    
     func fetchYTDAndOneYearChartData(completion: @escaping (Result<YearChartDataResult, Error>) -> Void)
     func fetchCurrentWeekStepCount(completion: @escaping (Result<Double, Error>) -> Void)
 }
@@ -27,19 +37,7 @@ final class HealthManager: HealthManagerType {
     
     private let healthStore = HKHealthStore()
     
-    /// Upon initialization, it attempts to request HealthKit access asynchronously.
-    private init () {
-        Task {
-            do {
-                try await requestHealthKitAccess()
-            } catch {
-                DispatchQueue.main.async {
-                    presentAlert(title: "Oops", message: "We were unable to access health data. Please allow access to enjoy the app.")
-                }
-            }
-        }
-    }
-    
+    @MainActor
     func requestHealthKitAccess() async throws {
         let calories = HKQuantityType(.activeEnergyBurned)
         let exercise = HKQuantityType(.appleExerciseTime)
@@ -72,6 +70,19 @@ final class HealthManager: HealthManagerType {
         healthStore.execute(query)
     }
     
+    func fetchTodayCalories() async throws -> Double {
+        try await withCheckedThrowingContinuation({ continuation in
+            fetchTodayCaloriesBurned { result in
+                switch result {
+                case .success(let calories):
+                    continuation.resume(returning: calories)
+                case .failure(let failure):
+                    continuation.resume(throwing: failure)
+                }
+            }
+        })
+    }
+    
     /// Fetches the total exercise time for the current day.
     ///
     /// This function queries HealthKit for the sum of apple exercise time from the start of the current day until now.
@@ -90,6 +101,14 @@ final class HealthManager: HealthManagerType {
         }
         
         healthStore.execute(query)
+    }
+    
+    func fetchTodayExerciseTime() async throws -> Double {
+        try await withCheckedThrowingContinuation({ continuation in
+            fetchTodayExerciseTime { result in
+                continuation.resume(with: result)
+            }
+        })
     }
     
     /// Fetches the number of stand hours for the current day.
@@ -112,6 +131,14 @@ final class HealthManager: HealthManagerType {
         healthStore.execute(query)
     }
     
+    func fetchTodayStandHours() async throws -> Int {
+        try await withCheckedThrowingContinuation({ continuation in
+            fetchTodayStandHours { result in
+                continuation.resume(with: result)
+            }
+        })
+    }
+    
     // MARK: Fitness Activity
     
     /// Fetches the number of steps for the current day.
@@ -123,7 +150,7 @@ final class HealthManager: HealthManagerType {
         let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
         let query = HKStatisticsQuery(quantityType: steps, quantitySamplePredicate: predicate) { _, results, error in
             guard let quantity = results?.sumQuantity(), error == nil else {
-                completion(.failure(error!))
+                completion(.success(Activity(title: "Today Steps", subtitle: "Goal: 800", image: "figure.walk", tintColor: .green, amount: "---")))
                 return
             }
             
@@ -134,6 +161,14 @@ final class HealthManager: HealthManagerType {
         }
         
         healthStore.execute(query)
+    }
+    
+    func fetchTodaySteps() async throws -> Activity {
+        try await withCheckedThrowingContinuation({ continuation in
+            fetchTodaySteps { result in
+                continuation.resume(with: result)
+            }
+        })
     }
     
     /// Fetches the current week's workout statistics.
@@ -194,6 +229,14 @@ final class HealthManager: HealthManagerType {
         ]
     }
     
+    func fetchCurrentWeekActivities() async throws -> [Activity] {
+        try await withCheckedThrowingContinuation({ continuation in
+            fetchCurrentWeekWorkoutStats { result in
+                continuation.resume(with: result)
+            }
+        })
+    }
+    
     // MARK: Recent Workouts
     
     /// Fetches workout data for a specified month.
@@ -221,6 +264,14 @@ final class HealthManager: HealthManagerType {
             completion(.success(workoutsArray))
         }
         healthStore.execute(query)
+    }
+    
+    func fetchRecentWorkouts() async throws -> [Workout] {
+        try await withCheckedThrowingContinuation({ continuation in
+            fetchWorkoutsForMonth(month: .now) { result in
+                continuation.resume(with: result)
+            }
+        })
     }
     
 }
@@ -256,6 +307,45 @@ extension HealthManager {
             completion(.success(dailySteps))
         }
         healthStore.execute(query)
+    }
+    
+    func fetchOneWeekStepData() async throws -> [DailyStepModel] {
+        try await withCheckedThrowingContinuation({ continuation in
+            fetchDailySteps(startDate: .oneWeekAgo) { result in
+                switch result {
+                case .success(let steps):
+                    continuation.resume(returning: steps)
+                case .failure(let failure):
+                    continuation.resume(throwing: failure)
+                }
+            }
+        })
+    }
+    
+    func fetchOneMonthStepData() async throws -> [DailyStepModel] {
+        try await withCheckedThrowingContinuation({ continuation in
+            fetchDailySteps(startDate: .oneMonthAgo) { result in
+                switch result {
+                case .success(let steps):
+                    continuation.resume(returning: steps)
+                case .failure(let failure):
+                    continuation.resume(throwing: failure)
+                }
+            }
+        })
+    }
+
+    func fetchThreeMonthsStepData() async throws -> [DailyStepModel] {
+        try await withCheckedThrowingContinuation({ continuation in
+            fetchDailySteps(startDate: .threeMonthsAgo) { result in
+                switch result {
+                case .success(let steps):
+                    continuation.resume(returning: steps)
+                case .failure(let failure):
+                    continuation.resume(throwing: failure)
+                }
+            }
+        })
     }
     
     /// Fetches step count data for the current year-to-date (YTD) and the past one year.
@@ -300,6 +390,20 @@ extension HealthManager {
             }
             healthStore.execute(query)
         }
+    }
+    
+    func fetchYTDAndOneYearChartData() async throws -> YearChartDataResult {
+        try await requestHealthKitAccess()
+        return try await withCheckedThrowingContinuation({ continuation in
+            fetchYTDAndOneYearChartData { result in
+                switch result {
+                case .success(let res):
+                    continuation.resume(returning: res)
+                case .failure(let failure):
+                    continuation.resume(throwing: failure)
+                }
+            }
+        })
     }
 }
 

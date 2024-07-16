@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State var viewModel = ProfileViewModel()
+    @StateObject var viewModel = ProfileViewModel()
     
     var body: some View {
         NavigationStack {
@@ -32,7 +32,7 @@ struct ProfileView: View {
                         }
                         
                         VStack(alignment: .leading) {
-                            Text(Calendar.current.date(byAdding: .hour, value: 4, to: .now)!.timeOfDayGreeting())
+                            Text(Date.now.timeOfDayGreeting())
                                 .font(.title)
                                 .foregroundColor(.gray)
                                 .lineLimit(1)

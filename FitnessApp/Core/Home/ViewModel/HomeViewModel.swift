@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-final class HomeViewModel {
+final class HomeViewModel: ObservableObject {
     
     var showPaywall = false
     var showAllActivities = false
@@ -36,14 +36,14 @@ final class HomeViewModel {
                 try await healthManager.requestHealthKitAccess()
                 try await fetchHealthData()
             } catch {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.showAlert =  true
+                await MainActor.run {
+                    showAlert = true
                 }
             }
         }
     }
     
+    @MainActor
     func fetchHealthData() async throws {
         // Fetch all health data in parallel at init of View Model
         async let fetchCalories: () = try await fetchTodayCalories()
@@ -65,118 +65,42 @@ final class HomeViewModel {
     
     /// Fetches today calories and leaves the activity card blank if it fails
     func fetchTodayCalories() async throws {
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchTodayCaloriesBurned { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let calories):
-                    DispatchQueue.main.async {
-                        self.calories = Int(calories)
-                        let activity = Activity(title: "Calories Burned", subtitle: "today", image: "flame", tintColor: .red, amount: calories.formattedNumberString())
-                        self.activities.append(activity)
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    DispatchQueue.main.async {
-                        let activity = Activity(title: "Calories Burned", subtitle: "today", image: "flame", tintColor: .red, amount: "---")
-                        self.activities.append(activity)
-                        continuation.resume(throwing: failure)
-                    }
-                }
-            }
-        }) as Void
+        do {
+            calories = Int(try await healthManager.fetchTodayCalories())
+            let activity = Activity(title: "Calories Burned", subtitle: "today", image: "flame", tintColor: .red, amount: "\(calories)")
+            activities.append(activity)
+        } catch {
+            let activity = Activity(title: "Calories Burned", subtitle: "today", image: "flame", tintColor: .red, amount: "---")
+            activities.append(activity)
+        }
     }
     
     func fetchTodayExerciseTime() async throws {
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchTodayExerciseTime { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let exercise):
-                    DispatchQueue.main.async {
-                        self.exercise = Int(exercise)
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    continuation.resume(throwing: failure)
-                }
-            }
-        }) as Void
+        exercise = Int(try await healthManager.fetchTodayExerciseTime())
     }
     
     func fetchTodayStandHours() async throws {
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchTodayStandHours { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let hours):
-                    DispatchQueue.main.async {
-                        self.stand = hours
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    continuation.resume(throwing: failure)
-                }
-            }
-        }) as Void
+        stand = try await healthManager.fetchTodayStandHours()
     }
     
     // MARK: Fitness Activity
     
     /// Fetches today's steps and displays an empty card if it fails
     func fetchTodaySteps() async throws {
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchTodaySteps { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let activity):
-                    DispatchQueue.main.async {
-                        self.activities.insert(activity, at: 0)
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    DispatchQueue.main.async {
-                        self.activities.append(Activity(title: "Today Steps", subtitle: "Goal: 800", image: "figure.walk", tintColor: .green, amount: "---"))
-                        continuation.resume(throwing: failure)
-                    }
-                }
-            }
-        }) as Void
+        let activity = try await healthManager.fetchTodaySteps()
+        activities.insert(activity, at: 0)
     }
     
     func fetchCurrentWeekActivities() async throws {
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchCurrentWeekWorkoutStats { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let activities):
-                    DispatchQueue.main.async {
-                        self.activities.append(contentsOf: activities)
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    continuation.resume(throwing: failure)
-                }
-            }
-        }) as Void
+        let weekActivities = try await healthManager.fetchCurrentWeekActivities()
+        activities.append(contentsOf: weekActivities)
     }
     
     // MARK: Recent Workouts
     func fetchRecentWorkouts() async throws {
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchWorkoutsForMonth(month: Date()) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let workouts):
-                    DispatchQueue.main.async {
-                        // Only displays the most recent 4 (four) workouts, the rest are behind a paywall
-                        self.workouts = Array(workouts.prefix(4))
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    continuation.resume(throwing: failure)
-                }
-            }
-        }) as Void
+        let monthWorkouts = try await healthManager.fetchRecentWorkouts()
+        // Only displays the most recent 4 (four) workouts, the rest are behind a paywall
+        workouts = Array(monthWorkouts.prefix(4))
     }
+        
 }

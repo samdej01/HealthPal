@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LeaderboardView: View {
     @Environment(FitnessTabState.self) var tabState
-    @State var viewModel = LeaderboardViewModel()
+    @StateObject var viewModel = LeaderboardViewModel()
     
     var body: some View {
         NavigationStack {
@@ -78,7 +78,13 @@ struct LeaderboardView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     if viewModel.didCompleteAccepting || viewModel.username != nil {
                         Button {
-                            viewModel.setupLeaderboardData()
+                            Task {
+                                do {
+                                    try await viewModel.setupLeaderboardData()
+                                } catch {
+                                    viewModel.showAlert = true
+                                }
+                            }
                         } label: {
                             Image(systemName: "arrow.clockwise")
                                 .foregroundColor(Color(uiColor: .label))
@@ -98,11 +104,16 @@ struct LeaderboardView: View {
             })
             .onChange(of: tabState.showTerms) { _,_ in
                 if !tabState.showTerms && viewModel.username != nil {
-                    viewModel.setupLeaderboardData()
+                    Task {
+                        do {
+                            try await viewModel.setupLeaderboardData()
+                        } catch {
+                            viewModel.showAlert = true
+                        }
+                    }
                 }
             }
         }
-        
     }
         
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable
-final class ProfileViewModel {
+final class ProfileViewModel: ObservableObject {
     
     var isEditingName = false
     var currentName = ""
@@ -63,6 +63,7 @@ final class ProfileViewModel {
         self.dismissEdit()
     }
     
+    @MainActor
     func presentEmailApp() {
         let emailSubject = "Fitness App - Contact Us"
         let emailRecipient = "jasonsdubon@gmail.com"

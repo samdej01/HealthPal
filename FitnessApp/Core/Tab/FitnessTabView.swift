@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FitnessTabView: View {
     @State var tabState = FitnessTabState()
-    
+
     var body: some View {
         TabView(selection: $tabState.selectedTab) {
             HomeView()
@@ -47,6 +47,15 @@ struct FitnessTabView: View {
                 }
         }
         .tint(.green)
+        .task {
+            do {
+                try await HealthManager.shared.requestHealthKitAccess()
+            } catch {
+                DispatchQueue.main.async {
+                    presentAlert(title: "Oops", message: "We were unable to access health data. Please allow access to enjoy the app.")
+                }
+            }
+        }
     }
 }
 

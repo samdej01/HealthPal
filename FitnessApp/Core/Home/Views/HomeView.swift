@@ -10,7 +10,7 @@ import RevenueCatUI
 
 struct HomeView: View {
     @Environment(FitnessTabState.self) var tabState
-    @State var viewModel = HomeViewModel()
+    @StateObject var viewModel = HomeViewModel()
     
     var body: some View {
         NavigationStack {
@@ -133,7 +133,7 @@ struct HomeView: View {
                                         .foregroundColor(.white)
                                 }
                             }
-
+                            
                         }
                     }
                     .padding(.horizontal)

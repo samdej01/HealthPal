@@ -7,8 +7,9 @@
 
 import Foundation
 
+
 @Observable
-final class ChartsViewModel {
+final class ChartsViewModel: ObservableObject {
     
     var selectedChart: ChartOptions = .oneWeek
     
@@ -48,9 +49,8 @@ final class ChartsViewModel {
                 
                 _ = (try await oneWeek, try await oneMonth, try await threeMonths, try await ytdAndOneYear)
             } catch {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.showAlert = true
+                await MainActor.run {
+                    showAlert = true
                 }
             }
         }
@@ -75,87 +75,37 @@ final class ChartsViewModel {
         return (total, average)
     }
     
+    @MainActor
     func fetchOneWeekStepData() async throws {
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchDailySteps(startDate: .oneWeekAgo) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let steps):
-                    DispatchQueue.main.async { 
-                        self.oneWeekChartData = steps
-                        
-                        (self.oneWeekTotal, self.oneWeekAverage) = self.calculateAverageAndTotalFromData(steps: steps)
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    continuation.resume(throwing: failure)
-                }
-            }
-        }) as Void
+        oneWeekChartData = try await healthManager.fetchOneWeekStepData()
+        
+        (oneWeekTotal, oneWeekAverage) = calculateAverageAndTotalFromData(steps: oneWeekChartData)
     }
     
     func fetchOneMonthStepData() async throws {
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchDailySteps(startDate: .oneMonthAgo) {  [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let steps):
-                    DispatchQueue.main.async {
-                        self.oneMonthChartData = steps
-                        
-                        (self.oneMonthTotal, self.oneMonthAverage) = self.calculateAverageAndTotalFromData(steps: steps)
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    continuation.resume(throwing: failure)
-                }
-            }
-        }) as Void
+        oneMonthChartData = try await healthManager.fetchOneMonthStepData()
+        
+        (oneMonthTotal, oneMonthAverage) = calculateAverageAndTotalFromData(steps: oneMonthChartData)
     }
     
     func fetchThreeMonthsStepData() async throws {
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchDailySteps(startDate: .threeMonthsAgo) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let steps):
-                    DispatchQueue.main.async {
-                        self.threeMonthsChartData = steps
-                        
-                        (self.threeMonthTotal, self.threeMonthAverage) = self.calculateAverageAndTotalFromData(steps: steps)
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    continuation.resume(throwing: failure)
-                }
-            }
-        }) as Void
+        threeMonthsChartData = try await healthManager.fetchThreeMonthsStepData()
+        
+        (threeMonthTotal, threeMonthAverage) = calculateAverageAndTotalFromData(steps: threeMonthsChartData)
+    }
+        
+    func fetchYTDAndOneYearChartData() async throws {
+        let result = try await healthManager.fetchYTDAndOneYearChartData()
+        ytdChartData = result.ytd
+        oneYearChartData = result.oneYear
+        
+        ytdTotal = ytdChartData.reduce(0, { $0 + $1.count })
+        oneYearTotal = oneYearChartData.reduce(0, { $0 + $1.count })
+        
+        ytdAverage = ytdTotal / Calendar.current.component(.month, from: Date.now)
+        oneYearAverage = oneYearTotal / 12
     }
     
     /// Fetches both one year and year to date data in one pass
-    func fetchYTDAndOneYearChartData() async throws {
-        try await healthManager.requestHealthKitAccess()
-        try await withCheckedThrowingContinuation({ continuation in
-            healthManager.fetchYTDAndOneYearChartData { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let result):
-                    DispatchQueue.main.async {
-                        self.ytdChartData = result.ytd
-                        self.oneYearChartData = result.oneYear
-                        
-                        self.ytdTotal = self.ytdChartData.reduce(0, { $0 + $1.count })
-                        self.oneYearTotal = self.oneYearChartData.reduce(0, { $0 + $1.count })
-                        
-                        self.ytdAverage = self.ytdTotal / Calendar.current.component(.month, from: Date.now)
-                        self.oneYearAverage = self.oneYearTotal / 12
-                        
-                        continuation.resume()
-                    }
-                case .failure(let failure):
-                    continuation.resume(throwing: failure)
-                }
-            }
-        }) as Void
-    }
+    
 }
