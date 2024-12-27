@@ -1,4 +1,3 @@
-
 import Foundation
 import RevenueCat
 
@@ -7,7 +6,7 @@ enum FitnessTabs: String {
     case charts = "Charts"
     case leaderboard = "Leaderboard"
     case profile = "Profile"
-}
+    case plans = "Plans" 
 
 @Observable
 final class FitnessTabState {

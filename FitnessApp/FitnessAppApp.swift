@@ -1,6 +1,3 @@
-
-//
-
 import SwiftUI
 import RevenueCat
 import FirebaseCore

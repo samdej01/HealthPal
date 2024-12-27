@@ -10,7 +10,6 @@ struct FitnessTabView: View {
                 .tag(FitnessTabs.home)
                 .tabItem {
                     Image(systemName: "house")
-                    
                     Text(FitnessTabs.home.rawValue)
                 }
             
@@ -18,7 +17,6 @@ struct FitnessTabView: View {
                 .tag(FitnessTabs.charts)
                 .tabItem {
                     Image(systemName: "chart.line.uptrend.xyaxis")
-                    
                     Text(FitnessTabs.charts.rawValue)
                 }
             
@@ -27,15 +25,20 @@ struct FitnessTabView: View {
                 .tag(FitnessTabs.leaderboard)
                 .tabItem {
                     Image(systemName: "list.bullet")
-                    
                     Text(FitnessTabs.leaderboard.rawValue)
                 }
             
+            PlansView()
+                .tag(FitnessTabs.plans)
+                .tabItem {
+                    Image(systemName: "calendar")
+                    Text("Plans")
+                }
+            
             ProfileView()
-                .tag(FitnessTabs.profile.rawValue)
+                .tag(FitnessTabs.profile)
                 .tabItem {
                     Image(systemName: "person")
-                    
                     Text(FitnessTabs.profile.rawValue)
                 }
         }

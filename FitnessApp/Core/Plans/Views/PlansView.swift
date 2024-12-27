@@ -14,6 +14,11 @@ struct PlansView: View {
             Text("Welcome to the Plans Page!")
                 .font(.largeTitle)
                 .padding()
+            
+            Text("Here you can manage your fitness plans.")
+                .font(.body)
+                .padding()
+            
             Spacer()
         }
     }
