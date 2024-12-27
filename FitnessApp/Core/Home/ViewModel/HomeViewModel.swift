@@ -1,9 +1,3 @@
-//
-//  HomeViewModel.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 7/31/23.
-//
 
 import Foundation
 

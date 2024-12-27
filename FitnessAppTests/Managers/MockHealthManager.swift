@@ -9,6 +9,46 @@ import Foundation
 @testable import FitnessApp
 
 class MockHealthManager: HealthManagerType {
+    func fetchTodayCalories() async throws -> Double {
+        <#code#>
+    }
+    
+    func fetchTodayExerciseTime() async throws -> Double {
+        <#code#>
+    }
+    
+    func fetchTodayStandHours() async throws -> Int {
+        <#code#>
+    }
+    
+    func fetchTodaySteps() async throws -> FitnessApp.Activity {
+        <#code#>
+    }
+    
+    func fetchCurrentWeekActivities() async throws -> [FitnessApp.Activity] {
+        <#code#>
+    }
+    
+    func fetchRecentWorkouts() async throws -> [FitnessApp.Workout] {
+        <#code#>
+    }
+    
+    func fetchOneWeekStepData() async throws -> [FitnessApp.DailyStepModel] {
+        <#code#>
+    }
+    
+    func fetchOneMonthStepData() async throws -> [FitnessApp.DailyStepModel] {
+        <#code#>
+    }
+    
+    func fetchThreeMonthsStepData() async throws -> [FitnessApp.DailyStepModel] {
+        <#code#>
+    }
+    
+    func fetchYTDAndOneYearChartData() async throws -> FitnessApp.YearChartDataResult {
+        <#code#>
+    }
+    
     
     var requestHealthKitAccessCalled = false
     var fetchTodayCaloriesBurnedResult: Result<Double, Error>?

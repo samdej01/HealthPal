@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -121,6 +121,10 @@
 		32FF673A2A96805C0001E8E9 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		E3EBF47F2D1E3E2D00ACE471 /* Plan */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Plan; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		3231DF3C2A75970D0051DCC7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -152,6 +156,7 @@
 				322F70942A82DD65002DBB9D /* Charts */,
 				32E3C6472A8CFC0300835BB3 /* Leaderboards */,
 				32D06DAF2A9D164400D69189 /* Profile */,
+				E3EBF47F2D1E3E2D00ACE471 /* Plan */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -447,6 +452,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				E3EBF47F2D1E3E2D00ACE471 /* Plan */,
+			);
 			name = FitnessApp;
 			packageProductDependencies = (
 				32E3C62E2A86D14300835BB3 /* RevenueCat */,
@@ -737,7 +745,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FitnessApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Be Fit";
+				INFOPLIST_KEY_CFBundleDisplayName = "Health Pal";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access!";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Please allow access, we will not be changing any of your data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -773,7 +781,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FitnessApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Be Fit";
+				INFOPLIST_KEY_CFBundleDisplayName = "Health Pal";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access!";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Please allow access, we will not be changing any of your data.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -1,9 +1,3 @@
-//
-//  MonthWorkoutsViewModel.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 9/6/23.
-//
 
 import Foundation
 

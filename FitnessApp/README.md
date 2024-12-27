@@ -1,12 +1,12 @@
-#  Be Fit
+#  Health Pal
 
-Be Fit is a fitness & activity tracking application where users can track their activity levels today and historical levels. It's built entirely in SwiftUI, making it fast, lightweight, and easy to use. 
+Health Pal is a fitness & activity tracking application where users can track their activity levels today and historical levels. It's built entirely in SwiftUI, making it fast, lightweight, and easy to use. 
 
 You can connect your health data, browse your historic data, interact with other users, and post step updates.
 
 ## Getting Started
 
-To run the Be Fit app locally, follow these steps:
+To run the Health Pal app locally, follow these steps:
 
 1. Open `FitnessApp.xcodeproj` in Xcode.
 2. Ensure you have the latest version of Xcode and SwiftUI.
