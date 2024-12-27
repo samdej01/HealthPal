@@ -1,9 +1,3 @@
-//
-//  ProfileViewModel.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 8/28/23.
-//
 
 import SwiftUI
 

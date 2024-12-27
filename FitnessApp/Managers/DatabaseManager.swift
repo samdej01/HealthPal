@@ -1,9 +1,3 @@
-//
-//  DatabaseManager.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 8/16/23.
-//
 
 import Foundation
 import FirebaseFirestore

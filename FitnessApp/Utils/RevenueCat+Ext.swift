@@ -1,9 +1,3 @@
-//
-//  RevenueCat+Ext.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 8/12/23.
-//
 
 import RevenueCat
 

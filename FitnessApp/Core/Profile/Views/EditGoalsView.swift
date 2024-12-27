@@ -1,9 +1,3 @@
-//
-//  EditGoalsView.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 3/4/24.
-//
 
 import SwiftUI
 

@@ -1,9 +1,3 @@
-//
-//  GlobalAlert.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 3/3/24.
-//
 
 import SwiftUI
 

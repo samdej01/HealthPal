@@ -1,9 +1,3 @@
-//
-//  LeaderboardViewModel.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 8/17/23.
-//
 
 import Foundation
 

@@ -1,9 +1,3 @@
-//
-//  TabState.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 3/2/24.
-//
 
 import Foundation
 import RevenueCat

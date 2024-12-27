@@ -1,9 +1,3 @@
-//
-//  HomeView.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 7/29/23.
-//
 
 import SwiftUI
 import RevenueCatUI

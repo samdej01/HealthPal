@@ -1,9 +1,3 @@
-//
-//  Date+Exy.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 8/23/23.
-//
 
 import Foundation
 

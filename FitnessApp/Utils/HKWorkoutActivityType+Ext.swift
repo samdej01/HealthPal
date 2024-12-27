@@ -1,9 +1,3 @@
-//
-//  HKWorkoutActivityType+Ext.swift
-//  FitnessApp
-//
-//  Created by Jason Dubon on 8/5/23.
-//
 
 import HealthKit
 import SwiftUI
