@@ -1,11 +1,3 @@
-//
-//  PlansView.swift
-//  FitnessApp
-//
-//  Created by Unicorn Semi on 27/12/2024.
-//
-
-
 import SwiftUI
 
 struct PlansView: View {
