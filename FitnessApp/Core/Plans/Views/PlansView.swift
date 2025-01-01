@@ -21,5 +21,3 @@ struct PlansView_Previews: PreviewProvider {
         PlansView()
     }
 }
-
-@StateObject private var viewModel = PlansViewModel()

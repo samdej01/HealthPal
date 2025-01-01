@@ -1,12 +1,11 @@
 import SwiftUI
 
 struct FitnessTabView: View {
-    @State var tabState = FitnessTabState()
+    @StateObject private var tabState = FitnessTabState() // Correctly use @StateObject
 
     var body: some View {
-        TabView(selection: $tabState.selectedTab) {
+        TabView(selection: $tabState.selectedTab) { // Bind to selectedTab of type FitnessTabs
             HomeView()
-                .environment(tabState)
                 .tag(FitnessTabs.home)
                 .tabItem {
                     Image(systemName: "house")
@@ -20,19 +19,18 @@ struct FitnessTabView: View {
                     Text(FitnessTabs.charts.rawValue)
                 }
             
-            LeaderboardView()
-                .environment(tabState)
-                .tag(FitnessTabs.leaderboard)
-                .tabItem {
-                    Image(systemName: "list.bullet")
-                    Text(FitnessTabs.leaderboard.rawValue)
-                }
-            
             PlansView()
                 .tag(FitnessTabs.plans)
                 .tabItem {
                     Image(systemName: "calendar")
-                    Text("Plans")
+                    Text(FitnessTabs.plans.rawValue)
+                }
+            
+            LeaderboardView()
+                .tag(FitnessTabs.leaderboard)
+                .tabItem {
+                    Image(systemName: "list.bullet")
+                    Text(FitnessTabs.leaderboard.rawValue)
                 }
             
             ProfileView()
@@ -42,7 +40,7 @@ struct FitnessTabView: View {
                     Text(FitnessTabs.profile.rawValue)
                 }
         }
-        .tint(.green)
+        .environmentObject(tabState) // Inject tabState as an EnvironmentObject
         .task {
             do {
                 try await HealthManager.shared.requestHealthKitAccess()

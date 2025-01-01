@@ -1,11 +1,10 @@
 import SwiftUI
 
 struct TermsView: View {
-    @Environment(FitnessTabState.self) var tabState
-    @Environment(LeaderboardViewModel.self) private var viewModel
+    @EnvironmentObject var tabState: FitnessTabState
+    @EnvironmentObject var viewModel: LeaderboardViewModel
     
     var body: some View {
-        @Bindable var viewModel = viewModel
         NavigationStack {
             VStack {
                 Spacer()
@@ -23,13 +22,8 @@ struct TermsView: View {
                             viewModel.acceptedTerms.toggle()
                         }
                     } label: {
-                        if viewModel.acceptedTerms {
-                            Image(systemName: "square.inset.filled")
-                        } else {
-                            Image(systemName: "square")
-                        }
+                        Image(systemName: viewModel.acceptedTerms ? "checkmark.square.fill" : "square")
                     }
-
                     
                     Text("By checking you agree to the terms and enter into the leaderboard competition.")
                 }
@@ -45,9 +39,7 @@ struct TermsView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                        )
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
                 }
             }
             .padding(.horizontal)
@@ -65,5 +57,7 @@ struct TermsView: View {
 struct TermsView_Previews: PreviewProvider {
     static var previews: some View {
         TermsView()
+            .environmentObject(FitnessTabState())
+            .environmentObject(LeaderboardViewModel())
     }
 }

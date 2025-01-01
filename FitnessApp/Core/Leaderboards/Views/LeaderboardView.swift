@@ -1,10 +1,9 @@
-
 import SwiftUI
 
 struct LeaderboardView: View {
-    @Environment(FitnessTabState.self) var tabState
+    @EnvironmentObject var tabState: FitnessTabState // Use EnvironmentObject
     @StateObject var viewModel = LeaderboardViewModel()
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -63,8 +62,8 @@ struct LeaderboardView: View {
                     Color.white
                     
                     TermsView()
-                        .environment(viewModel)
-                        .environment(tabState)
+                        .environmentObject(viewModel)
+                        .environmentObject(tabState)
                 }
             }
             .navigationTitle(FitnessTabs.leaderboard.rawValue)
@@ -96,7 +95,7 @@ struct LeaderboardView: View {
             }, message: {
                 Text("There was an issue loading the leaderboard data. Please try again.")
             })
-            .onChange(of: tabState.showTerms) { _,_ in
+            .onChange(of: tabState.showTerms) { _, _ in
                 if !tabState.showTerms && viewModel.username != nil {
                     Task {
                         do {
@@ -109,11 +108,11 @@ struct LeaderboardView: View {
             }
         }
     }
-        
 }
 
 struct LeaderboardView_Previews: PreviewProvider {
     static var previews: some View {
         LeaderboardView()
+            .environmentObject(FitnessTabState()) // Inject preview environment
     }
 }
