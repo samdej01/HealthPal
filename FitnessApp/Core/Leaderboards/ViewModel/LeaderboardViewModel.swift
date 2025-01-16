@@ -13,7 +13,7 @@ final class LeaderboardViewModel: ObservableObject {
     var showAlert = false
     
     var mockData = [
-        LeaderboardUser(username: "jason", count: 4124),
+        LeaderboardUser(username: "sam", count: 4124),
         LeaderboardUser(username: "you", count: 1124),
         LeaderboardUser(username: "seanallen", count: 41204),
         LeaderboardUser(username: "paul hudson", count: 4124),

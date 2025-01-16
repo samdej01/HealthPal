@@ -60,7 +60,7 @@ final class ProfileViewModel: ObservableObject {
     @MainActor
     func presentEmailApp() {
         let emailSubject = "Fitness App - Contact Us"
-        let emailRecipient = "jasonsdubon@gmail.com"
+        let emailRecipient = "go.imam.uni@gmail.com"
         
         let encodedSubject = emailSubject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let encodedRecipient = emailRecipient.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""

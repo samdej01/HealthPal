@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct ProfileView: View {
@@ -131,34 +130,11 @@ struct ProfileView: View {
                         FitnessProfileItemButton(title: "Contact Us", image: "envelope") {
                             viewModel.presentEmailApp()
                         }
-                        
-                        Link(destination: URL(string: "https://github.com/MexJason/SwiftUI-Course/blob/main/policy.md")!) {
-                            HStack {
-                                Image(systemName: "doc")
-                                
-                                Text("Privacy Policy")
-                            }
-                            .foregroundColor(.primary)
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                        
-                        Link(destination: URL(string: "https://github.com/MexJason/SwiftUI-Course/blob/main/terms.md")!) {
-                            HStack {
-                                Image(systemName: "doc")
-                                
-                                Text("Terms of Service")
-                            }
-                            .foregroundColor(.primary)
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        }
                     }
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.gray.opacity(0.15))
                     )
-                    
                 }
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
