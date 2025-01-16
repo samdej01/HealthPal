@@ -1,10 +1,3 @@
-//
-//  MockHealthManager.swift
-//  FitnessAppTests
-//
-//  Created by Jason Dubon on 3/5/24.
-//
-
 import Foundation
 @testable import FitnessApp
 

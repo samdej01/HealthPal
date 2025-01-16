@@ -124,6 +124,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E371E9D72D26217500A0D419 /* Notifications */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Notifications; sourceTree = "<group>"; };
 		E3EBF47F2D1E3E2D00ACE471 /* Plans */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Plans; sourceTree = "<group>"; };
+		E3ED59122D392F9500624150 /* Goals */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Goals; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +160,7 @@
 				32E3C6472A8CFC0300835BB3 /* Leaderboards */,
 				32D06DAF2A9D164400D69189 /* Profile */,
 				E3EBF47F2D1E3E2D00ACE471 /* Plans */,
+				E3ED59122D392F9500624150 /* Goals */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -457,6 +459,7 @@
 			fileSystemSynchronizedGroups = (
 				E371E9D72D26217500A0D419 /* Notifications */,
 				E3EBF47F2D1E3E2D00ACE471 /* Plans */,
+				E3ED59122D392F9500624150 /* Goals */,
 			);
 			name = FitnessApp;
 			packageProductDependencies = (
@@ -495,7 +498,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					3231DF3E2A75970D0051DCC7 = {
 						CreatedOnToolsVersion = 14.3.1;

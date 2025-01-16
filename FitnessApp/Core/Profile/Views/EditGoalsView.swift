@@ -1,66 +1,35 @@
-
 import SwiftUI
 
 struct EditGoalsView: View {
-    @Environment(ProfileViewModel.self) var viewModel
-    
+    @EnvironmentObject var viewModel: ProfileViewModel
+
     var body: some View {
         NavigationStack {
-            VStack {
-                Form {
-                    HStack {
-                        Stepper {
-                            Text("Step Count: \(viewModel.stepGoal)")
-                        } onIncrement: {
-                            viewModel.stepGoal += 100
-                        } onDecrement: {
-                            viewModel.stepGoal -= 100
-                        }
-                    }
-                    
-                    HStack {
-                        Stepper {
-                            Text("Calories: \(viewModel.caloriesGoal)")
-                        } onIncrement: {
-                            viewModel.caloriesGoal += 50
-                        } onDecrement: {
-                            viewModel.caloriesGoal -= 50
-                        }
-                    }
-                    
-                    HStack {
-                        Stepper {
-                            Text("Active Time: \(viewModel.activeGoal)")
-                        } onIncrement: {
-                            viewModel.activeGoal += 5
-                        } onDecrement: {
-                            viewModel.activeGoal -= 5
-                        }
-                    }
-                    
-                    HStack {
-                        Stepper {
-                            Text("Stand Hours: \(viewModel.standGoal)")
-                        } onIncrement: {
-                            viewModel.standGoal += 1
-                        } onDecrement: {
-                            viewModel.standGoal -= 1
-                        }
-                    }
-                    
-                    Button {
-                        viewModel.saveUserGoals()
-                    } label: {
-                        Text("Done")
-                    }
+            Form {
+                // Step Goal
+                Stepper("Step Count: \(viewModel.stepGoal)", value: $viewModel.stepGoal, step: 100)
+
+                // Calories Goal
+                Stepper("Calories: \(viewModel.caloriesGoal)", value: $viewModel.caloriesGoal, step: 50)
+
+                // Active Time Goal
+                Stepper("Active Time (min): \(viewModel.activeGoal)", value: $viewModel.activeGoal, step: 5)
+
+                // Stand Hours Goal
+                Stepper("Stand Hours: \(viewModel.standGoal)", value: $viewModel.standGoal, step: 1)
+
+                // Sleep Goal
+                Stepper("Sleep Hours: \(viewModel.sleepGoal)", value: $viewModel.sleepGoal, step: 1)
+
+                // Weight Goal
+                Stepper("Weight Goal: \(String(format: "%.1f", viewModel.weightGoal)) kg", value: $viewModel.weightGoal, step: 0.5)
+
+                Button("Save Goals") {
+                    viewModel.saveUserGoals()
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
             }
-            .navigationTitle("Goals")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle("Edit Goals")
         }
     }
-}
-
-#Preview {
-    EditGoalsView()
 }

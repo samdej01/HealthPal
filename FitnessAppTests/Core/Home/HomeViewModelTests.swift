@@ -1,10 +1,3 @@
-//
-//  HomeViewModelTests.swift
-//  FitnessAppTests
-//
-//  Created by Jason Dubon on 3/5/24.
-//
-
 import XCTest
 @testable import FitnessApp
 

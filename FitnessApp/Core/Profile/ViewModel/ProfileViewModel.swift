@@ -1,9 +1,7 @@
-
 import SwiftUI
 
 @Observable
 final class ProfileViewModel: ObservableObject {
-    
     var isEditingName = false
     var currentName = ""
     var profileName: String? = UserDefaults.standard.string(forKey: "profileName")
@@ -23,6 +21,8 @@ final class ProfileViewModel: ObservableObject {
     var stepGoal: Int = UserDefaults.standard.value(forKey: "stepGoal") as? Int ?? 7500
     var activeGoal: Int = UserDefaults.standard.value(forKey: "activeGoal") as? Int ?? 60
     var standGoal: Int = UserDefaults.standard.value(forKey: "standGoal") as? Int ?? 12
+    var sleepGoal: Int = UserDefaults.standard.value(forKey: "sleepGoal") as? Int ?? 8
+    var weightGoal: Double = UserDefaults.standard.value(forKey: "weightGoal") as? Double ?? 70.0
     
     func presentEditName() {
         isEditingName = true
@@ -86,6 +86,8 @@ final class ProfileViewModel: ObservableObject {
         UserDefaults.standard.set(caloriesGoal, forKey: "caloriesGoal")
         UserDefaults.standard.set(activeGoal, forKey: "activeGoal")
         UserDefaults.standard.set(standGoal, forKey: "standGoal")
+        UserDefaults.standard.set(sleepGoal, forKey: "sleepGoal")
+        UserDefaults.standard.set(weightGoal, forKey: "weightGoal")
         presentGoal = false
     }
 }

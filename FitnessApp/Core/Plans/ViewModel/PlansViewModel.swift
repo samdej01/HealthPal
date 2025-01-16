@@ -1,44 +1,31 @@
 import Foundation
 
-struct FitnessGoal {
-    var goalType: String // e.g., "Weight Loss", "Increase Strength"
-    var targetWeight: Double? // Target weight for weight loss
-    var workoutPreference: String? // e.g., "Cardio", "Strength Training"
-    var dailyCalorieIntake: Int? // Suggested calorie intake
-}
-
-struct Plan {
-    var title: String
-    var description: String
-}
-
 class PlansViewModel: ObservableObject {
-    @Published var userGoals: FitnessGoal = FitnessGoal(goalType: "Weight Loss", targetWeight: 70, workoutPreference: "Cardio", dailyCalorieIntake: 1800)
-    @Published var mealPlans: [Plan] = []
-    @Published var gymPlans: [Plan] = []
+    // Existing goals
+    @Published var stepGoal: Int = 10000
+    @Published var caloriesGoal: Int = 2000
+    @Published var activeGoal: Int = 30
+    @Published var standGoal: Int = 12
+
+    // New goals
+    @Published var sleepGoal: Int = 8 // Default 8 hours of sleep
+    @Published var weightGoal: Int = 70 // Default weight target in kg
+
+    // Meal Plans
+    @Published var mealPlans: [Plan] = [
+        Plan(title: "Low Carb Plan", description: "A diet focused on reducing carbohydrate intake."),
+        Plan(title: "Keto Plan", description: "A high-fat, low-carb diet.")
+    ]
     
-    func generatePlans() {
-        // AI logic for generating meal and gym plans based on userGoals
-        mealPlans = [
-            Plan(title: "Breakfast", description: "Oatmeal with berries and almond milk"),
-            Plan(title: "Lunch", description: "Grilled chicken salad with olive oil dressing"),
-            Plan(title: "Dinner", description: "Steamed salmon with quinoa and broccoli")
-        ]
-        
-        gymPlans = [
-            Plan(title: "Day 1: Cardio", description: "30 minutes running, 15 minutes cycling"),
-            Plan(title: "Day 2: Strength", description: "Full-body weight training routine"),
-            Plan(title: "Day 3: Active Recovery", description: "Yoga or light stretching")
-        ]
-    }
-    
-    func updateUserGoal(goalType: String, targetWeight: Double?, workoutPreference: String?, dailyCalorieIntake: Int?) {
-        userGoals = FitnessGoal(
-            goalType: goalType,
-            targetWeight: targetWeight,
-            workoutPreference: workoutPreference,
-            dailyCalorieIntake: dailyCalorieIntake
-        )
-        generatePlans() // Regenerate plans when goals change
-    }
+    // Gym Plans
+    @Published var gymPlans: [Plan] = [
+        Plan(title: "Strength Training", description: "A workout plan for building muscle."),
+        Plan(title: "Cardio Blast", description: "A high-intensity plan for endurance.")
+    ]
+}
+
+struct Plan: Identifiable {
+    let id = UUID()
+    let title: String
+    let description: String
 }

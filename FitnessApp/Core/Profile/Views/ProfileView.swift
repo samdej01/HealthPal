@@ -164,7 +164,7 @@ struct ProfileView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .sheet(isPresented: $viewModel.presentGoal) {
                     EditGoalsView()
-                        .presentationDetents([.fraction(0.45)])
+                        .presentationDetents([.fraction(0.55)])
                         .environment(viewModel)
                 }
                 .alert("Oops", isPresented: $viewModel.showAlert) {
