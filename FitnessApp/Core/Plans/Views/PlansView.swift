@@ -3,64 +3,68 @@ import SwiftUI
 struct PlansView: View {
     @StateObject var viewModel = PlansViewModel()
 
+    let columns = [GridItem(.flexible()), GridItem(.flexible())] // Two columns for even layout
+
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    // User Goals Section
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Your Fitness Goals")
-                            .font(.title2)
-                            .bold()
+                    // Weekly Gym Plan Section
+                    Text("Workout Schedule")
+                        .font(.title2)
+                        .bold()
+                        .padding(.horizontal)
 
-                        Text("Step Count Goal: \(viewModel.stepGoal)")
-                        Text("Calorie Goal: \(viewModel.caloriesGoal)")
-                        Text("Active Minutes: \(viewModel.activeGoal)")
-                        Text("Stand Hours: \(viewModel.standGoal)")
-                        Text("Sleep Goal: \(viewModel.sleepGoal) hours/night")
-                        Text("Weight Goal: \(viewModel.weightGoal) kg")
-                    }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-
-                    // Meal Plans Section
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Meal Plans")
-                            .font(.title2)
-                            .bold()
-
-                        ForEach(viewModel.mealPlans, id: \.id) { plan in
+                    LazyVGrid(columns: columns, spacing: 15) {
+                        ForEach(viewModel.gymSchedule) { schedule in
                             VStack(alignment: .leading) {
-                                Text(plan.title)
+                                Text(schedule.day)
                                     .font(.headline)
-                                Text(plan.description)
-                                    .foregroundColor(.secondary)
+                                    .bold()
+                                Divider()
+                                ForEach(schedule.exercises, id: \.self) { exercise in
+                                    Text(exercise)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
                             }
-                            .padding(.vertical, 5)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
 
-                    // Gym Plans Section
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Gym Plans")
-                            .font(.title2)
-                            .bold()
+                    // Weekly Meal Plan Section
+                    Text("Meal Plans")
+                        .font(.title2)
+                        .bold()
+                        .padding(.horizontal)
 
-                        ForEach(viewModel.gymPlans, id: \.id) { plan in
+                    LazyVGrid(columns: columns, spacing: 15) {
+                        ForEach(viewModel.mealSchedule) { schedule in
                             VStack(alignment: .leading) {
-                                Text(plan.title)
+                                Text(schedule.day)
                                     .font(.headline)
-                                Text(plan.description)
+                                    .bold()
+                            Divider()
+                                ForEach(schedule.meals, id: \.self) { meal in
+                                Text(meal)
+                                    .font(.subheadline)
                                     .foregroundColor(.secondary)
+                                    .padding(.bottom, meal == schedule.meals.last ? 0 : 10) // Add spacing except after dinner
+                                }
                             }
-                            .padding(.vertical, 5)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+                .padding(.vertical)
             }
             .navigationTitle("Personalized Plans")
         }
