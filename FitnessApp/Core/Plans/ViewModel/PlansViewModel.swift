@@ -1,70 +1,92 @@
 import SwiftUI
 import Combine
-import CoreML // For KMeans clustering
 
 // MARK: - Weekly Schedule Models
 struct GymPlan: Identifiable {
     let id = UUID()
     let day: String
-    let exercises: [String] // Detailed exercises
+    let exercises: [String]
 }
 
 struct MealPlan: Identifiable {
     let id = UUID()
     let day: String
-    let meals: [String] // Breakfast, lunch, dinner
+    let meals: [String]
 }
 
 class PlansViewModel: ObservableObject {
     @Published var gymSchedule: [GymPlan] = []
     @Published var mealSchedule: [MealPlan] = []
-    @Published var userGoal: String = "Weight Loss" // Example: Could be set dynamically
+    @Published var userGoal: String = "Weight Loss" // Dynamically set
+    private let kMeansModel = KMeansModel()
 
+    /// Initialize and generate plans based on the user's goal
     init() {
         generatePlans()
     }
 
-    private func generatePlans() {
-        // Example: Simulate clustering with KMeans
+    /// Generates personalized plans based on the user's fitness goal
+    func generatePlans() {
+        // Define goals and mock feature data for clustering
         let goals = ["Weight Loss", "Muscle Gain", "Maintenance"]
-        let clusters = kMeansCluster(userGoal: userGoal, allGoals: goals)
+        let features = [
+            [0.5, 0.2], // Weight Loss
+            [0.8, 0.9], // Muscle Gain
+            [0.6, 0.5]  // Maintenance
+        ]
 
-        switch clusters {
+        // Identify the cluster corresponding to the user's goal
+        let goalIndex = goals.firstIndex(of: userGoal) ?? 0
+        kMeansModel.fit(data: features, k: goals.count)
+        let cluster = kMeansModel.predict(features: features[goalIndex])
+
+        // Update schedules based on the cluster
+        switch cluster {
         case 0: // Weight Loss
             gymSchedule = [
-                GymPlan(day: "Monday", exercises: ["Incline Dumbbell Press: 3x10", "Push-Ups: 3x15", "Tricep Dips: 3x12"]),
-                GymPlan(day: "Tuesday", exercises: ["Wide-Grip Lat Pulldown: 3x12", "Dumbbell Rows: 3x10", "Bicep Curls: 3x12"]),
-                GymPlan(day: "Wednesday", exercises: ["Plank: 3x60 sec", "Crunches: 3x20", "Leg Raises: 3x15"]),
-                GymPlan(day: "Thursday", exercises: ["Squats: 3x12", "Hip Thrusts: 3x10", "Romanian Deadlifts: 3x12"]),
-                GymPlan(day: "Friday", exercises: ["Lunges: 3x12 per leg", "Leg Press: 3x10", "Calf Raises: 3x20"]),
-                GymPlan(day: "Saturday", exercises: ["Cardio: 30 min run", "Stretching: 15 min"]),
-                GymPlan(day: "Sunday", exercises: ["Rest or Light Yoga"])
+                GymPlan(day: "Monday", exercises: ["Push-Ups: 3x15", "Squats: 3x12"]),
+                GymPlan(day: "Tuesday", exercises: ["Jogging: 30 mins", "Plank: 3x60 sec"]),
+                GymPlan(day: "Wednesday", exercises: ["Yoga Flow: 20 mins", "Lunges: 3x12"]),
+                GymPlan(day: "Thursday", exercises: ["Cycling: 40 mins"]),
+                GymPlan(day: "Friday", exercises: ["Burpees: 3x10", "Sit-Ups: 3x15"]),
+                GymPlan(day: "Saturday", exercises: ["Stretching: 30 mins"]),
+                GymPlan(day: "Sunday", exercises: ["Rest or Light Walk"])
             ]
 
             mealSchedule = [
-                MealPlan(day: "Monday", meals: ["Breakfast: Greek Yogurt with Berries", "Lunch: Grilled Chicken Salad", "Dinner: Steamed Fish with Vegetables"]),
-                MealPlan(day: "Tuesday", meals: ["Breakfast: Scrambled Eggs with Spinach", "Lunch: Turkey Wrap", "Dinner: Grilled Shrimp with Quinoa"]),
-                MealPlan(day: "Wednesday", meals: ["Breakfast: Protein Smoothie", "Lunch: Grilled Chicken with Brown Rice", "Dinner: Stir-Fry Veggies with Tofu"]),
-                MealPlan(day: "Thursday", meals: ["Breakfast: Oatmeal with Almond Butter", "Lunch: Tuna Salad", "Dinner: Baked Salmon with Asparagus"]),
-                MealPlan(day: "Friday", meals: ["Breakfast: Veggie Omelette", "Lunch: Chicken Caesar Salad", "Dinner: Lean Beef Stir-Fry"]),
-                MealPlan(day: "Saturday", meals: ["Breakfast: Avocado Toast", "Lunch: Grilled Chicken Wrap", "Dinner: Grilled Turkey with Sweet Potatoes"]),
-                MealPlan(day: "Sunday", meals: ["Breakfast: Smoothie Bowl", "Lunch: Lentil Soup", "Dinner: Herb-Roasted Chicken"])
+                MealPlan(day: "Monday", meals: ["Breakfast: Greek Yogurt", "Lunch: Grilled Chicken Salad", "Dinner: Steamed Fish"]),
+                MealPlan(day: "Tuesday", meals: ["Breakfast: Oatmeal", "Lunch: Turkey Wrap", "Dinner: Grilled Salmon"]),
+                MealPlan(day: "Wednesday", meals: ["Breakfast: Smoothie Bowl", "Lunch: Quinoa Salad", "Dinner: Stir-Fried Veggies"]),
+                MealPlan(day: "Thursday", meals: ["Breakfast: Avocado Toast", "Lunch: Tuna Salad", "Dinner: Baked Cod"]),
+                MealPlan(day: "Friday", meals: ["Breakfast: Scrambled Eggs", "Lunch: Chicken Caesar Salad", "Dinner: Grilled Shrimp"]),
+                MealPlan(day: "Saturday", meals: ["Breakfast: Protein Pancakes", "Lunch: Veggie Wrap", "Dinner: Herb-Roasted Chicken"]),
+                MealPlan(day: "Sunday", meals: ["Breakfast: Fruit Salad", "Lunch: Lentil Soup", "Dinner: Grilled Turkey"])
             ]
 
         case 1: // Muscle Gain
-            // Similar structure with exercises/meals tailored for muscle gain.
-            break
+            gymSchedule = [
+                GymPlan(day: "Monday", exercises: ["Deadlifts: 3x10", "Bench Press: 3x12"]),
+                // More muscle-building exercises...
+            ]
+
+            mealSchedule = [
+                MealPlan(day: "Monday", meals: ["Breakfast: Protein Shake", "Lunch: Grilled Steak", "Dinner: Pasta with Chicken"]),
+                // More calorie-dense meals...
+            ]
 
         case 2: // Maintenance
-            // Similar structure with balanced exercises/meals.
-            break
+            gymSchedule = [
+                GymPlan(day: "Monday", exercises: ["Jogging: 20 mins", "Plank: 3x60 sec"]),
+                // More balanced exercises...
+            ]
+
+            mealSchedule = [
+                MealPlan(day: "Monday", meals: ["Breakfast: Smoothie Bowl", "Lunch: Quinoa Salad", "Dinner: Grilled Salmon"]),
+                // More balanced meals...
+            ]
 
         default:
             break
         }
-    }
-
-    private func kMeansCluster(userGoal: String, allGoals: [String]) -> Int {
-        return allGoals.firstIndex(of: userGoal) ?? 0
     }
 }

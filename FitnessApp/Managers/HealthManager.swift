@@ -1,6 +1,6 @@
-
 import Foundation
 import HealthKit
+
 protocol HealthManagerType {
     func requestHealthKitAccess() async throws
     func fetchTodayCaloriesBurned(completion: @escaping(Result<Double, Error>) -> Void)
@@ -22,11 +22,8 @@ protocol HealthManagerType {
     func fetchYTDAndOneYearChartData() async throws -> YearChartDataResult
     func fetchYTDAndOneYearChartData(completion: @escaping (Result<YearChartDataResult, Error>) -> Void)
     func fetchCurrentWeekStepCount(completion: @escaping (Result<Double, Error>) -> Void)
-    func fetchTodaySleepHours(completion: @escaping(Result<Double, Error>) -> Void)
-    func fetchTodaySleepHours() async throws -> Double
-    func fetchLatestHeartRate(completion: @escaping(Result<Double, Error>) -> Void)
-    func fetchLatestHeartRate() async throws -> Double
 }
+
 final class HealthManager: HealthManagerType {
     
     static let shared = HealthManager()
@@ -40,10 +37,8 @@ final class HealthManager: HealthManagerType {
         let stand = HKCategoryType(.appleStandHour)
         let steps = HKQuantityType(.stepCount)
         let workouts = HKSampleType.workoutType()
-        let sleep = HKCategoryType(.sleepAnalysis)
-        let heartRate = HKQuantityType(.heartRate)
         
-        let healthTypes: Set = [calories, exercise, stand, steps, workouts, sleep, heartRate]
+        let healthTypes: Set = [calories, exercise, stand, steps, workouts]
         try await healthStore.requestAuthorization(toShare: [], read: healthTypes)
     }
     
@@ -273,6 +268,7 @@ final class HealthManager: HealthManagerType {
     }
     
 }
+
     // MARK: ChartsView Data
 extension HealthManager {
     
@@ -331,6 +327,7 @@ extension HealthManager {
             }
         })
     }
+
     func fetchThreeMonthsStepData() async throws -> [DailyStepModel] {
         try await withCheckedThrowingContinuation({ continuation in
             fetchDailySteps(startDate: .threeMonthsAgo) { result in
@@ -402,8 +399,10 @@ extension HealthManager {
         })
     }
 }
+
    // MARK: Leaderboard View
 extension HealthManager {
+
     /// Fetches the total step count for the current week.
     ///
     /// Queries HealthKit for the sum of steps taken from the start of the current week to the present. This data is used to populate the leaderboard, comparing the user's activity against others.
@@ -412,6 +411,7 @@ extension HealthManager {
     func fetchCurrentWeekStepCount(completion: @escaping (Result<Double, Error>) -> Void) {
         let steps = HKQuantityType(.stepCount)
         let predicate = HKQuery.predicateForSamples(withStart: .startOfWeek, end: Date())
+
         let query = HKStatisticsQuery(quantityType: steps, quantitySamplePredicate: predicate) { _, results, error in
             guard let quantity = results?.sumQuantity(), error == nil else {
                 completion(.failure(error!))
@@ -425,68 +425,4 @@ extension HealthManager {
         healthStore.execute(query)
     }
     
-    /// Fetches the total sleep hours for today
-    ///
-    /// Uses HealthKit to fetch the total number of hours slept from the start of the day until now.
-    ///
-    /// - Parameter completion: A completion handler that returns either the total sleep hours as `Double` or an error.
-    func fetchTodaySleepHours(completion: @escaping(Result<Double, Error>) -> Void) {
-        let sleepType = HKCategoryType(.sleepAnalysis)
-        let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
-        
-        let query = HKSampleQuery(sampleType: sleepType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, samples, error in
-            guard let samples = samples as? [HKCategorySample], error == nil else {
-                completion(.failure(error!))
-                return
-            }
-            
-            let totalSeconds = samples.reduce(0.0) { result, sample in
-                result + sample.endDate.timeIntervalSince(sample.startDate)
-            }
-            
-            let totalHours = totalSeconds / 3600.0 // Convert seconds to hours
-            completion(.success(totalHours))
-        }
-        
-        healthStore.execute(query)
-    }
-    
-    func fetchTodaySleepHours() async throws -> Double {
-        try await withCheckedThrowingContinuation({ continuation in
-            fetchTodaySleepHours { result in
-                continuation.resume(with: result)
-            }
-        })
-    }
-    
-    /// Fetches the most recent heart rate measurement
-    ///
-    /// Uses HealthKit to fetch the most recent heart rate measurement.
-    ///
-    /// - Parameter completion: A completion handler that returns either the heart rate as `Double` or an error.
-    func fetchLatestHeartRate(completion: @escaping(Result<Double, Error>) -> Void) {
-        let heartRateType = HKQuantityType(.heartRate)
-        let predicate = HKQuery.predicateForSamples(withStart: Date().addingTimeInterval(-3600), end: Date()) // Last hour
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-        
-        let query = HKSampleQuery(sampleType: heartRateType, predicate: predicate, limit: 1, sortDescriptors: [sortDescriptor]) { _, samples, error in
-            guard let sample = samples?.first as? HKQuantitySample, error == nil else {
-                completion(.failure(error ?? NSError(domain: "HealthKit", code: -1, userInfo: [NSLocalizedDescriptionKey: "No recent heart rate data available"])))
-                return
-            }
-            
-            let heartRate = sample.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
-            completion(.success(heartRate))
-        }
-        
-        healthStore.execute(query)
-    }
-    
-    func fetchLatestHeartRate() async throws -> Double {
-        try await withCheckedThrowingContinuation({ continuation in
-            fetchLatestHeartRate { result in
-                continuation.resume(with: result)
-            }
-        })
-    }
 }

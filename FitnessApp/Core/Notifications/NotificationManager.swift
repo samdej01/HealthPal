@@ -5,16 +5,31 @@ class NotificationManager {
 
     private init() {}
 
+    /// Requests notification permissions from the user.
     func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if let error = error {
-                print("Error requesting notifications permission: \(error.localizedDescription)")
+        let center = UNUserNotificationCenter.current()
+        center.getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                    if let error = error {
+                        print("Error requesting notifications permission: \(error.localizedDescription)")
+                    } else {
+                        print("Notification permission granted: \(granted)")
+                    }
+                }
+            case .denied:
+                print("Notifications are denied. Please enable them in Settings.")
+            case .authorized, .provisional, .ephemeral:
+                print("Notifications are already authorized.")
+            @unknown default:
+                fatalError("Unhandled case: \(settings.authorizationStatus)")
             }
-            print("Notification permission granted: \(granted)")
         }
     }
 
-    // Workout Reminder Noticication
+    // MARK: - Workout Reminder Notification
+    /// Schedules a daily workout reminder notification at the specified time.
     func scheduleWorkoutReminder(at hour: Int, minute: Int) {
         let content = UNMutableNotificationContent()
         content.title = "Time to Workout!"
@@ -31,11 +46,14 @@ class NotificationManager {
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Failed to schedule workout reminder: \(error.localizedDescription)")
+            } else {
+                print("Workout reminder scheduled successfully.")
             }
         }
     }
 
-    // Health Risk Notification
+    // MARK: - Health Risk Notification
+    /// Sends a health risk notification immediately.
     func notifyHealthRisk(for condition: String) {
         let content = UNMutableNotificationContent()
         content.title = "Health Alert"
@@ -47,12 +65,15 @@ class NotificationManager {
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Failed to send health risk notification: \(error.localizedDescription)")
+            } else {
+                print("Health risk notification sent successfully.")
             }
         }
     }
 
-    // Schedule Affirmation Notification
-    func scheduleAffirmation() {
+    // MARK: - Daily Affirmation Notification
+    /// Schedules a daily affirmation notification.
+    func scheduleAffirmation(at hour: Int, minute: Int) {
         let affirmations = [
             "You're beautiful.",
             "You deserve the world.",
@@ -66,12 +87,18 @@ class NotificationManager {
         content.body = affirmations.randomElement()!
         content.sound = .default
 
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: true) // Once a day
+        var dateComponents = DateComponents()
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: "AffirmationNotification", content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Failed to schedule affirmation notification: \(error.localizedDescription)")
+            } else {
+                print("Daily affirmation notification scheduled successfully.")
             }
         }
     }

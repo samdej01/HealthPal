@@ -56,9 +56,3 @@ Requires: iOS 17+ & Xcode 15
 The project is built following a straightforward Model-View-View Model (MVVM). The Health & Database Managers follow the singleton design pattern as single instance was sufficient and can still use dependency injection by injecting in initialization of view models. The project also incorporates Apple's new Observation framework (carried out a migration from Apple's old paradigm to this new one).
 
 The app covers many of the basic concepts of SwiftUI, such as building layouts, working with data, and handling user interaction. By exploring the code, you can understand how to use SwiftUI, MVVM, HealthKit in your daily life. 
-
-### Note on the project
-
-This project was apart of the Pro iOS Dev Course I built for young iOS developers looking to level up their skills by learning and mastering MVVM, source control, in-app purchases, Firebase and HealthKit.
-
-
