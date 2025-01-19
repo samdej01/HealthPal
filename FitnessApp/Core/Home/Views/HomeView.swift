@@ -35,47 +35,38 @@ struct HomeView: View {
                     .padding()
                     
                     // Fitness Activity Section
-                    SectionHeader(title: "Fitness Activity") {
-                        if tabState.isPremium {
-                            viewModel.showAllActivities.toggle()
-                        } else {
-                            viewModel.showPaywall = true
-                        }
-                    }
-                    .padding(.horizontal)
+                    Text("Fitness Activity")
+                        .font(.title2)
+                        .padding(.horizontal)
                     
                     if !viewModel.activities.isEmpty {
                         LazyVGrid(columns: Array(repeating: GridItem(spacing: 20), count: 2)) {
-                            ForEach(viewModel.activities.prefix(viewModel.showAllActivities ? 8 : 4), id: \.title) { activity in
+                            // Display Calories Burned first
+                            if let caloriesActivity = viewModel.activities.first(where: { $0.title == "Calories Burned" }) {
+                                ActivityCard(activity: caloriesActivity)
+                            }
+                            
+                            // Display Sleep activity next
+                            if let sleepActivity = viewModel.activities.first(where: { $0.title == "Sleep" }) {
+                                ActivityCard(activity: sleepActivity)
+                            }
+                            
+                            // Display Heart Rate activity next
+                            if let heartRateActivity = viewModel.activities.first(where: { $0.title == "Heart Rate" }) {
+                                ActivityCard(activity: heartRateActivity)
+                            }
+                            
+                            // Display the remaining activities except Calories Burned, Sleep, and Heart Rate
+                            ForEach(viewModel.activities.filter {
+                                $0.title != "Calories Burned" &&
+                                $0.title != "Sleep" &&
+                                $0.title != "Heart Rate"
+                            }, id: \.title) { activity in
                                 ActivityCard(activity: activity)
                             }
                         }
                         .padding(.horizontal)
                     }
-                    
-                    // Recent Workouts Section
-                    SectionHeader(title: "Recent Workouts") {
-                        if tabState.isPremium {
-                            NavigationLink {
-                                MonthWorkoutsView()
-                            } label: {
-                                Text("Show more")
-                                    .padding(.all, 10)
-                                    .foregroundColor(.white)
-                            }
-                        } else {
-                            viewModel.showPaywall = true
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.top)
-                    
-                    LazyVStack {
-                        ForEach(viewModel.workouts, id: \.self) { workout in
-                            WorkoutCard(workout: workout)
-                        }
-                    }
-                    .padding(.bottom)
                 }
                 .navigationTitle(FitnessTabs.home.rawValue)
             }
@@ -114,30 +105,6 @@ struct MetricView: View {
                 .bold()
         }
         .padding(.bottom)
-    }
-}
-
-/// Section header with a customizable action button
-struct SectionHeader: View {
-    let title: String
-    let action: () -> Void
-    
-    var body: some View {
-        HStack {
-            Text(title)
-                .font(.title2)
-            Spacer()
-            ZStack {
-                Color.green
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                    .frame(width: 115)
-                Button(action: action) {
-                    Text("Show more")
-                        .padding(10)
-                        .foregroundColor(.white)
-                }
-            }
-        }
     }
 }
 

@@ -1,3 +1,11 @@
+//
+//  ActivityCard.swift
+//  FitnessApp
+//
+//  Created by Unicorn Semi on 18/01/2025.
+//
+
+
 import SwiftUI
 
 struct ActivityCard: View {

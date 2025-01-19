@@ -16,12 +16,10 @@
 		3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF522A759DC70051DCC7 /* HomeView.swift */; };
 		3231DF552A759E5C0051DCC7 /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF542A759E5C0051DCC7 /* ChartsView.swift */; };
 		3231DF572A75B1E70051DCC7 /* ProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF562A75B1E70051DCC7 /* ProgressCircleView.swift */; };
-		3231DF5A2A768F370051DCC7 /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF592A768F370051DCC7 /* ActivityCard.swift */; };
 		3231DF5C2A769E790051DCC7 /* WorkoutCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3231DF5B2A769E790051DCC7 /* WorkoutCard.swift */; };
 		3260933F2C46E39800EF3FF4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3260933E2C46E39800EF3FF4 /* StoreKit.framework */; };
 		326B02272A7864D60034E363 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B02262A7864D60034E363 /* HomeViewModel.swift */; };
 		326B022C2A7865AC0034E363 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022B2A7865AC0034E363 /* Activity.swift */; };
-		326B022E2A7865D20034E363 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326B022D2A7865D20034E363 /* Workout.swift */; };
 		3273CB6B2B938B4000F39A00 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3273CB6A2B938B4000F39A00 /* RevenueCatUI */; };
 		3273CB712B93920F00F39A00 /* TabState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3273CB702B93920F00F39A00 /* TabState.swift */; };
 		3273CB732B94CF9F00F39A00 /* GlobalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3273CB722B94CF9F00F39A00 /* GlobalAlert.swift */; };
@@ -56,6 +54,9 @@
 		32FF5F112AA90D7F002062C1 /* MonthWorkoutsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF5F102AA90D7F002062C1 /* MonthWorkoutsViewModel.swift */; };
 		32FF67392A9680410001E8E9 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF67382A9680410001E8E9 /* Double+Ext.swift */; };
 		32FF673B2A96805C0001E8E9 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF673A2A96805C0001E8E9 /* Date+Ext.swift */; };
+		E31A35C42D3BB59200D9F255 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31A35C32D3BB59200D9F255 /* NotificationManager.swift */; };
+		E31A35DC2D3C26BC00D9F255 /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31A35DB2D3C26BC00D9F255 /* ActivityCard.swift */; };
+		E31A35DE2D3C270600D9F255 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31A35DD2D3C270600D9F255 /* Workout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,12 +81,10 @@
 		3231DF522A759DC70051DCC7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3231DF542A759E5C0051DCC7 /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
 		3231DF562A75B1E70051DCC7 /* ProgressCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleView.swift; sourceTree = "<group>"; };
-		3231DF592A768F370051DCC7 /* ActivityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		3231DF5B2A769E790051DCC7 /* WorkoutCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCard.swift; sourceTree = "<group>"; };
 		3260933E2C46E39800EF3FF4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		326B02262A7864D60034E363 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		326B022B2A7865AC0034E363 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		326B022D2A7865D20034E363 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		3273CB702B93920F00F39A00 /* TabState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabState.swift; sourceTree = "<group>"; };
 		3273CB722B94CF9F00F39A00 /* GlobalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalAlert.swift; sourceTree = "<group>"; };
 		3273CB742B94CFF100F39A00 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -119,10 +118,12 @@
 		32FF5F102AA90D7F002062C1 /* MonthWorkoutsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthWorkoutsViewModel.swift; sourceTree = "<group>"; };
 		32FF67382A9680410001E8E9 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		32FF673A2A96805C0001E8E9 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		E31A35C32D3BB59200D9F255 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		E31A35DB2D3C26BC00D9F255 /* ActivityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
+		E31A35DD2D3C270600D9F255 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E371E9D72D26217500A0D419 /* Notifications */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Notifications; sourceTree = "<group>"; };
 		E3EBF47F2D1E3E2D00ACE471 /* Plans */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Plans; sourceTree = "<group>"; };
 		E3ED59122D392F9500624150 /* Goals */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Goals; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -153,7 +154,6 @@
 		322E865E2AEBE51200B388D8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				E371E9D72D26217500A0D419 /* Notifications */,
 				3273CB6D2B9391F100F39A00 /* Tab */,
 				3231DF582A768F010051DCC7 /* Home */,
 				322F70942A82DD65002DBB9D /* Charts */,
@@ -170,6 +170,7 @@
 			children = (
 				322F708E2A7C2BD4002DBB9D /* HealthManager.swift */,
 				32E3C6572A8D5D2500835BB3 /* DatabaseManager.swift */,
+				E31A35C32D3BB59200D9F255 /* NotificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -282,8 +283,8 @@
 		326B02282A7865570034E363 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E31A35DB2D3C26BC00D9F255 /* ActivityCard.swift */,
 				3231DF5B2A769E790051DCC7 /* WorkoutCard.swift */,
-				3231DF592A768F370051DCC7 /* ActivityCard.swift */,
 				3231DF562A75B1E70051DCC7 /* ProgressCircleView.swift */,
 				3231DF522A759DC70051DCC7 /* HomeView.swift */,
 				32FF5F0C2AA90103002062C1 /* MonthWorkoutsView.swift */,
@@ -294,8 +295,8 @@
 		326B02292A78655C0034E363 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E31A35DD2D3C270600D9F255 /* Workout.swift */,
 				326B022B2A7865AC0034E363 /* Activity.swift */,
-				326B022D2A7865D20034E363 /* Workout.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -457,7 +458,6 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E371E9D72D26217500A0D419 /* Notifications */,
 				E3EBF47F2D1E3E2D00ACE471 /* Plans */,
 				E3ED59122D392F9500624150 /* Goals */,
 			);
@@ -562,6 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E31A35DE2D3C270600D9F255 /* Workout.swift in Sources */,
 				326B022C2A7865AC0034E363 /* Activity.swift in Sources */,
 				3273CB712B93920F00F39A00 /* TabState.swift in Sources */,
 				32FF5F0D2AA90103002062C1 /* MonthWorkoutsView.swift in Sources */,
@@ -583,17 +584,17 @@
 				32D06DBA2A9D3AC000D69189 /* ProfileViewModel.swift in Sources */,
 				3231DF532A759DC70051DCC7 /* HomeView.swift in Sources */,
 				322F70932A7E79CB002DBB9D /* HKWorkoutActivityType+Ext.swift in Sources */,
-				326B022E2A7865D20034E363 /* Workout.swift in Sources */,
 				32E3C6352A87B68300835BB3 /* RevenueCat+Ext.swift in Sources */,
 				32E3C6252A83F81500835BB3 /* MonthlyStepModel.swift in Sources */,
+				E31A35DC2D3C26BC00D9F255 /* ActivityCard.swift in Sources */,
 				32FF67392A9680410001E8E9 /* Double+Ext.swift in Sources */,
 				322F708F2A7C2BD4002DBB9D /* HealthManager.swift in Sources */,
 				328C94152B97CA9500499547 /* YearChartData.swift in Sources */,
 				3231DF552A759E5C0051DCC7 /* ChartsView.swift in Sources */,
 				32E3C6292A83F89B00835BB3 /* ChartOptions.swift in Sources */,
 				32D06DB82A9D245300D69189 /* FitnessProfileEditButton.swift in Sources */,
+				E31A35C42D3BB59200D9F255 /* NotificationManager.swift in Sources */,
 				32E3C64C2A8CFC2100835BB3 /* LeaderboardView.swift in Sources */,
-				3231DF5A2A768F370051DCC7 /* ActivityCard.swift in Sources */,
 				3273CB762B96536500F39A00 /* EditGoalsView.swift in Sources */,
 				32E3C6232A83F7FB00835BB3 /* ChartsViewModel.swift in Sources */,
 				3231DF432A75970D0051DCC7 /* FitnessAppApp.swift in Sources */,

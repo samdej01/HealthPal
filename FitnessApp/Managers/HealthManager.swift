@@ -22,6 +22,10 @@ protocol HealthManagerType {
     func fetchYTDAndOneYearChartData() async throws -> YearChartDataResult
     func fetchYTDAndOneYearChartData(completion: @escaping (Result<YearChartDataResult, Error>) -> Void)
     func fetchCurrentWeekStepCount(completion: @escaping (Result<Double, Error>) -> Void)
+    // Sleep
+    func fetchTodaySleepHours() async throws -> Double
+    // Heart Rate
+    func fetchLatestHeartRate() async throws -> Double
 }
 
 final class HealthManager: HealthManagerType {
@@ -37,8 +41,10 @@ final class HealthManager: HealthManagerType {
         let stand = HKCategoryType(.appleStandHour)
         let steps = HKQuantityType(.stepCount)
         let workouts = HKSampleType.workoutType()
-        
-        let healthTypes: Set = [calories, exercise, stand, steps, workouts]
+        let sleep = HKCategoryType(.sleepAnalysis) // Add sleep
+        let heartRate = HKQuantityType(.heartRate) // Add heart rate
+
+        let healthTypes: Set = [calories, exercise, stand, steps, workouts, sleep, heartRate]
         try await healthStore.requestAuthorization(toShare: [], read: healthTypes)
     }
     
@@ -162,6 +168,56 @@ final class HealthManager: HealthManagerType {
                 continuation.resume(with: result)
             }
         })
+    }
+    
+    func fetchTodaySleepHours() async throws -> Double {
+        let sleepType = HKCategoryType(.sleepAnalysis)
+        let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            let query = HKSampleQuery(sampleType: sleepType, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { _, results, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                
+                guard let samples = results as? [HKCategorySample] else {
+                    continuation.resume(returning: 0.0)
+                    return
+                }
+                
+                // Calculate total sleep time in hours
+                let totalSleep = samples.reduce(0.0) { total, sample in
+                    total + sample.endDate.timeIntervalSince(sample.startDate)
+                }
+                
+                continuation.resume(returning: totalSleep / 3600.0) // Convert seconds to hours
+            }
+            self.healthStore.execute(query)
+        }
+    }
+
+    func fetchLatestHeartRate() async throws -> Double {
+        let heartRateType = HKQuantityType(.heartRate)
+        let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            let query = HKSampleQuery(sampleType: heartRateType, predicate: predicate, limit: 1, sortDescriptors: [NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)]) { _, results, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                
+                guard let sample = results?.first as? HKQuantitySample else {
+                    continuation.resume(returning: 0.0)
+                    return
+                }
+                
+                let heartRate = sample.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
+                continuation.resume(returning: heartRate)
+            }
+            self.healthStore.execute(query)
+        }
     }
     
     /// Fetches the current week's workout statistics.
