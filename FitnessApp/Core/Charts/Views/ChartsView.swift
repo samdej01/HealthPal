@@ -15,7 +15,7 @@ struct ChartsView: View {
                             
                             Chart {
                                 ForEach(viewModel.oneWeekChartData) { data in
-                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .day), y: .value("Steps", data.count))
+                                    BarMark(x: .value("Day", data.date, unit: .day), y: .value("Steps", data.count))
                                 }
                             }
                         }
@@ -25,27 +25,7 @@ struct ChartsView: View {
                             
                             Chart {
                                 ForEach(viewModel.oneMonthChartData) { data in
-                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .day), y: .value("Steps", data.count))
-                                }
-                            }
-                        }
-                    case .threeMonth:
-                        VStack {
-                            ChartDataView(average: $viewModel.threeMonthAverage, total: $viewModel.threeMonthTotal)
-                            
-                            Chart {
-                                ForEach(viewModel.threeMonthsChartData) { data in
-                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .day), y: .value("Steps", data.count))
-                                }
-                            }
-                        }
-                    case .yearToDate:
-                        VStack {
-                            ChartDataView(average: $viewModel.ytdAverage, total: $viewModel.ytdTotal)
-                            
-                            Chart {
-                                ForEach(viewModel.ytdChartData) { data in
-                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .month), y: .value("Steps", data.count))
+                                    BarMark(x: .value("Day", data.date, unit: .day), y: .value("Steps", data.count))
                                 }
                             }
                         }
@@ -55,18 +35,21 @@ struct ChartsView: View {
                             
                             Chart {
                                 ForEach(viewModel.oneYearChartData) { data in
-                                    BarMark(x: .value(data.date.formatted(), data.date, unit: .month), y: .value("Steps", data.count))
+                                    BarMark(x: .value("Month", data.date, unit: .month), y: .value("Steps", data.count))
                                 }
                             }
                         }
+                    default:
+                        EmptyView() // Fallback in case of unexpected state
                     }
                 }
                 .foregroundColor(.green)
                 .frame(maxHeight: 450)
                 .padding(.horizontal)
                 
+                // Chart Selection Buttons
                 HStack {
-                    ForEach(ChartOptions.allCases, id:\.rawValue) { option in
+                    ForEach([ChartOptions.oneWeek, ChartOptions.oneMonth, ChartOptions.oneYear], id: \.rawValue) { option in
                         Button(option.rawValue) {
                             withAnimation {
                                 viewModel.selectedChart = option
@@ -89,13 +72,13 @@ struct ChartsView: View {
                     Text("Ok")
                 }
             } message: {
-                Text("We ran into issues fetching some of your step data please make sure you have allowed access and try again.")
+                Text("We ran into issues fetching some of your step data. Please make sure you have allowed access and try again.")
             }
         }
     }
 }
 
-struct HistoricDataView_Previews: PreviewProvider {
+struct ChartsView_Previews: PreviewProvider {
     static var previews: some View {
         ChartsView()
     }

@@ -57,6 +57,13 @@ final class ProfileViewModel: ObservableObject {
         self.dismissEdit()
     }
     
+    @Published var notificationsEnabled: Bool = UserDefaults.standard.bool(forKey: "notificationsEnabled") {
+            didSet {
+                UserDefaults.standard.set(notificationsEnabled, forKey: "notificationsEnabled")
+                handleNotificationToggle()
+            }
+        }
+    
     @MainActor
     func presentEmailApp() {
         let emailSubject = "Fitness App - Contact Us"
@@ -90,4 +97,44 @@ final class ProfileViewModel: ObservableObject {
         UserDefaults.standard.set(weightGoal, forKey: "weightGoal")
         presentGoal = false
     }
+    
+        @Published var isUserLoggedIn: Bool = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
+
+        // Handle toggle for notifications
+        private func handleNotificationToggle() {
+            if notificationsEnabled {
+                NotificationManager.shared.scheduleWorkoutReminders()
+                NotificationManager.shared.scheduleAffirmationNotifications()
+            } else {
+                NotificationManager.shared.disableAllNotifications()
+            }
+        }
+
+        // Handle login action
+        func loginUser(email: String, password: String) {
+            // Replace with actual login logic (e.g., Firebase Auth)
+            if email == "test@example.com" && password == "password" {
+                isUserLoggedIn = true
+                UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+            } else {
+                // Handle login failure
+                isUserLoggedIn = false
+            }
+        }
+
+        // Handle logout action
+        func logoutUser() {
+            isUserLoggedIn = false
+            UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+            // Additional cleanup if necessary
+        }
+
+        // Handle registration action
+        func registerUser(email: String, password: String) {
+            // Replace with actual registration logic (e.g., Firebase Auth)
+            // Simulate successful registration
+            isUserLoggedIn = true
+            UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+        }
+
 }

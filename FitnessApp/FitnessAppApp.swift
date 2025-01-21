@@ -5,44 +5,36 @@ import UserNotifications
 
 @main
 struct FitnessAppApp: App {
-
+    
     init() {
-        // Revenue Cat Setup
+        // RevenueCat Setup
         Purchases.logLevel = .debug
         Purchases.configure(withAPIKey: "appl_OiZLcmUmVWNwiitRslmiiogTxFn")
         
         // Firebase Setup
         FirebaseApp.configure()
-
+        
         // Request Notification Permission
-        requestNotificationPermission()
+        NotificationManager.shared.requestNotificationPermission()
         
-        // Schedule a workout reminder for 9:00 AM
-        NotificationManager.shared.scheduleWorkoutReminder(at: 9, minute: 0)
-        
-        // Simulate checking heart rate and triggering a health risk notification
-        checkUserHeartRate(heartRate: 125)  // Example heart rate exceeding 120 bpm
+        // Schedule Notifications
+        NotificationManager.shared.scheduleWorkoutReminders() // Morning & Evening workout reminders
+        NotificationManager.shared.scheduleAffirmationNotifications() // Daily affirmations
     }
     
     var body: some Scene {
         WindowGroup {
             FitnessTabView()
+                .onAppear {
+                    // Simulate checking heart rate dynamically (you'll replace this with real logic later)
+                    simulateHeartRateCheck()
+                }
         }
     }
-
-    func requestNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if let error = error {
-                print("Error requesting notifications permission: \(error.localizedDescription)")
-            }
-            print("Notification permission granted: \(granted)")
-        }
-    }
-
-    // Simulate checking heart rate and sending notification if heart rate exceeds 120 bpm
-    func checkUserHeartRate(heartRate: Int) {
-        if heartRate > 120 {
-            NotificationManager.shared.notifyHealthRisk(for: "your heart rate is too high (\(heartRate) bpm).")
-        }
+    
+    /// Simulate checking heart rate and triggering health risk alerts
+    func simulateHeartRateCheck() {
+        let exampleHeartRate: Int = 125 // Replace with actual heart rate fetched from HealthKit
+        HealthManager.shared.checkHeartRate(Double(exampleHeartRate)) // Convert to Double
     }
 }

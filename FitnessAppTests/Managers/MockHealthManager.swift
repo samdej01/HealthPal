@@ -2,121 +2,155 @@ import Foundation
 @testable import FitnessApp
 
 class MockHealthManager: HealthManagerType {
-    func fetchTodayCalories() async throws -> Double {
+    func fetchTodayCaloriesBurned(completion: @escaping (Result<Double, any Error>) -> Void) {
         <#code#>
     }
     
-    func fetchTodayExerciseTime() async throws -> Double {
+    func fetchTodayExerciseTime(completion: @escaping (Result<Double, any Error>) -> Void) {
         <#code#>
     }
     
-    func fetchTodayStandHours() async throws -> Int {
+    func fetchTodayStandHours(completion: @escaping (Result<Int, any Error>) -> Void) {
         <#code#>
     }
     
-    func fetchTodaySteps() async throws -> FitnessApp.Activity {
+    func fetchTodaySteps(completion: @escaping (Result<FitnessApp.Activity, any Error>) -> Void) {
         <#code#>
     }
     
-    func fetchCurrentWeekActivities() async throws -> [FitnessApp.Activity] {
+    func fetchCurrentWeekWorkoutStats(completion: @escaping (Result<[FitnessApp.Activity], any Error>) -> Void) {
         <#code#>
     }
     
-    func fetchRecentWorkouts() async throws -> [FitnessApp.Workout] {
+    func fetchWorkoutsForMonth(month: Date, completion: @escaping (Result<[FitnessApp.Workout], any Error>) -> Void) {
         <#code#>
     }
     
-    func fetchOneWeekStepData() async throws -> [FitnessApp.DailyStepModel] {
-        <#code#>
-    }
-    
-    func fetchOneMonthStepData() async throws -> [FitnessApp.DailyStepModel] {
-        <#code#>
-    }
-    
-    func fetchThreeMonthsStepData() async throws -> [FitnessApp.DailyStepModel] {
-        <#code#>
-    }
-    
-    func fetchYTDAndOneYearChartData() async throws -> FitnessApp.YearChartDataResult {
-        <#code#>
-    }
-    
-    
+    // MARK: - Mock Results
     var requestHealthKitAccessCalled = false
-    var fetchTodayCaloriesBurnedResult: Result<Double, Error>?
+    var fetchTodayCaloriesResult: Result<Double, Error>?
     var fetchTodayExerciseTimeResult: Result<Double, Error>?
     var fetchTodayStandHoursResult: Result<Int, Error>?
     var fetchTodayStepsResult: Result<FitnessApp.Activity, Error>?
-    var fetchCurrentWeekWorkoutStatsResult: Result<[FitnessApp.Activity], Error>?
-    var fetchWorkoutsForMonthResult: Result<[FitnessApp.Workout], Error>?
-    // Add other methods and results as needed
+    var fetchCurrentWeekActivitiesResult: Result<[FitnessApp.Activity], Error>?
+    var fetchRecentWorkoutsResult: Result<[FitnessApp.Workout], Error>?
+    var fetchOneWeekStepDataResult: Result<[FitnessApp.DailyStepModel], Error>?
+    var fetchOneMonthStepDataResult: Result<[FitnessApp.DailyStepModel], Error>?
+    var fetchThreeMonthsStepDataResult: Result<[FitnessApp.DailyStepModel], Error>?
+    var fetchYTDAndOneYearChartDataResult: Result<FitnessApp.YearChartDataResult, Error>?
+    var fetchTodaySleepHoursResult: Result<Double, Error>?
+    var fetchLatestHeartRateResult: Result<Double, Error>?
 
+    // MARK: - Protocol Methods
     func requestHealthKitAccess() async throws {
         requestHealthKitAccessCalled = true
-        // Simulate accessing HealthKit
     }
 
-    func fetchTodayCaloriesBurned(completion: @escaping (Result<Double, Error>) -> Void) {
-        if let result = fetchTodayCaloriesBurnedResult {
-            completion(result)
-        } else {
-            completion(.failure(NSError(domain: "Test", code: 1, userInfo: nil)))
+    func fetchTodayCalories() async throws -> Double {
+        switch fetchTodayCaloriesResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
         }
     }
 
+    func fetchTodayExerciseTime() async throws -> Double {
+        switch fetchTodayExerciseTimeResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
+        }
+    }
 
-    func fetchTodayExerciseTime(completion: @escaping (Result<Double, Error>) -> Void) {
-        if let result = fetchTodayExerciseTimeResult {
-            completion(result)
-        } else {
-            completion(.failure(NSError(domain: "Test", code: 1, userInfo: nil)))
+    func fetchTodayStandHours() async throws -> Int {
+        switch fetchTodayStandHoursResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
         }
     }
-    
-    func fetchTodayStandHours(completion: @escaping (Result<Int, Error>) -> Void) {
-        if let result = fetchTodayStandHoursResult {
-            completion(result)
-        } else {
-            completion(.failure(NSError(domain: "Test", code: 1, userInfo: nil)))
+
+    func fetchTodaySteps() async throws -> FitnessApp.Activity {
+        switch fetchTodayStepsResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
         }
     }
-    
-    func fetchTodaySteps(completion: @escaping (Result<FitnessApp.Activity, Error>) -> Void) {
-        if let result = fetchTodayStepsResult {
-            completion(result)
-        } else {
-            completion(.failure(NSError(domain: "Test", code: 1, userInfo: nil)))
+
+    func fetchCurrentWeekActivities() async throws -> [FitnessApp.Activity] {
+        switch fetchCurrentWeekActivitiesResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
         }
     }
-    
-    func fetchCurrentWeekWorkoutStats(completion: @escaping (Result<[FitnessApp.Activity], Error>) -> Void) {
-        if let result = fetchCurrentWeekWorkoutStatsResult {
-            completion(result)
-        } else {
-            completion(.failure(NSError(domain: "Test", code: 1, userInfo: nil)))
+
+    func fetchRecentWorkouts() async throws -> [FitnessApp.Workout] {
+        switch fetchRecentWorkoutsResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
         }
     }
-    
-    func fetchWorkoutsForMonth(month: Date, completion: @escaping (Result<[FitnessApp.Workout], Error>) -> Void) {
-        if let result = fetchWorkoutsForMonthResult {
-            completion(result)
-        } else {
-            completion(.failure(NSError(domain: "Test", code: 1, userInfo: nil)))
+
+    func fetchOneWeekStepData() async throws -> [FitnessApp.DailyStepModel] {
+        switch fetchOneWeekStepDataResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
         }
     }
-    
-    // Implement other methods for full use & coverage
-    
+
+    func fetchOneMonthStepData() async throws -> [FitnessApp.DailyStepModel] {
+        switch fetchOneMonthStepDataResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
+        }
+    }
+
+    func fetchThreeMonthsStepData() async throws -> [FitnessApp.DailyStepModel] {
+        switch fetchThreeMonthsStepDataResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
+        }
+    }
+
+    func fetchYTDAndOneYearChartData() async throws -> FitnessApp.YearChartDataResult {
+        switch fetchYTDAndOneYearChartDataResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
+        }
+    }
+
+    func fetchTodaySleepHours() async throws -> Double {
+        switch fetchTodaySleepHoursResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
+        }
+    }
+
+    func fetchLatestHeartRate() async throws -> Double {
+        switch fetchLatestHeartRateResult {
+        case .success(let value): return value
+        case .failure(let error): throw error
+        case .none: throw NSError(domain: "MockHealthManager", code: 1, userInfo: nil)
+        }
+    }
+
     func fetchDailySteps(startDate: Date, completion: @escaping (Result<[FitnessApp.DailyStepModel], Error>) -> Void) {
-        completion(.failure(NSError(domain: "Test", code: 1, userInfo: nil)))
+        completion(.failure(NSError(domain: "MockHealthManager", code: 1, userInfo: nil)))
     }
-    
+
     func fetchYTDAndOneYearChartData(completion: @escaping (Result<FitnessApp.YearChartDataResult, Error>) -> Void) {
-        completion(.failure(NSError(domain: "Test", code: 1, userInfo: nil)))
+        completion(.failure(NSError(domain: "MockHealthManager", code: 1, userInfo: nil)))
     }
-    
+
     func fetchCurrentWeekStepCount(completion: @escaping (Result<Double, Error>) -> Void) {
-        completion(.failure(NSError(domain: "Test", code: 1, userInfo: nil)))
+        completion(.failure(NSError(domain: "MockHealthManager", code: 1, userInfo: nil)))
     }
 }

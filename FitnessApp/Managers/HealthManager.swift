@@ -214,9 +214,24 @@ final class HealthManager: HealthManagerType {
                 }
                 
                 let heartRate = sample.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
+                
+                // Check for abnormal heart rate and trigger a notification if needed
+                self.checkHeartRate(heartRate)
+                
                 continuation.resume(returning: heartRate)
             }
             self.healthStore.execute(query)
+        }
+    }
+    
+    /// Checks if the heart rate is outside of normal bounds and triggers a health risk notification if needed.
+    func checkHeartRate(_ heartRate: Double) {
+        let lowerBound = 50.0
+        let upperBound = 120.0
+
+        if heartRate < lowerBound || heartRate > upperBound {
+            let condition = heartRate < lowerBound ? "too low (\(heartRate) BPM)" : "too high (\(heartRate) BPM)"
+            NotificationManager.shared.notifyHealthRisk(for: "an abnormal heart rate: \(condition).")
         }
     }
     
