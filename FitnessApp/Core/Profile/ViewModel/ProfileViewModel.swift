@@ -136,5 +136,4 @@ final class ProfileViewModel: ObservableObject {
             isUserLoggedIn = true
             UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
         }
-
-}
+    }

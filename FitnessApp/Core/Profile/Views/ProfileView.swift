@@ -2,7 +2,10 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()
-    
+
+    @State private var email = ""
+    @State private var password = ""
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -17,27 +20,27 @@ struct ProfileView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 100, height: 100)
-                                .padding(.all, 8)
+                                .padding(8)
                                 .background(
                                     RoundedRectangle(cornerRadius: 10)
                                         .foregroundColor(.gray.opacity(0.25))
                                 )
                         }
-                        
+
                         VStack(alignment: .leading) {
                             Text(Date.now.timeOfDayGreeting())
                                 .font(.title)
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.4)
-                            
+
                             Text(viewModel.profileName ?? "Name")
                                 .font(.title2)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.4)
                         }
                     }
-                    
+
                     if viewModel.isEditingName {
                         TextField("Name ...", text: $viewModel.currentName)
                             .padding()
@@ -52,14 +55,14 @@ struct ProfileView: View {
                                 }
                             }
                             .foregroundColor(.red)
-                            
+
                             FitnessProfileEditButton(title: "Done", backgroundColor: .primary) {
                                 viewModel.setNewName()
                             }
                             .foregroundColor(Color(uiColor: .systemBackground))
                         }
                     }
-                    
+
                     if viewModel.isEditingImage {
                         ScrollView(.horizontal) {
                             HStack {
@@ -74,7 +77,7 @@ struct ProfileView: View {
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 100, height: 100)
-                                            
+
                                             if viewModel.selectedImage == image {
                                                 Circle()
                                                     .frame(width: 16, height: 16)
@@ -83,7 +86,6 @@ struct ProfileView: View {
                                         }
                                         .padding()
                                     }
-
                                 }
                             }
                         }
@@ -91,7 +93,7 @@ struct ProfileView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(.gray.opacity(0.15))
                         )
-                        
+
                         FitnessProfileEditButton(title: "Done", backgroundColor: .primary) {
                             withAnimation {
                                 viewModel.setNewImage()
@@ -101,20 +103,20 @@ struct ProfileView: View {
                         .padding(.bottom)
                         .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    
+
                     VStack {
                         FitnessProfileItemButton(title: "Edit Name", image: "square.and.pencil") {
                             withAnimation {
                                 viewModel.presentEditName()
                             }
                         }
-                        
+
                         FitnessProfileItemButton(title: "Edit Image", image: "square.and.pencil") {
                             withAnimation {
                                 viewModel.presentEditImage()
                             }
                         }
-                        
+
                         FitnessProfileItemButton(title: "Edit Goals", image: "gearshape") {
                             withAnimation {
                                 viewModel.presentGoal = true
@@ -125,7 +127,50 @@ struct ProfileView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.gray.opacity(0.15))
                     )
-                    
+
+                    // Notification toggle
+                    Toggle("Enable Notifications", isOn: $viewModel.notificationsEnabled)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.gray.opacity(0.15))
+                        )
+
+                    // Login/Register Section
+                    if viewModel.isUserLoggedIn {
+                        Text("Logged in as: \(viewModel.profileName ?? "User")")
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(.green.opacity(0.15))
+                            )
+
+                        Button("Logout") {
+                            viewModel.logoutUser()
+                        }
+                        .padding()
+                        .foregroundColor(.red)
+                    } else {
+                        VStack {
+                            TextField("Email", text: $email)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            SecureField("Password", text: $password)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            Button("Login") {
+                                viewModel.loginUser(email: email, password: password)
+                            }
+                            .padding()
+                            Button("Register") {
+                                viewModel.registerUser(email: email, password: password)
+                            }
+                            .padding()
+                        }
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.gray.opacity(0.15))
+                        )
+                    }
+
                     VStack {
                         FitnessProfileItemButton(title: "Contact Us", image: "envelope") {
                             viewModel.presentEmailApp()
@@ -153,6 +198,7 @@ struct ProfileView: View {
                     Text("We were unable to open your mail application. Please make sure you have one installed.")
                 }
             }
+            .navigationTitle("Profile")
         }
     }
 }

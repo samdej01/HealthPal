@@ -1,11 +1,3 @@
-//
-//  NotificationManager.swift
-//  FitnessApp
-//
-//  Created by Unicorn Semi on 21/01/2025.
-//
-
-
 import UserNotifications
 
 class NotificationManager {
@@ -17,7 +9,7 @@ class NotificationManager {
     func requestNotificationPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
-                print("Error requesting notification permission: \(error)")
+                print("Error requesting notification permission: \(error.localizedDescription)")
             } else {
                 print("Notification permission granted: \(granted)")
             }
@@ -26,50 +18,26 @@ class NotificationManager {
 
     /// Schedule workout reminders at 10:00 AM and 8:00 PM daily
     func scheduleWorkoutReminders() {
-        let center = UNUserNotificationCenter.current()
-        
         // Morning reminder
-        let morningContent = UNMutableNotificationContent()
-        morningContent.title = "Morning Workout Reminder"
-        morningContent.body = "It's time to get active and crush your goals!"
-        morningContent.sound = .default
-        
-        var morningTrigger = DateComponents()
-        morningTrigger.hour = 10
-        let morningNotification = UNNotificationRequest(
-            identifier: "WorkoutMorningReminder",
-            content: morningContent,
-            trigger: UNCalendarNotificationTrigger(dateMatching: morningTrigger, repeats: true)
+        scheduleNotification(
+            atHour: 10,
+            minute: 0,
+            title: "Morning Workout Reminder",
+            body: "It's time to get active and crush your goals!",
+            identifier: "WorkoutMorningReminder"
         )
-        
+
         // Evening reminder
-        let eveningContent = UNMutableNotificationContent()
-        eveningContent.title = "Evening Workout Reminder"
-        eveningContent.body = "Wrap up your day with a great workout!"
-        eveningContent.sound = .default
-        
-        var eveningTrigger = DateComponents()
-        eveningTrigger.hour = 20
-        let eveningNotification = UNNotificationRequest(
-            identifier: "WorkoutEveningReminder",
-            content: eveningContent,
-            trigger: UNCalendarNotificationTrigger(dateMatching: eveningTrigger, repeats: true)
+        scheduleNotification(
+            atHour: 20,
+            minute: 0,
+            title: "Evening Workout Reminder",
+            body: "Wrap up your day with a great workout!",
+            identifier: "WorkoutEveningReminder"
         )
-        
-        // Schedule both reminders
-        center.add(morningNotification) { error in
-            if let error = error {
-                print("Failed to schedule morning workout reminder: \(error.localizedDescription)")
-            }
-        }
-        center.add(eveningNotification) { error in
-            if let error = error {
-                print("Failed to schedule evening workout reminder: \(error.localizedDescription)")
-            }
-        }
     }
 
-    /// Schedule daily affirmations at random times (5 times a day) - 25 to choose from
+    /// Schedule daily affirmations at random times (5 times a day) - 30 to choose from
     func scheduleAffirmationNotifications() {
         let affirmations = [
             "You're beautiful.",
@@ -81,7 +49,7 @@ class NotificationManager {
             "Keep going; you're doing great!",
             "Take a deep breath; you're amazing!",
             "Every step you take brings you closer to your fitness goals.",
-            "I are strong, healthy, and full of energy.",
+            "You are strong, healthy, and full of energy.",
             "Today is full of endless possibilities.",
             "Be kind to yourself today.",
             "You light up the world with your unique energy.",
@@ -96,34 +64,26 @@ class NotificationManager {
             "You’re doing so much better than you realize.",
             "You are loved and supported.",
             "You have the strength to overcome any obstacle.",
-            "Your potential is limitless."
+            "Your potential is limitless.",
+            "You are capable of amazing things.",
+            "You are loved and cherished.",
+            "You have the power to change your life.",
+            "You are amazing!",
+            "You have the power to achieve your dreams."
         ]
-        
+
         for i in 1...5 { // Schedule 5 affirmations daily
-            let content = UNMutableNotificationContent()
-            content.title = "Daily Affirmation"
-            content.body = affirmations.randomElement() ?? "You are amazing!"
-            content.sound = .default
-            
             let randomHour = Int.random(in: 8...22) // Between 8 AM and 10 PM
             let randomMinute = Int.random(in: 0...59)
-            
-            var triggerDate = DateComponents()
-            triggerDate.hour = randomHour
-            triggerDate.minute = randomMinute
-            
-            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: true)
-            let request = UNNotificationRequest(
-                identifier: "Affirmation-\(i)",
-                content: content,
-                trigger: trigger
+            let affirmation = affirmations.randomElement() ?? "You are amazing!"
+
+            scheduleNotification(
+                atHour: randomHour,
+                minute: randomMinute,
+                title: "Daily Affirmation",
+                body: affirmation,
+                identifier: "Affirmation-\(i)"
             )
-            
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error = error {
-                    print("Failed to schedule affirmation \(i): \(error.localizedDescription)")
-                }
-            }
         }
     }
 
@@ -133,12 +93,39 @@ class NotificationManager {
         content.title = "Health Alert"
         content.body = "Your recent data indicates \(condition). Please consult a doctor if needed."
         content.sound = .default
-        
+
         let request = UNNotificationRequest(identifier: "HealthRiskAlert", content: content, trigger: nil)
         
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
                 print("Failed to send health alert: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    /// Disables all pending notifications
+    func disableAllNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        print("All notifications disabled.")
+    }
+
+    /// Helper function to schedule notifications
+    private func scheduleNotification(atHour hour: Int, minute: Int, title: String, body: String, identifier: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+
+        var dateComponents = DateComponents()
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling notification \(identifier): \(error.localizedDescription)")
             }
         }
     }
