@@ -129,47 +129,12 @@ struct ProfileView: View {
                     )
 
                     // Notification toggle
-                    Toggle("Notifications", isOn: $viewModel.notificationsEnabled)
+                    Toggle("Enable Notifications", isOn: $viewModel.notificationsEnabled)
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(.gray.opacity(0.15))
                         )
-
-                    // Login/Register Section
-                    if viewModel.isUserLoggedIn {
-                        Text("Logged in as: \(viewModel.profileName ?? "User")")
-                            .padding()
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(.green.opacity(0.15))
-                            )
-
-                        Button("Logout") {
-                            viewModel.logoutUser()
-                        }
-                        .padding()
-                        .foregroundColor(.red)
-                    } else {
-                        VStack {
-                            TextField("Email", text: $email)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                            SecureField("Password", text: $password)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                            Button("Login") {
-                                viewModel.loginUser(email: email, password: password)
-                            }
-                            .padding()
-                            Button("Register") {
-                                viewModel.registerUser(email: email, password: password)
-                            }
-                            .padding()
-                        }
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.gray.opacity(0.15))
-                        )
-                    }
 
                     VStack {
                         FitnessProfileItemButton(title: "Contact Us", image: "envelope") {
