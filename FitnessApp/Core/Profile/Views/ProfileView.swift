@@ -129,7 +129,7 @@ struct ProfileView: View {
                     )
 
                     // Notification toggle
-                    Toggle("Enable Notifications", isOn: $viewModel.notificationsEnabled)
+                    Toggle("Notifications", isOn: $viewModel.notificationsEnabled)
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 10)
