@@ -26,10 +26,11 @@ struct LeaderboardView: View {
                                 
                                 Text(person.username)
                                 
-                                if viewModel.username == person.username {
-                                    Image(systemName: "crown.fill")
-                                        .foregroundColor(.yellow)
-                                }
+                                // Show crown emoji only for the first-place user
+                                        if idx == 0 {
+                                            Image(systemName: "crown.fill")
+                                                .foregroundColor(.yellow)
+                                        }
                                 
                                 Spacer()
                                 
