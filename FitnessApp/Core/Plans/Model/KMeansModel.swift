@@ -31,14 +31,12 @@ class KMeansModel {
             }
         }
     }
-
     /// Predicts the cluster for a given feature set
     func predict(features: [Double]) -> Int {
         return centroids.enumerated().min {
             euclideanDistance($0.1, features) < euclideanDistance($1.1, features)
         }!.0
     }
-
     /// Helper function: Euclidean Distance
     private func euclideanDistance(_ a: [Double], _ b: [Double]) -> Double {
         return sqrt(zip(a, b).map { pow($0 - $1, 2) }.reduce(0, +))
