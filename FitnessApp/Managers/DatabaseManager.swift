@@ -32,3 +32,4 @@ final class DatabaseManager: DatabaseManagerType {
         try await database.collection(weeklyLeaderboard).document(leader.username).setData(data, merge: false)
     }
 }
+
