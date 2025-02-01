@@ -57,7 +57,8 @@ class PlansViewModel: ObservableObject {
             "Sleep Improvement" //25
         ]
         let features = [
-            //[calorie focus, workout intensity, and cardio]
+            
+            //[calories, workout intensity, and cardio]
             
             [0.5, 0.2, 0.8],  // Weight Loss 1
             [0.9, 0.8, 0.3],  // Muscle Gain 2
