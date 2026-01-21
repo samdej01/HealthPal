@@ -20,7 +20,7 @@ Many individuals struggle to maintain healthy habits due to:
 - Low motivation and engagement  
 
 Traditional health tracking methods are time-consuming and inconsistent. Health Pal addresses this by offering automated tracking, AI-driven recommendations, and motivational features in one unified platform  
-F12.
+
 
 ---
 
@@ -67,7 +67,7 @@ Used to cluster users based on:
 Enables scalable and efficient personalization.
 
 Trained using curated datasets from Kaggle  
-F12.
+
 
 ### Preprocessing
 - Feature normalization and scaling  
@@ -90,7 +90,6 @@ The architecture ensures:
 - Maintainability  
 - Scalability  
 - Clean data flow between UI, logic, and storage  
-F12.
 
 ---
 
@@ -147,7 +146,6 @@ The application was tested using multiple real-world scenarios, including:
 - Feedback submission failures  
 
 All core features were validated for reliability and usability  
-F12.
 
 ---
 
