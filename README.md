@@ -116,42 +116,62 @@ HealthPal/
 ├── AI/                  # K-Means clustering & preprocessing
 ├── Resources/           # Assets & UI resources
 └── README.md
+```
 
-📱 Supported Devices
-iPhone / iPad (iOS)
-Apple Watch (via HealthKit integration)
-🚀 Installation & Deployment
-Clone the repository
-Open the project in Xcode
-Connect an iOS device
-Configure:
-Apple HealthKit permissions
-Firebase project & GoogleService-Info.plist
-Run the app directly on the device (no App Store required)
-🧪 Testing
+## 📱 Supported Devices
+
+- iPhone / iPad (iOS)  
+- Apple Watch (via HealthKit integration)  
+
+---
+
+## 🚀 Installation & Deployment
+
+- Clone the repository  
+- Open the project in Xcode  
+- Connect an iOS device  
+- Configure:
+  - Apple HealthKit permissions  
+  - Firebase project & GoogleService-Info.plist  
+- Run the app directly on the device (no App Store required)  
+
+---
+
+## 🧪 Testing
+
 The application was tested using multiple real-world scenarios, including:
-Valid & missing HealthKit data
-Goal-based plan generation
-Notification enable/disable
-Leaderboard updates
-Feedback submission failures
-All core features were validated for reliability and usability
+- Valid & missing HealthKit data  
+- Goal-based plan generation  
+- Notification enable/disable  
+- Leaderboard updates  
+- Feedback submission failures  
+
+All core features were validated for reliability and usability  
 F12.
-🔮 Future Enhancements
-Deep learning models (RNNs) for advanced recommendations
-User authentication & multi-device sync
-Android version
-Custom wearable device
-Enhanced data privacy & encryption
-👩‍💻 Team Members
-Samia Sami Aldejwi
-Leen Abdullah Alzahrani
-Reem Faisal Almalki
-Sitah Talal Alshalawi
-Supervisor: Dr. Sultan Noman Qasem
-📄 License
+
+---
+
+## 🔮 Future Enhancements
+
+- Deep learning models (RNNs) for advanced recommendations  
+- User authentication & multi-device sync  
+- Android version  
+- Custom wearable device  
+- Enhanced data privacy & encryption  
+
+---
+
+## 👩‍💻 Team Members
+
+- Samia Sami Aldejwi  
+- Leen Abdullah Alzahrani  
+- Reem Faisal Almalki  
+- Sitah Talal Alshalawi  
+
+Supervisor: Dr. Sultan Noman Qasem  
+
+---
+
+## 📄 License
+
 This project is developed for academic and research purposes.
-
-
-
-
